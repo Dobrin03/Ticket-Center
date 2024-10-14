@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="063EF4CA-5CBC-1E88-397F-9BC2308D7C64" name="Event_Type">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:38:44 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Event_Type_ID" id="9DA2A75D-2E9D-A201-AE35-91B5CF073FC0">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:39:47 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Event_Type_Name" id="56E885E7-D317-7018-38D6-D3EB8758FD57">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:39:47 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4623E081-3F60-6410-0BAE-F4C57FE74AD3" name="Event_Type_PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:39:47 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9DA2A75D-2E9D-A201-AE35-91B5CF073FC0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

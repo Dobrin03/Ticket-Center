@@ -1,0 +1,107 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DD1BFD70-4221-0F9C-6699-81A9EC42FFB2" name="Client">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:14:21 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<ordsAlias>table_7</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Client_ID" id="0BE12F51-6B95-FAB0-06C5-A2606B3A7D20">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:02 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Client_name" id="52DD3A22-18F4-29E4-1C21-B5F490452D57">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:02 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Client_Number" id="CB825D2A-679F-C0CB-5657-4172464ACCED">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:02 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Client_Email" id="D19FB4F2-150C-B1FB-D7C6-8D045A8A1CB3">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:02 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Client_Address" id="95D3CE9B-7874-2DEC-94BB-8D9CA8693D23">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:02 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="City_City_ID" id="95E560A7-558A-7179-F2DA-72FA5BDE5C51">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:13 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B7E32C22-0B44-1DA0-6CC2-685991217A5D" referredColumn="ED6FA722-9283-C6F6-70B8-EAF5049A809E"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2BA7C2AF-E855-DEA4-72AC-98409969D76F" name="Client_PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:02 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0BE12F51-6B95-FAB0-06C5-A2606B3A7D20"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F8447E15-3513-F8C2-4869-70E538A14D13" name="Client_City_FK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:13 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="95E560A7-558A-7179-F2DA-72FA5BDE5C51"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

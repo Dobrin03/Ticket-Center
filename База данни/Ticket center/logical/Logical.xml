@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="BC956342-5DC1-AFB4-DBDF-A32C09C0127A" mainViewID="86D9482E-BCEF-7462-1BCB-AB1F6D6A09C4">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:38:08 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

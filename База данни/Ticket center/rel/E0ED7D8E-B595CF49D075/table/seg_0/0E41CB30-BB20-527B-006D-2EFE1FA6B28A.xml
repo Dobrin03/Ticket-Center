@@ -1,0 +1,97 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0E41CB30-BB20-527B-006D-2EFE1FA6B28A" name="Distributor">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:25:25 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<ordsAlias>table_8</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Distributor_ID" id="45BB6980-21AB-FD84-7D25-5A7E5B670895">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:26:44 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Distributor_Name" id="88795DCA-7B49-47A9-3EE4-F15D09A7B469">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:26:44 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Distributor_User" id="7F707E20-0EFE-4D22-9864-8365E2F90B82">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:36:48 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DIstributor_Pass" id="AD248748-B1EC-375E-CE62-E44530045309">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:36:48 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Distributor_Fee" id="99D23B7A-599F-4CB1-1BE5-1B1E49C3209B">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:26:44 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Raiting" id="51F3E591-8DE9-5BF6-2BD9-05DF4FD61AE7">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:29:53 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,2,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A621854C-7172-9E7D-249C-F5757AAEF148" name="Distributor_PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:26:44 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="45BB6980-21AB-FD84-7D25-5A7E5B670895"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

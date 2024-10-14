@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="Relational_1" id="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" mainViewID="2A25107D-AF6F-9A92-9701-A8B907CAAFF3">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:38:08 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>32076570-2523-435C-2E92-BF29817DFF70</selectedRDBMSSite>
+</relationalModel>

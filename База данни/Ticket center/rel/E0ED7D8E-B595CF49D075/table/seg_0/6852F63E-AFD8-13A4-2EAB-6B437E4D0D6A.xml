@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6852F63E-AFD8-13A4-2EAB-6B437E4D0D6A" name="Event_Status">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:42:16 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<ordsAlias>table_14</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Status_ID" id="41551B5E-2533-2813-E5D3-B627F8F3C6CE">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:42:54 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Status_Name" id="D27493C3-C5D8-A8E3-E32B-1DF16EF85D86">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:42:54 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8B4C5D6E-750A-4C41-327A-5B3E3829D86C" name="Event_Status_PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:42:54 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="41551B5E-2533-2813-E5D3-B627F8F3C6CE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

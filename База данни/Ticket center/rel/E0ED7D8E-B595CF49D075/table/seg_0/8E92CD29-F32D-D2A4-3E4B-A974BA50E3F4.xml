@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8E92CD29-F32D-D2A4-3E4B-A974BA50E3F4" name="Organiser">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:59:29 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<ordsAlias>table_4</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Organiser_ID" id="6BAD7F55-4DF4-75E2-1C13-8C52DD901BFC">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:03:12 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Organiser_Name" id="E36355CF-7D0F-3F7C-4A54-93DC0EAF0566">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:03:12 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Organiser_User" id="3A1D12F8-E09D-42E4-BCA5-7C43FB913D0A">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:35:59 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Organiser_Pass" id="195F367B-02EA-1719-B278-4B5265913CF0">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:35:59 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="733EC9C6-698B-84CE-68F3-D933E758AC1A" name="Organisor_PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:03:12 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6BAD7F55-4DF4-75E2-1C13-8C52DD901BFC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

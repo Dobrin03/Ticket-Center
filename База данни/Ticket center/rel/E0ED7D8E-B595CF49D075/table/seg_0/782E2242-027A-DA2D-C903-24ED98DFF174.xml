@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="782E2242-027A-DA2D-C903-24ED98DFF174" name="Ticket">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:12:13 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<ordsAlias>table_6</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Ticket_ID" id="0EF9A474-D39D-3655-E037-3C1B886904E7">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:13:37 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Client_Client_ID" id="52BE38A3-5AA8-C3D1-95FB-C1AC915B503B">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:21 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3C3970C7-82CB-9210-8957-3230EB8F3A3A" referredColumn="0BE12F51-6B95-FAB0-06C5-A2606B3A7D20"/>
+</associations>
+</Column>
+<Column name="Event_Event_ID" id="EF288CB6-E317-F815-85C6-D69148AFEF3C">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:19:57 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D88092B8-B29E-0268-8665-65BF51D6023A" referredColumn="5EFC5725-CDF2-BBDB-2B7F-678ABADA032D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1C1A52AB-2E3C-2518-EEBC-A8827EF39B07" name="Ticket_PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:13:37 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0EF9A474-D39D-3655-E037-3C1B886904E7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0FBE5EEA-AB60-92A3-DDB1-A79593ACFC88" name="Ticket_Client_FK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:16:21 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="52BE38A3-5AA8-C3D1-95FB-C1AC915B503B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5CFBB994-EB43-F427-CADA-F13360752AF7" name="Ticket_Event_FK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 10:19:57 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EF288CB6-E317-F815-85C6-D69148AFEF3C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

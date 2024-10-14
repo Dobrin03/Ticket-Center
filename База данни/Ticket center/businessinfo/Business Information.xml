@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="F3D0A551-3EC3-3267-4827-B9A82C71952E">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-14 09:38:08 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>
