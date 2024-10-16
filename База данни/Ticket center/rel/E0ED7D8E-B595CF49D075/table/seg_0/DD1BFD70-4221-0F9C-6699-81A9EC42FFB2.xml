@@ -80,6 +80,30 @@
 <colAssociation fkAssociation="B7E32C22-0B44-1DA0-6CC2-685991217A5D" referredColumn="ED6FA722-9283-C6F6-70B8-EAF5049A809E"/>
 </associations>
 </Column>
+<Column name="Client_User" id="2B0F3726-24F7-CEB9-B49A-7686A712C942">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-16 11:29:38 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Client_Pass" id="779C350F-3969-E26B-C810-0918926FF1D4">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-16 11:29:38 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="2BA7C2AF-E855-DEA4-72AC-98409969D76F" name="Client_PK">

@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B9707E99-DFB5-A12F-6501-CDF6E44F60D2" name="Ticket">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>782E2242-027A-DA2D-C903-24ED98DFF174</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Ticket ID" id="F54A2822-6ABF-35DA-8451-25C321E2F29F">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>0EF9A474-D39D-3655-E037-3C1B886904E7</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Client Client ID" id="AEC99CB6-6FBF-D3BD-9E83-716851732F5E">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>9C7A693F-D5FB-9F32-4E83-01DA24688B85</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<referedAttribute>FF505951-8A9B-1132-83F1-69EC814D7B1A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Event Seats Event Seat ID" id="FF79563B-4A47-D73B-1A98-B6639A9B4BB7">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>13D08AE9-B000-1A8E-9F5C-775C6B456EFB</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<referedAttribute>933C7039-8DB7-2196-E039-CCC2362AC5B0</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Event Distributor Event Distributor ID" id="46249558-C2E2-77CB-B430-E8AD98BA1984">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>A334B87D-FBF6-374D-1E7A-A055E5B7EFAC</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<referedAttribute>9D08707B-A85C-FCF4-BF57-E496B2A6A1AD</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="793E7919-871F-2EBD-BA6A-1CAB2C9D53AD" name="Ticket PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>1C1A52AB-2E3C-2518-EEBC-A8827EF39B07</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>F54A2822-6ABF-35DA-8451-25C321E2F29F</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

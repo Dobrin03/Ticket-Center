@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="676B6D1E-7CA1-6EA1-8E74-EE3CDFBF6B8F" containerWithKeyObject="199B1E01-230C-F560-5047-CD9682C26DBA" localFKIndex="B8A6FC88-7F64-7B5B-6991-3EFCA31A519A" name="Event_Seat_Type_FK">
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="1630E9EF-7EBE-325C-1567-A24830E304F6" containerWithKeyObject="4A64F842-4E87-B5FE-23EF-E5CAAF797E0D" localFKIndex="DFABBAA0-637F-1E71-882E-9BE8E43E516D" name="Event_Seats_Seat_Type_FK">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-14 10:21:24 UTC</createdTime>
+<createdTime>2024-10-15 17:23:04 UTC</createdTime>
 <ownerDesignName>Ticket center</ownerDesignName>
 <referredTableLongName>Seat_Type</referredTableLongName>
 <deleteRule>NO ACTION</deleteRule>

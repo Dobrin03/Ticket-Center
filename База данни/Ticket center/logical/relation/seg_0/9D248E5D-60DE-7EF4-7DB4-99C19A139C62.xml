@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Event_City_FK" directorySegmentName="seg_0" id="9D248E5D-60DE-7EF4-7DB4-99C19A139C62">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>C180BDC2-2109-1A98-120D-FF4F597D771E</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<sourcePk>8DCD0345-2D48-1BD6-12FA-0458F5335169</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>C61BD62F-4C28-B0BD-FB65-1F3ED2D9A447</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>4BEE3934-4490-BAB4-F148-2BCBF6579D93</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

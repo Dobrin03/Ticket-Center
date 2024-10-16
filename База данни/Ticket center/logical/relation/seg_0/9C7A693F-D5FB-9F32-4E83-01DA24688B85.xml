@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Ticket_Client_FK" directorySegmentName="seg_0" id="9C7A693F-D5FB-9F32-4E83-01DA24688B85">
+<createdBy>dobri</createdBy>
+<createdTime>2024-10-15 17:27:24 UTC</createdTime>
+<generatorID>3C3970C7-82CB-9210-8957-3230EB8F3A3A</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<sourcePk>C58E254B-03B3-D2BF-8010-CB1AC8A22573</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>C123C3DD-81F6-D497-FE8F-D8987217A0F3</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>B9707E99-DFB5-A12F-6501-CDF6E44F60D2</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

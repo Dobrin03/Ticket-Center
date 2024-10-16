@@ -30,19 +30,6 @@
 <ownDataTypeParameters>30,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Seat_Price" id="A17B36E0-6D00-8D53-D065-92610984BA17">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-14 09:45:46 UTC</createdTime>
-<ownerDesignName>Ticket center</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>5</dataTypePrecision>
-<dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,5,2</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="C373DDB0-3BD9-72AB-3E5A-87F9FFA0A8BD" name="Seat_Type_PK">
