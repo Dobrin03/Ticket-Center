@@ -3,7 +3,11 @@ module org.example.ticketcenter {
     requires javafx.fxml;
 
     requires com.dlsc.formsfx;
+    requires java.sql;
+    requires com.oracle.database.jdbc;
 
-    opens org.example.ticketcenter to javafx.fxml;
-    exports org.example.ticketcenter;
+    exports org.example.ticketcenter.controllers;
+    opens org.example.ticketcenter.controllers to javafx.fxml;
+    exports org.example.ticketcenter.application;
+    opens org.example.ticketcenter.application to javafx.fxml;
 }

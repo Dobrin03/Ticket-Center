@@ -1,4 +1,4 @@
-package org.example.ticketcenter;
+package org.example.ticketcenter.application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class ProgramApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("log_in.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ProgramApplication.class.getResource("/org/example/ticketcenter/presentation/views/log_in.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
