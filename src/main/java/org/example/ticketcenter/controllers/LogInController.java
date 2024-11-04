@@ -1,12 +1,18 @@
 package org.example.ticketcenter.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import org.example.ticketcenter.database.DBConnection;
+import org.example.ticketcenter.scene_actions.ChangeSceneCommand;
+import org.example.ticketcenter.scene_actions.CloseSceneCommand;
+import org.example.ticketcenter.scene_actions.Invoker;
+import org.example.ticketcenter.scene_actions.SceneActionsImplication;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class LogInController {
@@ -20,7 +26,12 @@ public class LogInController {
     private PasswordField pass_field;
 
     @FXML
-    protected void onLogInButtonClick() throws SQLException, ClassNotFoundException {
+    protected void onLogInButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+        SceneActionsImplication sceneAction=new SceneActionsImplication();
+        ChangeSceneCommand change=new ChangeSceneCommand(sceneAction);
+        CloseSceneCommand close=new CloseSceneCommand(sceneAction);
+        Invoker changeInvoker=new Invoker(change);
+        Invoker closeInvoker=new Invoker(close);
         DBConnection database= DBConnection.getInstance();
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -28,12 +39,14 @@ public class LogInController {
         String user_column = null;
         String pass_column = null;
         String table = null;
+        String fxml = null;
 
         if(!user_field.getText().isEmpty() && !pass_field.getText().isEmpty()) {
             if (radio_admin.isSelected()) {
                 table="Administrator_Data";
                 user_column="admin_user";
                 pass_column="admin_pass";
+                fxml="/admin_fxml/Admin.fxml";
             } else if (radio_org.isSelected()) {
                 table="Organiser_Data";
                 user_column="organiser_user";
@@ -54,7 +67,7 @@ public class LogInController {
             lbl_error.setText("Please input the username and password");
         }
 
-        if(table != null && user_column != null && pass_column != null){
+        if(!table.equals(null) && !user_column.equals(null) && !pass_column.equals(null) && !fxml.equals(null)){
             database.Connect();
             String query=builder.append("SELECT * FROM ").append(table).append(" WHERE ").append(user_column).append(" = ? AND ").append(pass_column).append(" = ?").toString();
             preparedStatement = database.getConnection().prepareStatement(query);
@@ -65,7 +78,8 @@ public class LogInController {
             resultSet= preparedStatement.executeQuery();
 
             if(resultSet.next()) {
-                lbl_error.setText("User is found");
+                closeInvoker.execute(fxml, event);
+                changeInvoker.execute(fxml, event);
             }
             else{
                 lbl_error.setText("User is not found");
