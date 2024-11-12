@@ -13,6 +13,22 @@ Event_Type_ID INTEGER NOT NULL,
 Event_Type_Name VARCHAR(30));
 ALTER TABLE Event_Type ADD CONSTRAINT PK_Event_Type PRIMARY KEY(Event_Type_ID);
 
+CREATE SEQUENCE EType_SEQ START WITH 100 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER EType_ID_AUTO
+BEFORE INSERT ON Event_Type
+FOR EACH ROW
+WHEN (NEW.Event_Type_ID IS NULL)
+BEGIN
+    :NEW.Event_Type_ID:=EType_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE EType_Ins
+(v_event_type_name Event_Type.event_type_name%type) AS
+BEGIN
+    INSERT INTO Event_Type(event_type_name)
+    VALUES(v_event_type_name);
+END;
 
 CREATE TABLE Event_Status(
 Event_Status_ID INTEGER NOT NULL,
@@ -29,6 +45,22 @@ City_ID INTEGER NOT NULL,
 City_Name VARCHAR(30));
 ALTER TABLE City ADD CONSTRAINT PK_City PRIMARY KEY(City_ID);
 
+CREATE SEQUENCE City_SEQ START WITH 200 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER City_ID_AUTO
+BEFORE INSERT ON City
+FOR EACH ROW
+WHEN (NEW.City_ID IS NULL)
+BEGIN
+    :NEW.City_ID:=City_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE City_Ins
+(v_city_name City.city_name%type) AS
+BEGIN
+    INSERT INTO City(city_name)
+    VALUES(v_city_name);
+END;
 
 CREATE TABLE Seat_Type(
 Seat_Type_ID INTEGER NOT NULL,
@@ -50,6 +82,24 @@ Organiser_User VARCHAR(30),
 Organiser_Pass VARCHAR(20));
 ALTER TABLE Organiser_Data ADD CONSTRAINT PK_Organiser PRIMARY KEY(Organiser_ID);
 
+CREATE SEQUENCE Organiser_SEQ START WITH 300 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER Organiser_ID_AUTO
+BEFORE INSERT ON Organiser_Data
+FOR EACH ROW
+WHEN (NEW.Organiser_ID IS NULL)
+BEGIN
+    :NEW.Organiser_ID:=Organiser_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE Organiser_Ins
+(v_organiser_name Organiser_Data.organiser_name%type,
+v_organiser_user Organiser_Data.organiser_user%type,
+v_organiser_pass Organiser_Data.organiser_pass%type) AS
+BEGIN
+    INSERT INTO Organiser_Data(organiser_name, organiser_user, organiser_pass)
+    VALUES(v_organiser_name, v_organiser_user, v_organiser_pass);
+END;
 
 CREATE TABLE Distributor_Data(
 Distributor_ID INTEGER NOT NULL,
@@ -60,6 +110,25 @@ Distributor_Fee NUMBER(5,2),
 Rating NUMBER(2,2));
 ALTER TABLE Distributor_Data ADD CONSTRAINT PK_Distributor PRIMARY KEY(Distributor_ID);
 
+CREATE SEQUENCE Distributor_SEQ START WITH 400 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER Distributor_ID_AUTO
+BEFORE INSERT ON Distributor_Data
+FOR EACH ROW
+WHEN (NEW.Distributor_ID IS NULL)
+BEGIN
+    :NEW.Distributor_ID:=Distributor_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE Distributor_Ins
+(v_distributor_name Distributor_Data.distributor_name%type,
+v_distributor_user Distributor_Data.distributor_user%type,
+v_distributor_pass Distributor_Data.distributor_pass%type,
+v_distributor_fee Distributor_Data.distributor_fee%type) AS
+BEGIN
+    INSERT INTO Distributor_Data(distributor_name, distributor_user, distributor_pass, distributor_fee)
+    VALUES(v_distributor_name, v_distributor_user, v_distributor_pass, v_distributor_fee);
+END;
 
 CREATE TABLE Client_Data(
 Client_ID INTEGER NOT NULL,
@@ -73,6 +142,28 @@ City_ID INTEGER);
 ALTER TABLE Client_Data ADD CONSTRAINT PK_Client PRIMARY KEY(Client_ID);
 ALTER TABLE Client_Data ADD CONSTRAINT FK_City FOREIGN KEY(City_ID) REFERENCES City(City_ID);
 
+CREATE SEQUENCE Client_SEQ START WITH 500 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER Client_ID_AUTO
+BEFORE INSERT ON Client_Data
+FOR EACH ROW
+WHEN (NEW.Client_ID IS NULL)
+BEGIN
+    :NEW.Client_ID:=Distributor_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE Client_Ins
+(v_client_name Client_Data.client_name%type,
+v_client_user Client_Data.client_user%type,
+v_client_pass Client_Data.client_pass%type,
+v_client_email Client_Data.client_email%type,
+v_client_address Client_Data.client_address%type,
+v_client_number Client_Data.client_number%type,
+v_city_id Client_Data.city_id%type) AS
+BEGIN
+    INSERT INTO Client_Data(client_name, client_user, client_pass, client_email, client_address, client_number, city_id)
+    VALUES(v_client_name, v_client_user, v_client_pass, v_client_email, v_client_address, v_client_number, v_city_id);
+END;
 
 CREATE TABLE Event(
 Event_ID INTEGER NOT NULL,
@@ -90,6 +181,29 @@ ALTER TABLE Event ADD CONSTRAINT FK_Type FOREIGN KEY(Event_Type_ID) REFERENCES E
 ALTER TABLE Event ADD CONSTRAINT FK_Status FOREIGN KEY(Event_Status_ID) REFERENCES Event_Status(Event_Status_ID);
 ALTER TABLE Event ADD CONSTRAINT FK_Organiser FOREIGN KEY(Organiser_ID) REFERENCES Organiser_Data(Organiser_ID);
 
+CREATE SEQUENCE Event_SEQ START WITH 600 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER Event_ID_AUTO
+BEFORE INSERT ON Event
+FOR EACH ROW
+WHEN (NEW.Event_ID IS NULL)
+BEGIN
+    :NEW.Event_ID:=Event_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE Event_Ins
+(v_event_name Event.event_name%type,
+v_ticket_limit_per_person Event.ticket_limit_per_person%type,
+v_event_date Event.event_date%type,
+v_event_address Event.event_address%type,
+v_city_id Event.city_id%type,
+v_event_type_id Event.event_type_id%type,
+v_event_status_id Event.event_status_id%type,
+v_organiser_id Event.organiser_id%type) AS
+BEGIN
+    INSERT INTO Event(event_name, ticket_limit_per_person, event_date, event_address, city_id, event_type_id, event_status_id, organiser_id)
+    VALUES(v_event_name, v_ticket_limit_per_person, v_event_date, v_event_address, v_city_id, v_event_type_id, v_event_status_id, v_organiser_id);
+END;
 
 CREATE TABLE Event_Distributor(
 Event_Distributor_ID INTEGER NOT NULL,
@@ -99,6 +213,23 @@ ALTER TABLE Event_Distributor ADD CONSTRAINT PK_Event_Distributor PRIMARY KEY(Ev
 ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Event FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID);
 ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Distributor FOREIGN KEY(Distributor_ID) REFERENCES Distributor_Data(Distributor_ID);
 
+CREATE SEQUENCE ED_SEQ START WITH 700 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER ED_ID_AUTO
+BEFORE INSERT ON Event_Distributor
+FOR EACH ROW
+WHEN (NEW.Event_Distributor_ID IS NULL)
+BEGIN
+    :NEW.Event_Distributor_ID:=ED_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE ED_Ins
+(v_event_id Event_Distributor.event_id%type,
+v_distributor_id Event_Distributor.distributor_id%type) AS
+BEGIN
+    INSERT INTO Event_Distributor(event_id, distributor_id)
+    VALUES(v_event_id, v_distributor_id);
+END;
 
 CREATE TABLE Event_Seats(
 Event_Seats_ID INTEGER NOT NULL,
@@ -110,6 +241,25 @@ ALTER TABLE Event_Seats ADD CONSTRAINT PK_Event_Seats PRIMARY KEY(Event_Seats_ID
 ALTER TABLE Event_Seats ADD CONSTRAINT FK_Event_Seats_Event FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID);
 ALTER TABLE Event_Seats ADD CONSTRAINT FK_Seat_Type FOREIGN KEY(Seat_Type_ID) REFERENCES Seat_Type(Seat_Type_ID);
 
+CREATE SEQUENCE ES_SEQ START WITH 800 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER ES_ID_AUTO
+BEFORE INSERT ON Event_Seats
+FOR EACH ROW
+WHEN (NEW.Event_Seats_ID IS NULL)
+BEGIN
+    :NEW.Event_Seats_ID:=ES_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE ES_Ins
+(v_event_id Event_Seats.event_id%type,
+v_seat_type_id Event_Seats.seat_type_id%type,
+v_seat_quantity Event_Seats.seat_quantity%type,
+v_seat_price Event_Seats.seat_price%type) AS
+BEGIN
+    INSERT INTO Event_Seats(event_id, seat_type_id, seat_quantity, seat_price)
+    VALUES(v_event_id, v_seat_type_id, v_seat_quantity, v_seat_price);
+END;
 
 CREATE TABLE Ticket(
 Ticket_ID INTEGER NOT NULL,
@@ -120,3 +270,22 @@ ALTER TABLE Ticket ADD CONSTRAINT PK_Ticket PRIMARY KEY(Ticket_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Client FOREIGN KEY(Client_ID) REFERENCES Client_Data(Client_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Event_Seat FOREIGN KEY(Event_Seats_ID) REFERENCES Event_Seats(Event_Seats_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Event_Distributor FOREIGN KEY(Event_Distributor_ID) REFERENCES Event_Distributor(Event_Distributor_ID);
+
+CREATE SEQUENCE Ticket_SEQ START WITH 900 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER Ticket_ID_AUTO
+BEFORE INSERT ON Ticket
+FOR EACH ROW
+WHEN (NEW.Ticket_ID IS NULL)
+BEGIN
+    :NEW.Ticket_ID:=Ticket_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE Ticket_Ins
+(v_client_id Ticket.client_id%type,
+v_event_seats_id Ticket.event_seats_id%type,
+v_event_distributor_id Ticket.event_distributor_id%type) AS
+BEGIN
+    INSERT INTO Ticket(client_id, event_seats_id, event_distributor_id)
+    VALUES(v_client_id, v_event_seats_id, v_event_distributor_id);
+END;
