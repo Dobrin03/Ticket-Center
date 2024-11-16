@@ -207,10 +207,10 @@ END;
 
 CREATE TABLE Event_Distributor(
 Event_Distributor_ID INTEGER NOT NULL,
-Event_ID INTEGER,
+Event_Seats_ID INTEGER,
 Distributor_ID INTEGER);
 ALTER TABLE Event_Distributor ADD CONSTRAINT PK_Event_Distributor PRIMARY KEY(Event_Distributor_ID);
-ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Event FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID);
+ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Seats FOREIGN KEY(Event_Seats_ID) REFERENCES Event_Seats(Event_Seats_ID);
 ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Distributor FOREIGN KEY(Distributor_ID) REFERENCES Distributor_Data(Distributor_ID);
 
 CREATE SEQUENCE ED_SEQ START WITH 700 NOCACHE ORDER;
@@ -224,11 +224,11 @@ BEGIN
 END;
 
 CREATE OR REPLACE PROCEDURE ED_Ins
-(v_event_id Event_Distributor.event_id%type,
+(v_event_seats_id Event_Distributor.event_seats_id%type,
 v_distributor_id Event_Distributor.distributor_id%type) AS
 BEGIN
-    INSERT INTO Event_Distributor(event_id, distributor_id)
-    VALUES(v_event_id, v_distributor_id);
+    INSERT INTO Event_Distributor(event_seats_id, distributor_id)
+    VALUES(v_event_seats_id, v_distributor_id);
 END;
 
 CREATE TABLE Event_Seats(
@@ -264,11 +264,9 @@ END;
 CREATE TABLE Ticket(
 Ticket_ID INTEGER NOT NULL,
 Client_ID INTEGER,
-Event_Seats_ID INTEGER, 
 Event_Distributor_ID INTEGER);
 ALTER TABLE Ticket ADD CONSTRAINT PK_Ticket PRIMARY KEY(Ticket_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Client FOREIGN KEY(Client_ID) REFERENCES Client_Data(Client_ID);
-ALTER TABLE Ticket ADD CONSTRAINT FK_Event_Seat FOREIGN KEY(Event_Seats_ID) REFERENCES Event_Seats(Event_Seats_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Event_Distributor FOREIGN KEY(Event_Distributor_ID) REFERENCES Event_Distributor(Event_Distributor_ID);
 
 CREATE SEQUENCE Ticket_SEQ START WITH 900 NOCACHE ORDER;
@@ -283,9 +281,8 @@ END;
 
 CREATE OR REPLACE PROCEDURE Ticket_Ins
 (v_client_id Ticket.client_id%type,
-v_event_seats_id Ticket.event_seats_id%type,
 v_event_distributor_id Ticket.event_distributor_id%type) AS
 BEGIN
-    INSERT INTO Ticket(client_id, event_seats_id, event_distributor_id)
-    VALUES(v_client_id, v_event_seats_id, v_event_distributor_id);
+    INSERT INTO Ticket(client_id, event_distributor_id)
+    VALUES(v_client_id, v_event_distributor_id);
 END;

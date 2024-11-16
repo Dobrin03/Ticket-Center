@@ -29,20 +29,6 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Event Event ID" id="048E1327-F4BC-8A27-B3B6-891F0616A8F6">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>092C3BEF-EBD0-CC3E-A815-E739E8340547</generatorID>
-<ownerDesignName>Ticket center</ownerDesignName>
-<engineerTo>
-<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
-</engineerTo>
-<referedAttribute>C14B911F-FE2B-EF27-B38F-ECD692A86C46</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="Distributor Distributor ID" id="68C7765A-0CC3-9919-DC0A-F561F7FD519E">
 <createdBy>dobri</createdBy>
 <createdTime>2024-10-15 17:27:24 UTC</createdTime>
@@ -52,6 +38,20 @@
 <item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
 </engineerTo>
 <referedAttribute>107DAEA8-BDBF-55B0-7EE0-6152E9425D1B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Event Seats Event Seat ID" id="40DDCDDB-C649-4C1B-4F94-4AD06F455FAC">
+<createdBy>dobri</createdBy>
+<createdTime>2024-11-16 13:02:21 UTC</createdTime>
+<generatorID>4BEB2DCB-E402-0192-479A-15C28720EF60</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<referedAttribute>933C7039-8DB7-2196-E039-CCC2362AC5B0</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>

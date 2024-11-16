@@ -5,21 +5,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="364.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane prefHeight="364.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.AdminWelcomeController">
    <children>
-      <Label layoutX="213.0" layoutY="45.0" prefHeight="27.0" prefWidth="193.0" text="Welcome">
+      <Label alignment="CENTER" layoutX="116.0" layoutY="22.0" prefHeight="27.0" prefWidth="193.0" text="Welcome">
          <font>
-            <Font size="18.0" />
+            <Font size="24.0" />
          </font>
       </Label>
-      <Button id="btn_lo" layoutX="480.0" layoutY="308.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="67.0" text="Log out" />
-      <Button id="btn_add_org" layoutX="152.0" layoutY="159.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="121.0" text="Add organizer">
+      <Button id="btn_lo" layoutX="345.0" layoutY="315.0" mnemonicParsing="false" onAction="#onLogOutClick" prefHeight="34.0" prefWidth="67.0" text="Log out" />
+      <Button id="btn_add_org" layoutX="153.0" layoutY="104.0" mnemonicParsing="false" onAction="#onAddOrganiserClick" prefHeight="42.0" prefWidth="121.0" text="Add organizer">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button id="btn_add_dis" layoutX="300.0" layoutY="159.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="122.0" text="Add distributor">
+      <Button id="btn_add_dis" layoutX="152.0" layoutY="161.0" mnemonicParsing="false" onAction="#onAddDistributorClick" prefHeight="42.0" prefWidth="122.0" text="Add distributor">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button id="btn_add_dis" layoutX="152.0" layoutY="213.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="122.0" text="Add client">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button id="btn_add_dis" layoutX="152.0" layoutY="267.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="122.0" text="Edit Users">
          <font>
             <Font size="14.0" />
          </font>

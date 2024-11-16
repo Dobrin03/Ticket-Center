@@ -14,10 +14,18 @@ public class SceneActionsImplication implements SceneActions {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private String url = "/org/example/ticketcenter/presentation/views";
+    private static SceneActionsImplication actionsInstance;
 
+    public static SceneActionsImplication getInstance(){
+        if(actionsInstance==null){
+            actionsInstance=new SceneActionsImplication();
+        }
+
+        return actionsInstance;
+    }
     @Override
     public void changeScene(String fxml, ActionEvent event) throws IOException {
+        String url = "/org/example/ticketcenter/presentation/views";
         StringBuilder builder= new StringBuilder();
         url=builder.append(url).append(fxml).toString();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(url)));

@@ -12,7 +12,7 @@ public class DBConnection {
         return databaseInstance;
     }
 
-    public void Connect() throws SQLException, ClassNotFoundException {
+    public void connect() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         connection=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "project_manager", "DobiTBG#03");
     }

@@ -32,20 +32,6 @@
 <colAssociation fkAssociation="3C3970C7-82CB-9210-8957-3230EB8F3A3A" referredColumn="0BE12F51-6B95-FAB0-06C5-A2606B3A7D20"/>
 </associations>
 </Column>
-<Column name="Event_Seats_Event_Seat_ID" id="AACAFB77-E250-C07E-DE03-4AB20905E554">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:25:22 UTC</createdTime>
-<ownerDesignName>Ticket center</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="E38FC9BB-29FE-8444-C3E7-E29F74B22101" referredColumn="0A9FACC6-A5FF-4F2F-099C-B4025AD5EEB8"/>
-</associations>
-</Column>
 <Column name="Event_Distributor_Event_Distributor_ID" id="A2A6AB62-5F90-3CAE-6CB3-94AF18F14DF9">
 <createdBy>dobri</createdBy>
 <createdTime>2024-10-15 17:25:45 UTC</createdTime>
@@ -81,16 +67,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="52BE38A3-5AA8-C3D1-95FB-C1AC915B503B"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="A50A4C48-9638-1890-F252-835F4BEA5D1D" name="Ticket_Event_Seats_FK">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:25:22 UTC</createdTime>
-<ownerDesignName>Ticket center</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="AACAFB77-E250-C07E-DE03-4AB20905E554"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="78182AEF-E6A0-1348-EA2C-A406F00546EC" name="Ticket_Event_Distributor_FK">

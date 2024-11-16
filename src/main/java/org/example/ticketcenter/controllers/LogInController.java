@@ -27,7 +27,7 @@ public class LogInController {
 
     @FXML
     protected void onLogInButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
-        SceneActionsImplication sceneAction=new SceneActionsImplication();
+        SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
         ChangeSceneCommand change=new ChangeSceneCommand(sceneAction);
         CloseSceneCommand close=new CloseSceneCommand(sceneAction);
         Invoker changeInvoker=new Invoker(change);
@@ -51,6 +51,7 @@ public class LogInController {
                 table="Organiser_Data";
                 user_column="organiser_user";
                 pass_column="organiser_pass";
+                fxml="/organisor_fxml/organisor.fxml";
             } else if (radio_distr.isSelected()) {
                 table="Distributor_Data";
                 user_column="distributor_user";
@@ -68,7 +69,7 @@ public class LogInController {
         }
 
         if(!table.equals(null) && !user_column.equals(null) && !pass_column.equals(null) && !fxml.equals(null)){
-            database.Connect();
+            database.connect();
             String query=builder.append("SELECT * FROM ").append(table).append(" WHERE ").append(user_column).append(" = ? AND ").append(pass_column).append(" = ?").toString();
             preparedStatement = database.getConnection().prepareStatement(query);
 
