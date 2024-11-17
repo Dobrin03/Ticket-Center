@@ -56,10 +56,12 @@ public class LogInController {
                 table="Distributor_Data";
                 user_column="distributor_user";
                 pass_column="distributor_pass";
+                fxml="/distributor_fxml/distributor.fxml";
             } else if (radio_cl.isSelected()) {
                 table="Client_Data";
                 user_column="client_user";
                 pass_column="client_pass";
+                fxml="/client_fxml/client.fxml";
             } else {
                 lbl_error.setText("Please check the type of user to log in");
             }

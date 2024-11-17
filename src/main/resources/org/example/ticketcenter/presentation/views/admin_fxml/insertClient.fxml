@@ -7,28 +7,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="289.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.InsertOrganiserController">
+<AnchorPane prefHeight="431.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.InsertClientController">
    <children>
       <TextField fx:id="user_field" layoutX="115.0" layoutY="113.0" prefHeight="26.0" prefWidth="303.0" />
       <TextField fx:id="name_field" layoutX="115.0" layoutY="75.0" prefHeight="26.0" prefWidth="303.0" />
       <Label layoutX="77.0" layoutY="154.0" />
-      <Label layoutX="37.0" layoutY="154.0" text="Password" />
+      <Label layoutX="36.0" layoutY="300.0" text="Password" />
       <Label layoutX="32.0" layoutY="118.0" text="User Name" />
       <Label layoutX="46.0" layoutY="80.0" text="Name" />
-      <Button layoutX="351.0" layoutY="231.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="38.0" prefWidth="59.0" text="Cancel" />
-      <Button layoutX="274.0" layoutY="231.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="38.0" prefWidth="59.0" text="Add" />
+      <Button layoutX="356.0" layoutY="378.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="38.0" prefWidth="59.0" text="Cancel" />
+      <Button layoutX="279.0" layoutY="378.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="38.0" prefWidth="59.0" text="Add" />
       <Label alignment="CENTER" layoutX="104.0" layoutY="22.0" prefHeight="38.0" prefWidth="224.0" text="Add User Orgamiser" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <PasswordField fx:id="pass_field" layoutX="115.0" layoutY="149.0" prefHeight="26.0" prefWidth="303.0" />
-      <Label layoutX="14.0" layoutY="192.0" text="Confirm Password" />
-      <PasswordField fx:id="confirm_field" layoutX="113.0" layoutY="187.0" prefHeight="26.0" prefWidth="303.0" />
-      <Label fx:id="lbl_error" alignment="CENTER" layoutX="11.0" layoutY="236.0" prefHeight="27.0" prefWidth="248.0">
+      <PasswordField fx:id="pass_field" layoutX="114.0" layoutY="295.0" prefHeight="26.0" prefWidth="303.0" />
+      <Label layoutX="13.0" layoutY="338.0" text="Confirm Password" />
+      <PasswordField fx:id="confirm_field" layoutX="112.0" layoutY="333.0" prefHeight="26.0" prefWidth="303.0" />
+      <Label fx:id="lbl_error" alignment="CENTER" layoutX="16.0" layoutY="383.0" prefHeight="27.0" prefWidth="248.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <TextField fx:id="email_field" layoutX="115.0" layoutY="149.0" prefHeight="26.0" prefWidth="303.0" />
+      <Label layoutX="47.0" layoutY="153.0" text="Email" />
+      <TextField fx:id="address_field" layoutX="111.0" layoutY="217.0" prefHeight="26.0" prefWidth="303.0" />
+      <Label layoutX="36.0" layoutY="221.0" text="Address" />
+      <TextField fx:id="number_field" layoutX="111.0" layoutY="254.0" prefHeight="26.0" prefWidth="303.0" />
+      <Label layoutX="36.0" layoutY="258.0" text="Number" />
+      <TextField fx:id="city_field" layoutX="112.0" layoutY="183.0" prefHeight="26.0" prefWidth="303.0" />
+      <Label layoutX="47.0" layoutY="187.0" text="City" />
    </children>
 </AnchorPane>

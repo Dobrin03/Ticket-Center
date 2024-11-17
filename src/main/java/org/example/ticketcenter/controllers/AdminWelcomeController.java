@@ -26,6 +26,11 @@ public class AdminWelcomeController {
     }
 
     @FXML
+    protected void onAddClientClick(ActionEvent event) throws IOException {
+        changeScene.execute("/admin_fxml/insertClient.fxml", event);
+    }
+
+    @FXML
     protected void onLogOutClick(ActionEvent event) throws IOException {
         changeScene.execute("/log_in.fxml", event);
         closeScene.execute("", event);

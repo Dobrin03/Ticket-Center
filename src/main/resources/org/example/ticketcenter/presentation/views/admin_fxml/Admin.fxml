@@ -23,7 +23,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button id="btn_add_dis" layoutX="152.0" layoutY="213.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="122.0" text="Add client">
+      <Button id="btn_add_dis" layoutX="152.0" layoutY="213.0" mnemonicParsing="false" onAction="#onAddClientClick" prefHeight="42.0" prefWidth="122.0" text="Add client">
          <font>
             <Font size="14.0" />
          </font>
