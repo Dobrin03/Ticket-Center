@@ -6,10 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.example.ticketcenter.database.DBConnection;
-import org.example.ticketcenter.scene_actions.ChangeSceneCommand;
-import org.example.ticketcenter.scene_actions.CloseSceneCommand;
-import org.example.ticketcenter.scene_actions.Invoker;
-import org.example.ticketcenter.scene_actions.SceneActionsImplication;
+import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
+import org.example.ticketcenter.scene_actions.invoker.Invoker;
+import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;

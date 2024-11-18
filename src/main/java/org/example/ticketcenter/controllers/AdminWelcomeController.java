@@ -2,10 +2,12 @@ package org.example.ticketcenter.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import org.example.ticketcenter.scene_actions.ChangeSceneCommand;
-import org.example.ticketcenter.scene_actions.CloseSceneCommand;
-import org.example.ticketcenter.scene_actions.Invoker;
-import org.example.ticketcenter.scene_actions.SceneActionsImplication;
+import javafx.scene.control.Label;
+import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
+import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
+import org.example.ticketcenter.scene_actions.invoker.Invoker;
+import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
+import org.example.ticketcenter.user_factory.models.Admin;
 
 import java.io.IOException;
 
@@ -15,6 +17,17 @@ public class AdminWelcomeController {
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
     private Invoker changeScene=new Invoker(change);
     private Invoker closeScene=new Invoker(close);
+    private Admin admin=Admin.getInstance();
+
+    @FXML
+    private Label lbl_welcome;
+
+    @FXML
+    public void initialize(){
+        StringBuilder builder=new StringBuilder();
+        builder.append(lbl_welcome.getText()).append(" ").append(admin.getName()).append("!");
+        lbl_welcome.setText(builder.toString());
+    }
     @FXML
     protected void onAddOrganiserClick(ActionEvent event) throws IOException {
         changeScene.execute("/admin_fxml/insertOrganiser.fxml", event);

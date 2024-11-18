@@ -7,10 +7,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import org.example.ticketcenter.database.DBConnection;
-import org.example.ticketcenter.scene_actions.ChangeSceneCommand;
-import org.example.ticketcenter.scene_actions.CloseSceneCommand;
-import org.example.ticketcenter.scene_actions.Invoker;
-import org.example.ticketcenter.scene_actions.SceneActionsImplication;
+import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
+import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
+import org.example.ticketcenter.scene_actions.invoker.Invoker;
+import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
+import org.example.ticketcenter.user_factory.factories.UserFactory;
 
 import java.io.IOException;
 import java.sql.*;
@@ -32,6 +33,7 @@ public class LogInController {
         CloseSceneCommand close=new CloseSceneCommand(sceneAction);
         Invoker changeInvoker=new Invoker(change);
         Invoker closeInvoker=new Invoker(close);
+        UserFactory userFactory=new UserFactory();
         DBConnection database= DBConnection.getInstance();
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -46,22 +48,22 @@ public class LogInController {
                 table="Administrator_Data";
                 user_column="admin_user";
                 pass_column="admin_pass";
-                fxml="/admin_fxml/Admin.fxml";
+                fxml="/admin_fxml/adminWelcome.fxml";
             } else if (radio_org.isSelected()) {
                 table="Organiser_Data";
                 user_column="organiser_user";
                 pass_column="organiser_pass";
-                fxml="/organisor_fxml/organisor.fxml";
+                fxml="/organiser_fxml/organiserWelcome.fxml";
             } else if (radio_distr.isSelected()) {
                 table="Distributor_Data";
                 user_column="distributor_user";
                 pass_column="distributor_pass";
-                fxml="/distributor_fxml/distributor.fxml";
+                fxml="/distributor_fxml/distributorWelcome.fxml";
             } else if (radio_cl.isSelected()) {
                 table="Client_Data";
                 user_column="client_user";
                 pass_column="client_pass";
-                fxml="/client_fxml/client.fxml";
+                fxml="/client_fxml/clientWelcome.fxml";
             } else {
                 lbl_error.setText("Please check the type of user to log in");
             }
@@ -80,7 +82,8 @@ public class LogInController {
 
             resultSet= preparedStatement.executeQuery();
 
-            if(resultSet.next()) {
+            if(resultSet.isBeforeFirst()) {
+                userFactory.getUser(resultSet);
                 closeInvoker.execute(fxml, event);
                 changeInvoker.execute(fxml, event);
             }

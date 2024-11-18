@@ -1,10 +1,12 @@
-package org.example.ticketcenter.scene_actions;
+package org.example.ticketcenter.scene_actions.commands;
 
 import javafx.event.ActionEvent;
+import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
+import org.example.ticketcenter.scene_actions.interfaces.Command;
 
 import java.io.IOException;
 
-public class ChangeSceneCommand implements Command{
+public class ChangeSceneCommand implements Command {
     private SceneActionsImplication sceneAction;
 
     public ChangeSceneCommand(SceneActionsImplication sceneAction){

@@ -1,4 +1,4 @@
-package org.example.ticketcenter.scene_actions;
+package org.example.ticketcenter.scene_actions.interfaces;
 
 import javafx.event.ActionEvent;
 
