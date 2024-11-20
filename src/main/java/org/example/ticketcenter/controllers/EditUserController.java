@@ -29,10 +29,6 @@ public class EditUserController {
         Statement query=connection.getConnection().createStatement();
         ResultSet result= query.executeQuery(search);
         ResultSetMetaData rd= result.getMetaData();
-        List<User> obUser=((List<User>) result.toList())
-        users= FXCollections.observableArrayList();
-        users.clear();
-        users.addAll((List<User>)result.toList
 
     }
 

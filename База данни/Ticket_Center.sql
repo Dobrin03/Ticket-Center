@@ -286,3 +286,44 @@ BEGIN
     INSERT INTO Ticket(client_id, event_distributor_id)
     VALUES(v_client_id, v_event_distributor_id);
 END;
+
+CREATE OR REPLACE PROCEDURE ORGANISER_UPD
+(v_name ORGANISER_DATA.organiser_name%type,
+v_id ORGANISER_DATA.organiser_id%type,
+v_user ORGANISER_DATA.organiser_user%type,
+v_pass ORGANISER_DATA.organiser_pass%type) AS
+BEGIN
+    UPDATE ORGANISER_DATA
+    SET ORGANISER_NAME=v_name, ORGANISER_USER=v_user,  ORGANISER_PASS=v_pass 
+    WHERE ORGANISER_ID=v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE DISTRIBUTOR_UPD
+(v_name DISTRIBUTOR_DATA.distributor_name%type,
+v_id DISTRIBUTOR_DATA.distributor_id%type,
+v_user DISTRIBUTOR_DATA.distributor_user%type,
+v_pass DISTRIBUTOR_DATA.distributor_pass%type,
+v_fee DISTRIBUTOR_DATA.distributor_fee%type,
+v_rating DISTRIBUTOR_DATA.rating%type) AS
+BEGIN
+    UPDATE DISTRIBUTOR_DATA
+    SET DISTRIBUTOR_NAME=v_name, DISTRIBUTOR_USER=v_user,  DISTRIBUTOR_PASS=v_pass, DISTRIBUTOR_FEE=v_fee,  RATING=v_rating 
+    WHERE DISTRIBUTOR_ID=v_id;
+END;
+
+
+CREATE OR REPLACE PROCEDURE CLIENT_UPD
+(v_name CLIENT_DATA.client_name%type,
+v_id CLIENT_DATA.client_id%type,
+v_user CLIENT_DATA.client_user%type,
+v_pass CLIENT_DATA.client_pass%type,
+v_email CLIENT_DATA.client_email%type,
+v_address CLIENT_DATA.client_address%type,
+v_number CLIENT_DATA.client_number%type,
+v_city_id CLIENT_DATA.city_id%type) AS
+BEGIN
+    UPDATE CLIENT_DATA
+    SET CLIENT_NAME=v_name, CLIENT_USER=v_user,  CLIENT_PASS=v_pass, CLIENT_EMAIL=v_email,  CLIENT_ADDRESS=v_address, CLIENT_NUMBER=v_number, CITY_ID=v_city_id 
+    WHERE CLIENT_ID=v_id;
+END;
+
