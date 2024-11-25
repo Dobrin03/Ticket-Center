@@ -5,7 +5,6 @@ import org.example.ticketcenter.user_factory.interfaces.User;
 import java.math.BigDecimal;
 
 public class Distributor extends User {
-    private static Distributor distributorInstance;
     private int ID;
     private String name;
     private String username;
@@ -13,18 +12,6 @@ public class Distributor extends User {
 
     private BigDecimal fee;
     private BigDecimal rating;
-
-    public static Distributor getInstance() {
-        if(distributorInstance==null){
-            distributorInstance=new Distributor();
-        }
-
-        return distributorInstance;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -43,6 +30,15 @@ public class Distributor extends User {
     }
 
     public void setRating(BigDecimal rating) {
+        this.rating = rating;
+    }
+
+    public Distributor(int ID, String name, String username, String password, BigDecimal fee, BigDecimal rating) {
+        this.ID = ID;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.fee = fee;
         this.rating = rating;
     }
 

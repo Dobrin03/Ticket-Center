@@ -3,23 +3,10 @@ package org.example.ticketcenter.user_factory.models;
 import org.example.ticketcenter.user_factory.interfaces.User;
 
 public class Organiser extends User {
-    private static Organiser organiserInstance;
     private int ID;
     private String name;
     private String username;
     String password;
-
-    public static Organiser getInstance() {
-        if(organiserInstance==null){
-            organiserInstance=new Organiser();
-        }
-
-        return organiserInstance;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -30,6 +17,13 @@ public class Organiser extends User {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Organiser(int ID, String name, String username, String password) {
+        this.ID = ID;
+        this.name = name;
+        this.username = username;
         this.password = password;
     }
 

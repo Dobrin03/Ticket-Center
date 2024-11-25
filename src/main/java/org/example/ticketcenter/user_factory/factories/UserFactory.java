@@ -4,25 +4,44 @@ import org.example.ticketcenter.user_factory.interfaces.User;
 import org.example.ticketcenter.user_factory.interfaces.UserAbstractFactory;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class UserFactory{
-    public void getUser(ResultSet resultSet) throws SQLException {
-        UserAbstractFactory abstractFactory = null;
-        if(resultSet.findColumn("Admin_ID")==1){
-            abstractFactory=new AdminFactory(resultSet);
-        } else if (resultSet.findColumn("Organiser_ID")==1) {
-            abstractFactory=new OrganiserFactory(resultSet);
-        }
-        else if (resultSet.findColumn("Distributor_ID")==1) {
-            abstractFactory=new DistributorFactory(resultSet);
-        }
-        else if (resultSet.findColumn("Client_ID")==1) {
-            abstractFactory=new ClientFactory(resultSet);
+    private static UserFactory factoryInstance;
+    private ResultSet result;
+
+    public static UserFactory getInstance(){
+        if (factoryInstance==null){
+            factoryInstance=new UserFactory();
         }
 
-        if(!abstractFactory.equals(null)) {
-            abstractFactory.createUser();
+        return factoryInstance;
+    }
+
+    public ResultSet getResult() {
+        return result;
+    }
+
+    public void setResult(ResultSet result) {
+        this.result = result;
+    }
+
+    public User getUser() throws SQLException {
+        UserAbstractFactory abstractFactory = null;
+        ResultSetMetaData md= getResult().getMetaData();
+        if(md.getColumnName(1).equalsIgnoreCase("Admin_ID")){
+            abstractFactory=new AdminFactory(getResult());
+        } else if (md.getColumnName(1).equalsIgnoreCase("Organiser_ID")) {
+            abstractFactory=new OrganiserFactory(getResult());
         }
+        else if (md.getColumnName(1).equalsIgnoreCase("Distributor_ID")) {
+            abstractFactory=new DistributorFactory(getResult());
+        }
+        else if (md.getColumnName(1).equalsIgnoreCase("Client_ID")) {
+            abstractFactory=new ClientFactory(getResult());
+        }
+
+        return abstractFactory.createUser();
     }
 }

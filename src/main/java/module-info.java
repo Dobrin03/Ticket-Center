@@ -10,4 +10,6 @@ module org.example.ticketcenter {
     opens org.example.ticketcenter.controllers to javafx.fxml;
     exports org.example.ticketcenter.application;
     opens org.example.ticketcenter.application to javafx.fxml;
+
+    opens org.example.ticketcenter.user_factory.models to javafx.base;
 }

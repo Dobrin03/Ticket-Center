@@ -5,17 +5,29 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.EditUserController">
    <children>
-      <TableView fx:id="user_view" layoutX="57.0" layoutY="71.0" prefHeight="301.0" prefWidth="486.0">
+      <TableView fx:id="user_view" layoutX="-2.0" layoutY="71.0" prefHeight="328.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="col_id" prefWidth="36.80001676082611" text="ID" />
+          <TableColumn fx:id="col_name" onEditCommit="#updateCell" prefWidth="76.79995727539062" text="Name" />
+            <TableColumn fx:id="col_user" onEditCommit="#updateCell" prefWidth="71.20001220703125" text="Username" />
+            <TableColumn fx:id="col_pass" onEditCommit="#updateCell" prefWidth="66.39996337890625" text="Password" />
+            <TableColumn fx:id="col_fee" onEditCommit="#updateCell" prefWidth="41.60003662109375" text="Fee" />
+            <TableColumn fx:id="col_rating" onEditCommit="#updateCell" prefWidth="72.79998779296875" text="Rating" />
+            <TableColumn fx:id="col_email" onEditCommit="#updateCell" prefWidth="62.4000244140625" text="Email" />
+            <TableColumn fx:id="col_number" onEditCommit="#updateCell" prefWidth="75.0" text="Number" />
+            <TableColumn fx:id="col_city" onEditCommit="#updateCell" prefWidth="44.799957275390625" text="City" />
+            <TableColumn fx:id="col_address" onEditCommit="#updateCell" prefWidth="75.0" text="Address" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <Button layoutX="63.0" layoutY="27.0" mnemonicParsing="false" text="Organiser Data" />
-      <Button layoutX="172.0" layoutY="27.0" mnemonicParsing="false" text="Distributor Data" />
-      <Button layoutX="284.0" layoutY="27.0" mnemonicParsing="false" text="Client Data" />
-      <Button layoutX="464.0" layoutY="27.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#onOrganiserDataClick" text="Organiser Data" />
+      <Button layoutX="123.0" layoutY="27.0" mnemonicParsing="false" onAction="#onDistributorDataClick" text="Distributor Data" />
+      <Button layoutX="237.0" layoutY="27.0" mnemonicParsing="false" onAction="#onClientDataClick" text="Client Data" />
+      <Button layoutX="518.0" layoutY="27.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="458.0" layoutY="27.0" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
    </children>
 </AnchorPane>

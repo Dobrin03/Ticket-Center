@@ -17,24 +17,17 @@ public class DistributorFactory implements UserAbstractFactory {
     private BigDecimal rating;
 
     public DistributorFactory(ResultSet resultSet) throws SQLException {
-        while (resultSet.next()) {
-            this.ID = resultSet.getInt("Distributor_ID");
-            this.name = resultSet.getString("Distributor_Name");
-            this.username = resultSet.getString("Distributor_User");
-            this.password = resultSet.getString("Distributor_Pass");
-            this.fee = resultSet.getBigDecimal("Distributor_Fee");
-            this.rating = resultSet.getBigDecimal("Rating");
-        }
+        resultSet.next();
+        this.ID = resultSet.getInt("Distributor_ID");
+        this.name = resultSet.getString("Distributor_Name");
+        this.username = resultSet.getString("Distributor_User");
+        this.password = resultSet.getString("Distributor_Pass");
+        this.fee = resultSet.getBigDecimal("Distributor_Fee");
+        this.rating = resultSet.getBigDecimal("Rating");
     }
 
     @Override
-    public void createUser() {
-        Distributor distributor=Distributor.getInstance();
-        distributor.setID(ID);
-        distributor.setName(name);
-        distributor.setUsername(username);
-        distributor.setPassword(password);
-        distributor.setFee(fee);
-        distributor.setRating(rating);
+    public User createUser() {
+        return new Distributor(ID, name, username, password, fee, rating);
     }
 }

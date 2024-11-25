@@ -33,7 +33,7 @@ public class LogInController {
         CloseSceneCommand close=new CloseSceneCommand(sceneAction);
         Invoker changeInvoker=new Invoker(change);
         Invoker closeInvoker=new Invoker(close);
-        UserFactory userFactory=new UserFactory();
+        UserFactory userFactory=UserFactory.getInstance();
         DBConnection database= DBConnection.getInstance();
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -83,7 +83,7 @@ public class LogInController {
             resultSet= preparedStatement.executeQuery();
 
             if(resultSet.isBeforeFirst()) {
-                userFactory.getUser(resultSet);
+                userFactory.setResult(resultSet);
                 closeInvoker.execute(fxml, event);
                 changeInvoker.execute(fxml, event);
             }

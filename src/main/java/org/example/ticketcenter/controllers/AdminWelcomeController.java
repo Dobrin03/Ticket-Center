@@ -7,9 +7,11 @@ import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
 import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
 import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
+import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.models.Admin;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class AdminWelcomeController {
     private SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
@@ -17,13 +19,14 @@ public class AdminWelcomeController {
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
     private Invoker changeScene=new Invoker(change);
     private Invoker closeScene=new Invoker(close);
-    private Admin admin=Admin.getInstance();
+    private Admin admin;
 
     @FXML
     private Label lbl_welcome;
 
     @FXML
-    public void initialize(){
+    public void initialize() throws SQLException {
+        admin= (Admin) UserFactory.getInstance().getUser();
         StringBuilder builder=new StringBuilder();
         builder.append(lbl_welcome.getText()).append(" ").append(admin.getName()).append("!");
         lbl_welcome.setText(builder.toString());

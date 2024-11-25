@@ -3,7 +3,6 @@ package org.example.ticketcenter.user_factory.models;
 import org.example.ticketcenter.user_factory.interfaces.User;
 
 public class Client extends User {
-    private static Client clientInstance;
     private int ID;
     private String name;
     private String username;
@@ -11,20 +10,7 @@ public class Client extends User {
     private String email;
     private String address;
     private String number;
-    private int city;
-
-
-    public static Client getInstance() {
-        if(clientInstance==null){
-            clientInstance=new Client();
-        }
-
-        return clientInstance;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
+    private String city;
 
     public void setName(String name) {
         this.name = name;
@@ -50,7 +36,18 @@ public class Client extends User {
         this.number = number;
     }
 
-    public void setCity(int city) {
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Client(int ID, String name, String username, String password, String email, String address, String number, String city) {
+        this.ID = ID;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.number = number;
         this.city = city;
     }
 
@@ -86,7 +83,7 @@ public class Client extends User {
         return number;
     }
 
-    public int getCity() {
+    public String getCity() {
         return city;
     }
 }
