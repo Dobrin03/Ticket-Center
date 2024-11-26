@@ -14,7 +14,6 @@ public class OrganiserFactory implements UserAbstractFactory {
     String password;
 
     public OrganiserFactory(ResultSet resultSet) throws SQLException {
-        resultSet.next();
         this.ID = resultSet.getInt("Organiser_ID");
         this.name = resultSet.getString("Organiser_Name");
         this.username = resultSet.getString("Organiser_User");

@@ -19,7 +19,6 @@ public class ClientFactory implements UserAbstractFactory {
 
 
     public ClientFactory(ResultSet resultSet) throws SQLException {
-        resultSet.next();
         this.ID = resultSet.getInt("Client_ID");
         this.name = resultSet.getString("Client_Name");
         this.username = resultSet.getString("Client_User");

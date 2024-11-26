@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.BigDecimalStringConverter;
+import oracle.jdbc.OracleTypes;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.interfaces.User;
@@ -115,7 +116,7 @@ public class EditUserController {
         col_address.setVisible(false);
         col_city.setVisible(false);
 
-        query="SELECT * FROM ORGANISER_DATA";
+        query="CALL FIND_ALL_ORGANISERS(?)";
         update="CALL ORGANISER_UPD(?, ?, ?, ?)";
         delete="CALL ORGANISER_DEL(?)";
 
@@ -135,7 +136,7 @@ public class EditUserController {
         col_address.setVisible(false);
         col_city.setVisible(false);
 
-        query="SELECT * FROM DISTRIBUTOR_DATA";
+        query="CALL FIND_ALL_DISTRIBUTORS(?)";
         update="CALL DISTRIBUTOR_UPD(?, ?, ?, ?, ?, ?)";
         delete="CALL DISTRIBUTOR_DEL(?)";
 
@@ -155,9 +156,7 @@ public class EditUserController {
         col_address.setVisible(true);
         col_city.setVisible(true);
 
-        query="SELECT c.client_id, c.client_name, c.client_user, c.client_pass, " +
-                "c.client_email, c.client_number, ct.city_name, c.client_address " +
-                "FROM CLIENT_DATA c JOIN CITY ct ON c.CITY_ID = ct.CITY_ID";
+        query="CALL FIND_ALL_CLIENTS(?)";
         update="CALL CLIENT_UPD(?, ?, ?, ?, ?, ?, ?, ?)";
         delete="CALL CLIENT_DEL(?)";
 
@@ -168,15 +167,14 @@ public class EditUserController {
         connection=DBConnection.getInstance();
         connection.connect();
         users.clear();
-        Statement statement=connection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet result=statement.executeQuery(query);
-        while(true){
+        CallableStatement statement=connection.getConnection().prepareCall(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        statement.registerOutParameter(1, OracleTypes.CURSOR);
+        statement.execute();
+        ResultSet result = (ResultSet) statement.getObject(1);
+
+        while(result.next()){
             userFactory.setResult(result);
             users.add(userFactory.getUser());
-
-            if(result.isLast()){
-                break;
-            }
         }
 
         user_view.setItems(users);
@@ -188,9 +186,9 @@ public class EditUserController {
         Alert alert=new Alert(Alert.AlertType.ERROR);
         connection=DBConnection.getInstance();
         connection.connect();
-        String cityQuery="SELECT City_ID FROM City WHERE City_Name = ?";
+        String cityQuery="CALL CHECK_CITY(?, ?)";
         String cityIns="CALL CITY_INS(?)";
-        PreparedStatement checkCity=connection.getConnection().prepareStatement(cityQuery);
+        CallableStatement checkCity=connection.getConnection().prepareCall(cityQuery);
         PreparedStatement cityInsStmt=connection.getConnection().prepareStatement(cityIns);
         PreparedStatement statement=connection.getConnection().prepareStatement(update);
 
@@ -294,7 +292,10 @@ public class EditUserController {
             }
 
             checkCity.setString(1, client.getCity());
-            ResultSet result= checkCity.executeQuery();
+            checkCity.registerOutParameter(2, OracleTypes.CURSOR);
+            checkCity.execute();
+
+            ResultSet result= (ResultSet) checkCity.getObject(2);
 
             if(!result.isBeforeFirst()){
                 cityInsStmt.setString(1, client.getCity());

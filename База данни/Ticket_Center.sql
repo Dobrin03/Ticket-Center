@@ -346,3 +346,82 @@ BEGIN
     DELETE FROM CLIENT_DATA
     WHERE CLIENT_ID=v_id;
 END;
+
+CREATE OR REPLACE PROCEDURE FIND_ADMIN
+(v_user Administrator_data.admin_user%type,
+v_pass Administrator_data.admin_pass%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT * FROM ADMINISTRATOR_DATA
+    WHERE Admin_User=v_user AND Admin_Pass=v_pass;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_ORGANISER
+(v_user Organiser_data.organiser_user%type,
+v_pass Organiser_data.organiser_pass%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT * FROM ORGANISER_DATA
+    WHERE Organiser_User=v_user AND Organiser_Pass=v_pass;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_DISTRIBUTOR
+(v_user Distributor_data.distributor_user%type,
+v_pass Distributor_data.distributor_pass%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT * FROM DISTRIBUTOR_DATA
+    WHERE Distributor_User=v_user AND Distributor_Pass=v_pass;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_CLIENT
+(v_user Client_data.Client_user%type,
+v_pass Client_data.Client_pass%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT c.Client_ID, c.Client_Name, c.Client_User, c.Client_Pass, c.Client_Email, c.Client_Address, c.Client_Number, City_Name FROM CLIENT_DATA c
+    JOIN City ct ON c.city_id=ct.city_id
+    WHERE Client_User=v_user AND Client_Pass=v_pass;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_ALL_ORGANISERS
+(cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT * FROM ORGANISER_DATA;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_ALL_DISTRIBUTORS
+(cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT * FROM DISTRIBUTOR_DATA;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_ALL_CLIENTS
+(cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT c.Client_ID, c.Client_Name, c.Client_User, c.Client_Pass, c.Client_Email, c.Client_Address, c.Client_Number, City_Name FROM CLIENT_DATA c
+    JOIN City ct ON c.city_id=ct.city_id;
+END;
+
+CREATE OR REPLACE PROCEDURE CHECK_CITY
+(v_name City.city_name%type, 
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT City_ID FROM City WHERE City_Name = v_name;
+END;

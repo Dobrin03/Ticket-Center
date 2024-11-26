@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import oracle.jdbc.OracleTypes;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
 import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
@@ -35,32 +36,31 @@ public class LogInController {
         Invoker closeInvoker=new Invoker(close);
         UserFactory userFactory=UserFactory.getInstance();
         DBConnection database= DBConnection.getInstance();
-        PreparedStatement preparedStatement;
-        ResultSet resultSet;
-        StringBuilder builder=new StringBuilder();
+        CallableStatement statement;
+        ResultSet resultSet = null;
         String user_column = null;
         String pass_column = null;
-        String table = null;
         String fxml = null;
+        String query = null;
 
         if(!user_field.getText().isEmpty() && !pass_field.getText().isEmpty()) {
             if (radio_admin.isSelected()) {
-                table="Administrator_Data";
+                query="CALL FIND_ADMIN(?, ?, ?)";
                 user_column="admin_user";
                 pass_column="admin_pass";
                 fxml="/admin_fxml/adminWelcome.fxml";
             } else if (radio_org.isSelected()) {
-                table="Organiser_Data";
+                query="CALL FIND_ORGANISER(?, ?, ?)";
                 user_column="organiser_user";
                 pass_column="organiser_pass";
                 fxml="/organiser_fxml/organiserWelcome.fxml";
             } else if (radio_distr.isSelected()) {
-                table="Distributor_Data";
+                query="CALL FIND_DISTRIBUTOR(?, ?, ?)";
                 user_column="distributor_user";
                 pass_column="distributor_pass";
                 fxml="/distributor_fxml/distributorWelcome.fxml";
             } else if (radio_cl.isSelected()) {
-                table="Client_Data";
+                query="CALL FIND_CLIENT(?, ?, ?)";
                 user_column="client_user";
                 pass_column="client_pass";
                 fxml="/client_fxml/clientWelcome.fxml";
@@ -72,17 +72,19 @@ public class LogInController {
             lbl_error.setText("Please input the username and password");
         }
 
-        if(!table.equals(null) && !user_column.equals(null) && !pass_column.equals(null) && !fxml.equals(null)){
+        if(!query.equals(null) && !user_column.equals(null) && !pass_column.equals(null) && !fxml.equals(null)){
             database.connect();
-            String query=builder.append("SELECT * FROM ").append(table).append(" WHERE ").append(user_column).append(" = ? AND ").append(pass_column).append(" = ?").toString();
-            preparedStatement = database.getConnection().prepareStatement(query);
+            statement = database.getConnection().prepareCall(query);
 
-            preparedStatement.setString(1, user_field.getText());
-            preparedStatement.setString(2, pass_field.getText());
+            statement.setString(1, user_field.getText());
+            statement.setString(2, pass_field.getText());
+            statement.registerOutParameter(3, OracleTypes.CURSOR);
 
-            resultSet= preparedStatement.executeQuery();
+            statement.execute();
 
-            if(resultSet.isBeforeFirst()) {
+            resultSet= (ResultSet) statement.getObject(3);
+
+            if(resultSet.next()) {
                 userFactory.setResult(resultSet);
                 closeInvoker.execute(fxml, event);
                 changeInvoker.execute(fxml, event);

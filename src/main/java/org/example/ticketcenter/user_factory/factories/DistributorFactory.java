@@ -17,7 +17,6 @@ public class DistributorFactory implements UserAbstractFactory {
     private BigDecimal rating;
 
     public DistributorFactory(ResultSet resultSet) throws SQLException {
-        resultSet.next();
         this.ID = resultSet.getInt("Distributor_ID");
         this.name = resultSet.getString("Distributor_Name");
         this.username = resultSet.getString("Distributor_User");

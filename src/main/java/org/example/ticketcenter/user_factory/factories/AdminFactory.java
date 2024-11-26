@@ -14,7 +14,6 @@ public class AdminFactory implements UserAbstractFactory {
     private String password;
 
     public AdminFactory(ResultSet resultSet) throws SQLException {
-        resultSet.next();
         this.ID = resultSet.getInt("Admin_ID");
         this.name = resultSet.getString("Admin_Name");
         this.username = resultSet.getString("Admin_User");
