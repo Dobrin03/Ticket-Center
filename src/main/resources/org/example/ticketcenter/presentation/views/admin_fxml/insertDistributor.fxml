@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="331.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.InsertDistributorController">
+<AnchorPane prefHeight="331.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.admin_controllers.InsertDistributorController">
    <children>
       <TextField fx:id="user_field" layoutX="115.0" layoutY="113.0" prefHeight="26.0" prefWidth="303.0" />
       <TextField fx:id="name_field" layoutX="115.0" layoutY="75.0" prefHeight="26.0" prefWidth="303.0" />

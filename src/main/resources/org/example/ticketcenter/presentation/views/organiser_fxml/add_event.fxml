@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="469.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.AddEventController">
+   <children>
+      <Label alignment="CENTER" layoutX="149.0" layoutY="59.0" prefHeight="35.0" prefWidth="301.0" text="Insert Data For Event">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="122.0" text="Name" />
+      <Label layoutX="72.0" layoutY="152.0" text="Ticket Limit" />
+      <Label layoutX="73.0" layoutY="191.0" text="Date" />
+      <Label layoutX="75.0" layoutY="219.0" text="City" />
+      <Label layoutX="74.0" layoutY="253.0" text="Address" />
+      <Label layoutX="73.0" layoutY="283.0" text="Type" />
+      <Label layoutX="71.0" layoutY="313.0" text="Seats" />
+      <Label layoutX="70.0" layoutY="350.0" text="Distributor" />
+      <DatePicker layoutX="179.0" layoutY="187.0" />
+      <TextField layoutX="179.0" layoutY="118.0" prefHeight="26.0" prefWidth="175.0" />
+      <TextField layoutX="179.0" layoutY="148.0" prefHeight="26.0" prefWidth="175.0" />
+      <TextField layoutX="179.0" layoutY="215.0" prefHeight="26.0" prefWidth="175.0" />
+      <TextField layoutX="179.0" layoutY="249.0" prefHeight="26.0" prefWidth="175.0" />
+      <TextField layoutX="179.0" layoutY="279.0" prefHeight="26.0" prefWidth="175.0" />
+      <Button layoutX="284.0" layoutY="322.0" mnemonicParsing="false" text="Add Seats" />
+      <Button layoutX="230.0" layoutY="355.0" mnemonicParsing="false" onAction="#onRequestDistributorsClick" text="Request Distributors" />
+      <Button layoutX="534.0" layoutY="429.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="484.0" layoutY="429.0" mnemonicParsing="false" text="Add" />
+      <Label fx:id="lbl_error" alignment="CENTER" layoutX="179.0" layoutY="415.0" prefHeight="27.0" prefWidth="61.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

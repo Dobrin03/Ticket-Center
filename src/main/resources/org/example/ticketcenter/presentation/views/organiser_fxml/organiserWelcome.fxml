@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="338.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.OrganiserWelcomeController">
+   <children>
+      <Label fx:id="lbl_welcome" alignment="CENTER" layoutX="134.0" layoutY="34.0" prefHeight="35.0" prefWidth="247.0" text="Welcome">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="419.0" layoutY="287.0" mnemonicParsing="false" onAction="#onLogOutClick" prefHeight="30.0" prefWidth="70.0" text="Log Out" />
+      <Button layoutX="193.0" layoutY="98.0" mnemonicParsing="false" onAction="#onAddEventClick" text="Add Event">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="194.0" layoutY="161.0" mnemonicParsing="false" text="Edit Event">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="179.0" layoutY="225.0" mnemonicParsing="false" text="Bought Ticket">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>

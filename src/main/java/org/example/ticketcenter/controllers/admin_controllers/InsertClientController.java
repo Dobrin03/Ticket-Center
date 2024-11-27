@@ -1,4 +1,4 @@
-package org.example.ticketcenter.controllers;
+package org.example.ticketcenter.controllers.admin_controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

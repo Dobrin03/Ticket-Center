@@ -432,3 +432,52 @@ BEGIN
     INSERT INTO Event_Type(event_type_name)
     VALUES(v_name);
 END;
+
+CREATE OR REPLACE PROCEDURE EVENT_INS
+(v_name Event.event_name%type,
+v_limit Event.ticket_limit_per_person%type, 
+v_date Event.event_date%type, 
+v_address Event.event_address%type, 
+v_city Event.city_id%type, 
+v_type Event.event_type_id%type, 
+v_status Event.event_status_id%type, 
+v_organiser Event.organiser_id%type) AS
+BEGIN
+    INSERT INTO Event(event_name, ticket_limit_per_person, event_date, event_address, city_id, event_type_id, event_status_id, organiser_id)
+    VALUES(v_name, v_limit, v_date, v_address, v_city, v_type, v_status, v_organiser);
+END;
+
+CREATE OR REPLACE PROCEDURE EVENT_UPD
+(v_id Event.event_id%type,
+v_name Event.event_name%type,
+v_limit Event.ticket_limit_per_person%type, 
+v_date Event.event_date%type, 
+v_address Event.event_address%type, 
+v_city Event.city_id%type, 
+v_type Event.event_type_id%type, 
+v_status Event.event_status_id%type, 
+v_organiser Event.organiser_id%type) AS
+BEGIN
+    UPDATE Event
+    SET Event_name = v_name, Ticket_limit_per_person = v_limit, Event_date = v_date, Event_address = v_address, City_id = v_city, Event_type_id = v_type, Event_status_id = v_status, Organiser_id = v_organiser
+    WHERE Event_id = v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE ES_INS
+(v_event Event_Seats.event_id%type,
+v_seat Event_Seats.seat_type_id%type,
+v_quantity Event_Seats.seat_quantity%type,
+v_price Event_Seats.seat_price%type)AS
+BEGIN
+    INSERT INTO Event_Seats(event_id, seat_type_id, seat_quantity, seat_price)
+    VALUES(v_event, v_seat, v_quantity, v_price);
+END;
+
+CREATE OR REPLACE PROCEDURE ED_INS
+(v_seats Event_Distributor.event_seats_id%type,
+v_distributor Event_Distributor.distributor_id%type)AS
+BEGIN
+    INSERT INTO Event_Distributor(event_seats_id, distributor_id)
+    VALUES(v_seats, v_distributor);
+END;
+
