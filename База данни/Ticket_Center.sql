@@ -425,3 +425,10 @@ BEGIN
     OPEN cur FOR
     SELECT City_ID FROM City WHERE City_Name = v_name;
 END;
+
+CREATE OR REPLACE PROCEDURE ET_INS
+(v_name Event_Type.event_type_name%type) AS
+BEGIN
+    INSERT INTO Event_Type(event_type_name)
+    VALUES(v_name);
+END;
