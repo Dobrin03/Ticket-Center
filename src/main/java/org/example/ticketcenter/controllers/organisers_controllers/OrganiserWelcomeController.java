@@ -26,7 +26,7 @@ public class OrganiserWelcomeController {
     private Label lbl_welcome;
 
     @FXML
-    public void initialize() throws SQLException {
+    public void initialize() throws SQLException, ClassNotFoundException {
         organiser= (Organiser) UserFactory.getInstance().getUser();
         StringBuilder builder=new StringBuilder();
         builder.append(lbl_welcome.getText()).append(" ").append(organiser.getName()).append("!");
@@ -41,5 +41,10 @@ public class OrganiserWelcomeController {
     protected void onLogOutClick(ActionEvent event) throws IOException {
         changeScene.execute("/log_in.fxml", event);
         closeScene.execute("", event);
+    }
+
+    @FXML
+    private void onRequestDistributorClick(ActionEvent event) throws IOException {
+        changeScene.execute("/organiser_fxml/request_distributors.fxml", event);
     }
 }

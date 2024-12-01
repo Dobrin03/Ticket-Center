@@ -440,11 +440,12 @@ v_date Event.event_date%type,
 v_address Event.event_address%type, 
 v_city Event.city_id%type, 
 v_type Event.event_type_id%type, 
-v_status Event.event_status_id%type, 
-v_organiser Event.organiser_id%type) AS
+v_organiser Event.organiser_id%type,
+v_id OUT Event.event_id%type) AS
 BEGIN
-    INSERT INTO Event(event_name, ticket_limit_per_person, event_date, event_address, city_id, event_type_id, event_status_id, organiser_id)
-    VALUES(v_name, v_limit, v_date, v_address, v_city, v_type, v_status, v_organiser);
+    INSERT INTO Event(event_name, ticket_limit_per_person, event_date, event_address, city_id, event_type_id, organiser_id)
+    VALUES(v_name, v_limit, v_date, v_address, v_city, v_type, v_organiser)
+    RETURNING event_id INTO v_id;
 END;
 
 CREATE OR REPLACE PROCEDURE EVENT_UPD
@@ -481,3 +482,40 @@ BEGIN
     VALUES(v_seats, v_distributor);
 END;
 
+CREATE OR REPLACE PROCEDURE FIND_SEAT_TYPE
+(cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT Seat_Type_Name FROM Seat_Type;
+END;
+
+CREATE OR REPLACE PROCEDURE CHECK_ETYPE
+(v_type Event_Type.event_type_name%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT * FROM Event_Type WHERE Event_Type_Name=v_type;
+END;
+
+CREATE OR REPLACE TRIGGER DEFINE_EVENT_STATUS
+BEFORE INSERT ON Event
+FOR EACH ROW
+BEGIN
+    IF(:NEW.Event_Date IS NULL)
+    THEN
+        :NEW.Event_Status_ID:=12;
+    ELSE
+        :NEW.Event_Status_ID:=10;
+    END IF;
+END;
+
+CREATE OR REPLACE PROCEDURE CHECK_STYPE
+(v_type Seat_Type.seat_type_name%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT * FROM Seat_Type WHERE Seat_Type_Name=v_type;
+END;

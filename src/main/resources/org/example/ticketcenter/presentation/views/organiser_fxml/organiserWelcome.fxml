@@ -5,25 +5,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="338.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.OrganiserWelcomeController">
+<AnchorPane prefHeight="404.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.OrganiserWelcomeController">
    <children>
-      <Label fx:id="lbl_welcome" alignment="CENTER" layoutX="134.0" layoutY="34.0" prefHeight="35.0" prefWidth="247.0" text="Welcome">
+      <Label fx:id="lbl_welcome" alignment="CENTER" layoutX="83.0" layoutY="24.0" prefHeight="35.0" prefWidth="348.0" text="Welcome">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="419.0" layoutY="287.0" mnemonicParsing="false" onAction="#onLogOutClick" prefHeight="30.0" prefWidth="70.0" text="Log Out" />
-      <Button layoutX="193.0" layoutY="98.0" mnemonicParsing="false" onAction="#onAddEventClick" text="Add Event">
+      <Button layoutX="421.0" layoutY="359.0" mnemonicParsing="false" onAction="#onLogOutClick" prefHeight="30.0" prefWidth="70.0" text="Log Out" />
+      <Button layoutX="160.0" layoutY="70.0" mnemonicParsing="false" onAction="#onAddEventClick" prefHeight="48.0" prefWidth="194.0" text="Add Event">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="194.0" layoutY="161.0" mnemonicParsing="false" text="Edit Event">
+      <Button layoutX="160.0" layoutY="250.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="194.0" text="Edit Event">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="179.0" layoutY="225.0" mnemonicParsing="false" text="Bought Ticket">
+      <Button layoutX="160.0" layoutY="311.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="194.0" text="Bought Tickets">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="160.0" layoutY="130.0" mnemonicParsing="false" onAction="#onRequestDistributorClick" prefHeight="51.0" prefWidth="194.0" text="Request DIstributor">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="160.0" layoutY="187.0" mnemonicParsing="false" onAction="#onRequestDistributorClick" prefHeight="51.0" prefWidth="194.0" text="Rate DIstributor">
          <font>
             <Font size="18.0" />
          </font>

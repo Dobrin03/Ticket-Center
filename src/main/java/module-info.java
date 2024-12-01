@@ -16,4 +16,5 @@ module org.example.ticketcenter {
     opens org.example.ticketcenter.controllers.admin_controllers to javafx.fxml;
     opens org.example.ticketcenter.controllers.organisers_controllers to javafx.fxml;
     exports org.example.ticketcenter.controllers.organisers_controllers to javafx.fxml;
+    opens org.example.ticketcenter.seats_data to javafx.base;
 }

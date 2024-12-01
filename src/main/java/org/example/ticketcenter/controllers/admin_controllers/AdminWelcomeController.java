@@ -25,7 +25,7 @@ public class AdminWelcomeController {
     private Label lbl_welcome;
 
     @FXML
-    public void initialize() throws SQLException {
+    public void initialize() throws SQLException, ClassNotFoundException {
         admin= (Admin) UserFactory.getInstance().getUser();
         StringBuilder builder=new StringBuilder();
         builder.append(lbl_welcome.getText()).append(" ").append(admin.getName()).append("!");

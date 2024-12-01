@@ -5,12 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import oracle.jdbc.OracleTypes;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
 import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,8 +41,8 @@ public class InsertClientController {
                 prepareStatement("CALL Client_Ins(?, ?, ?, ?, ?, ?, ?)");
         PreparedStatement cityInsStmt=database.getConnection().
                 prepareStatement("CALL City_Ins(?)");
-        PreparedStatement checkCityQuery=database.getConnection().
-                prepareStatement("SELECT City_ID FROM City WHERE City_Name=?");
+        CallableStatement checkCityQuery=database.getConnection().
+                prepareCall("CALL CHECK_CITY(?, ?)");
         ResultSet result;
         int id = 0;
         if(!name_field.getText().isEmpty() && !user_field.getText().isEmpty()
@@ -48,12 +50,16 @@ public class InsertClientController {
                 && !address_field.getText().isEmpty() && !number_field.getText().isEmpty() &&
                 !pass_field.getText().isEmpty() && !confirm_field.getText().isEmpty()){
             checkCityQuery.setString(1, city_field.getText());
-            result= checkCityQuery.executeQuery();
+            checkCityQuery.registerOutParameter(2, OracleTypes.CURSOR);
+            checkCityQuery.execute();
+
+            result= (ResultSet) checkCityQuery.getObject(2);
 
             if(!result.isBeforeFirst()){
                 cityInsStmt.setString(1, city_field.getText());
                 cityInsStmt.execute();
-                result= checkCityQuery.executeQuery();
+                checkCityQuery.execute();
+                result= (ResultSet) checkCityQuery.getObject(2);
             }
 
             while(result.next()){

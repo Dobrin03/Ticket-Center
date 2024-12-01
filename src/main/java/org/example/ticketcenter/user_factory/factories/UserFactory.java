@@ -1,5 +1,6 @@
 package org.example.ticketcenter.user_factory.factories;
 
+import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.user_factory.interfaces.User;
 import org.example.ticketcenter.user_factory.interfaces.UserAbstractFactory;
 
@@ -27,8 +28,10 @@ public class UserFactory{
         this.result = result;
     }
 
-    public User getUser() throws SQLException {
+    public User getUser() throws SQLException, ClassNotFoundException {
         UserAbstractFactory abstractFactory = null;
+        DBConnection connection=DBConnection.getInstance();
+        connection.connect();
         ResultSetMetaData md= getResult().getMetaData();
         if(md.getColumnName(1).equalsIgnoreCase("Admin_ID")){
             abstractFactory=new AdminFactory(getResult());
@@ -41,6 +44,7 @@ public class UserFactory{
         else if (md.getColumnName(1).equalsIgnoreCase("Client_ID")) {
             abstractFactory=new ClientFactory(getResult());
         }
+        connection.closeConnection();
 
         return abstractFactory.createUser();
     }
