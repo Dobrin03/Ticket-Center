@@ -47,4 +47,8 @@ public class OrganiserWelcomeController {
     private void onRequestDistributorClick(ActionEvent event) throws IOException {
         changeScene.execute("/organiser_fxml/request_distributors.fxml", event);
     }
+    @FXML
+    private void onEditEventClick(ActionEvent event) throws IOException {
+        changeScene.execute("/organiser_fxml/edit_event.fxml", event);
+    }
 }

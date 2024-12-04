@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="404.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.OrganiserWelcomeController">
+<AnchorPane prefHeight="404.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.OrganiserWelcomeController">
    <children>
       <Label fx:id="lbl_welcome" alignment="CENTER" layoutX="83.0" layoutY="24.0" prefHeight="35.0" prefWidth="348.0" text="Welcome">
          <font>
@@ -18,7 +18,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="160.0" layoutY="250.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="194.0" text="Edit Event">
+      <Button layoutX="160.0" layoutY="250.0" mnemonicParsing="false" onAction="#onEditEventClick" prefHeight="51.0" prefWidth="194.0" text="Edit Event">
          <font>
             <Font size="18.0" />
          </font>

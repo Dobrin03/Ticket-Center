@@ -191,20 +191,6 @@ BEGIN
     :NEW.Event_ID:=Event_SEQ.NEXTVAL;
 END;
 
-CREATE OR REPLACE PROCEDURE Event_Ins
-(v_event_name Event.event_name%type,
-v_ticket_limit_per_person Event.ticket_limit_per_person%type,
-v_event_date Event.event_date%type,
-v_event_address Event.event_address%type,
-v_city_id Event.city_id%type,
-v_event_type_id Event.event_type_id%type,
-v_event_status_id Event.event_status_id%type,
-v_organiser_id Event.organiser_id%type) AS
-BEGIN
-    INSERT INTO Event(event_name, ticket_limit_per_person, event_date, event_address, city_id, event_type_id, event_status_id, organiser_id)
-    VALUES(v_event_name, v_ticket_limit_per_person, v_event_date, v_event_address, v_city_id, v_event_type_id, v_event_status_id, v_organiser_id);
-END;
-
 CREATE TABLE Event_Distributor(
 Event_Distributor_ID INTEGER NOT NULL,
 Event_Seats_ID INTEGER,
@@ -518,4 +504,50 @@ AS
 BEGIN
     OPEN cur FOR
     SELECT * FROM Seat_Type WHERE Seat_Type_Name=v_type;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_EVENTS
+(v_organiser Event.Organiser_Id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT E.Event_Id,E.Event_Name,E.Ticket_Limit_Per_Person,E.Event_Date,E.Event_Address,C.City_Name,T.Event_Type_Name,S.Event_Status_Name 
+    FROM Event E
+    JOIN City C ON C.City_Id=E.City_Id
+    JOIN Event_Type T ON T.Event_Type_Id=E.Event_Type_Id
+    JOIN Event_Status S ON S.Event_Status_Id=E.Event_Status_Id
+    WHERE Organiser_Id=v_organiser;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_EVENT_SEATS
+(v_event Event_Seats.event_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT S.SEAT_TYPE_ID,S.SEAT_TYPE_NAME,E.SEAT_QUANTITY,E.SEAT_PRICE 
+    FROM Event_Seats E 
+    JOIN Seat_Type S on S.SEAT_TYPE_ID = E.SEAT_TYPE_ID
+    WHERE Event_Id=v_event;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_EVENT_SEATS
+(v_event Event_Seats.event_id%type,
+v_seat Event_Seats.Seat_type_Id%type,
+v_quantity Event_Seats.Seat_Quantity%type,
+v_price Event_Seats.Seat_Price%type)
+AS
+BEGIN
+    UPDATE Event_Seats
+    SET Seat_Type_Id=v_seat, Seat_Quantity=v_quantity, Seat_Price=v_price
+    WHERE Event_Id=v_event;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_STATUS
+(cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT event_status_name FROM Event_Status;
 END;
