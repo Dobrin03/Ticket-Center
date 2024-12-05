@@ -442,11 +442,10 @@ v_date Event.event_date%type,
 v_address Event.event_address%type, 
 v_city Event.city_id%type, 
 v_type Event.event_type_id%type, 
-v_status Event.event_status_id%type, 
-v_organiser Event.organiser_id%type) AS
+v_status Event.event_status_id%type) AS
 BEGIN
     UPDATE Event
-    SET Event_name = v_name, Ticket_limit_per_person = v_limit, Event_date = v_date, Event_address = v_address, City_id = v_city, Event_type_id = v_type, Event_status_id = v_status, Organiser_id = v_organiser
+    SET Event_name = v_name, Ticket_limit_per_person = v_limit, Event_date = v_date, Event_address = v_address, City_id = v_city, Event_type_id = v_type, Event_status_id = v_status
     WHERE Event_id = v_id;
 END;
 
@@ -486,14 +485,17 @@ BEGIN
 END;
 
 CREATE OR REPLACE TRIGGER DEFINE_EVENT_STATUS
-BEFORE INSERT ON Event
+BEFORE INSERT OR UPDATE ON Event
 FOR EACH ROW
 BEGIN
-    IF(:NEW.Event_Date IS NULL)
+    IF(:NEW.Event_Status_ID != 11 OR :NEW.Event_Status_ID IS NULL)
     THEN
-        :NEW.Event_Status_ID:=12;
-    ELSE
-        :NEW.Event_Status_ID:=10;
+        IF(:NEW.Event_Date IS NULL)
+        THEN
+            :NEW.Event_Status_ID:=12;
+        ELSE
+            :NEW.Event_Status_ID:=10;
+        END IF;
     END IF;
 END;
 
@@ -532,16 +534,13 @@ BEGIN
     WHERE Event_Id=v_event;
 END;
 
-CREATE OR REPLACE PROCEDURE FIND_EVENT_SEATS
+CREATE OR REPLACE PROCEDURE ES_DEL
 (v_event Event_Seats.event_id%type,
-v_seat Event_Seats.Seat_type_Id%type,
-v_quantity Event_Seats.Seat_Quantity%type,
-v_price Event_Seats.Seat_Price%type)
+v_seat Event_Seats.Seat_type_Id%type)
 AS
 BEGIN
-    UPDATE Event_Seats
-    SET Seat_Type_Id=v_seat, Seat_Quantity=v_quantity, Seat_Price=v_price
-    WHERE Event_Id=v_event;
+    DELETE FROM Event_Seats
+    WHERE Event_Id=v_event AND Seat_Type_ID=v_seat;
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_STATUS
@@ -550,4 +549,14 @@ AS
 BEGIN
     OPEN cur FOR
     SELECT event_status_name FROM Event_Status;
+END;
+
+CREATE OR REPLACE PROCEDURE CHECK_STATUS
+(v_name Event_Status.event_status_name%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT event_status_id FROM Event_Status
+    WHERE event_status_name=v_name;
 END;

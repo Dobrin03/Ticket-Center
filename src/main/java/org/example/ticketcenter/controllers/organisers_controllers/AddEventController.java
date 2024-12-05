@@ -4,15 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.converter.BigDecimalStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import oracle.jdbc.OracleTypes;
@@ -23,7 +18,6 @@ import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
 import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.seats_data.SeatsData;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
-import org.example.ticketcenter.user_factory.interfaces.User;
 import org.example.ticketcenter.user_factory.models.Organiser;
 
 import java.io.IOException;
@@ -41,7 +35,6 @@ public class AddEventController {
     private TableColumn<SeatsData, Integer> col_quantity;
     @FXML
     private TableColumn<SeatsData, BigDecimal> col_price;
-    private ObservableList<SeatsData> seats = FXCollections.observableArrayList();
     private ObservableList<String> seatType = FXCollections.observableArrayList();
     private SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
     private ChangeSceneCommand change=new ChangeSceneCommand(sceneAction);
@@ -93,7 +86,7 @@ public class AddEventController {
 
     @FXML
     protected void onAddSeatsClick(ActionEvent event) throws IOException {
-        seat_view.getItems().add(new SeatsData(null, 0 , null));
+        seat_view.getItems().add(new SeatsData(0,null, 0 , null));
         List<String> values=new ArrayList<>();
 
         for(SeatsData seatsData : seat_view.getItems()){
@@ -118,7 +111,7 @@ public class AddEventController {
 
         switch (event.getTableColumn().getText()){
             case "Type":
-                seatsData.setName(event.getNewValue().toString());
+                seatsData.setType(event.getNewValue().toString());
                 break;
             case "Quantity":
                 seatsData.setQuantity((int) event.getNewValue());

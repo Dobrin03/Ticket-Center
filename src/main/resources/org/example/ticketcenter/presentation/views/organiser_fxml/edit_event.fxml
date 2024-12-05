@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="572.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.EditEventController">
+<AnchorPane prefHeight="572.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.EditEventController">
    <children>
       <Label alignment="CENTER" layoutX="149.0" layoutY="14.0" prefHeight="35.0" prefWidth="301.0" text="Insert Data For Event">
          <font>
@@ -38,7 +38,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="update_btn" layoutX="437.0" layoutY="517.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="30.0" prefWidth="76.0" text="Update">
+      <Button fx:id="update_btn" layoutX="437.0" layoutY="517.0" mnemonicParsing="false" onAction="#onUpdateClick" prefHeight="30.0" prefWidth="76.0" text="Update">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -72,5 +72,6 @@
       <Label layoutX="74.0" layoutY="68.0" prefHeight="18.0" prefWidth="76.0" text="Choose Event" />
       <ComboBox fx:id="status_cb" layoutX="179.0" layoutY="288.0" prefHeight="26.0" prefWidth="254.0" />
       <Label layoutX="74.0" layoutY="292.0" prefHeight="18.0" prefWidth="76.0" text="Status" />
+      <Label layoutX="440.0" layoutY="292.0" text="*" />
    </children>
 </AnchorPane>
