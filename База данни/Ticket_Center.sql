@@ -194,7 +194,8 @@ END;
 CREATE TABLE Event_Distributor(
 Event_Distributor_ID INTEGER NOT NULL,
 Event_Seats_ID INTEGER,
-Distributor_ID INTEGER);
+Distributor_ID INTEGER,
+Is_Distributing NUMBER(1, 0));
 ALTER TABLE Event_Distributor ADD CONSTRAINT PK_Event_Distributor PRIMARY KEY(Event_Distributor_ID);
 ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Seats FOREIGN KEY(Event_Seats_ID) REFERENCES Event_Seats(Event_Seats_ID);
 ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Distributor FOREIGN KEY(Distributor_ID) REFERENCES Distributor_Data(Distributor_ID);
@@ -453,10 +454,12 @@ CREATE OR REPLACE PROCEDURE ES_INS
 (v_event Event_Seats.event_id%type,
 v_seat Event_Seats.seat_type_id%type,
 v_quantity Event_Seats.seat_quantity%type,
-v_price Event_Seats.seat_price%type)AS
+v_price Event_Seats.seat_price%type,
+v_id OUT Event_Seats.event_seats_id%type)AS
 BEGIN
     INSERT INTO Event_Seats(event_id, seat_type_id, seat_quantity, seat_price)
-    VALUES(v_event, v_seat, v_quantity, v_price);
+    VALUES(v_event, v_seat, v_quantity, v_price)
+    RETURNING event_seats_id INTO v_id;
 END;
 
 CREATE OR REPLACE PROCEDURE ED_INS
@@ -559,4 +562,18 @@ BEGIN
     OPEN cur FOR
     SELECT event_status_id FROM Event_Status
     WHERE event_status_name=v_name;
+END;
+
+CREATE OR REPLACE PROCEDURE ED_DEL
+(v_event Event_Seats.Event_ID%type,
+v_seat Event_Seats.Seat_Type_ID%type,
+v_distributor Event_Distributor.Distributor_ID%type)
+AS
+BEGIN
+    DELETE FROM Event_Distributor
+    WHERE Event_Distributor_ID IN(
+    SELECT Event_Distributor_ID 
+    FROM Event_Distributor evd
+    JOIN Event_Seats es ON es.event_seats_id=evd.event_seats_id
+    WHERE es.Event_ID=v_event AND es.Seat_Type_ID=v_seat AND evd.Distributor_ID=v_distributor);
 END;

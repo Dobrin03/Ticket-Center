@@ -57,6 +57,21 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="Is Distributing" id="09237F5E-299D-3732-17A9-0E058AA98A66">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-09 13:44:46 UTC</createdTime>
+<generatorID>8E5E270F-C075-6C4C-8B30-0EC0873023DA</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="61D1212E-7870-C1C4-62A1-B1D744D2D2D9" name="Event Distributor PK">

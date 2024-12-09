@@ -46,6 +46,18 @@
 <colAssociation fkAssociation="85608D2D-E640-4606-1E18-B3F691CDD11A" referredColumn="0A9FACC6-A5FF-4F2F-099C-B4025AD5EEB8"/>
 </associations>
 </Column>
+<Column name="Is_Distributing" id="8E5E270F-C075-6C4C-8B30-0EC0873023DA">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-09 13:35:27 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="51D3B8FD-4A7B-D740-A072-0F54520D59EA" name="Event_Distributor_PK">

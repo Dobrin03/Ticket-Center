@@ -1,5 +1,6 @@
 package org.example.ticketcenter.user_factory.models;
 
+import javafx.scene.control.CheckBox;
 import org.example.ticketcenter.user_factory.interfaces.User;
 
 import java.math.BigDecimal;
@@ -9,9 +10,9 @@ public class Distributor extends User {
     private String name;
     private String username;
     private String password;
-
     private BigDecimal fee;
     private BigDecimal rating;
+    private CheckBox add;
 
     public void setName(String name) {
         this.name = name;
@@ -33,6 +34,14 @@ public class Distributor extends User {
         this.rating = rating;
     }
 
+    public CheckBox getAdd() {
+        return add;
+    }
+
+    public void setAdd(CheckBox add) {
+        this.add = add;
+    }
+
     public Distributor(int ID, String name, String username, String password, BigDecimal fee, BigDecimal rating) {
         this.ID = ID;
         this.name = name;
@@ -40,6 +49,7 @@ public class Distributor extends User {
         this.password = password;
         this.fee = fee;
         this.rating = rating;
+        this.add=new CheckBox();
     }
 
     @Override

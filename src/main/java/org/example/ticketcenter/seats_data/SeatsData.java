@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 public class SeatsData {
     private int ID;
+    private String type;
+    private int quantity;
+    private BigDecimal price;
 
     public int getID() {
         return ID;
@@ -16,10 +19,6 @@ public class SeatsData {
     public void setType(String type) {
         this.type = type;
     }
-
-    private String type;
-    private int quantity;
-    private BigDecimal price;
 
     public String getType() {
         return type;

@@ -18,6 +18,8 @@ import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
 import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.seats_data.SeatsData;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
+import org.example.ticketcenter.user_factory.interfaces.User;
+import org.example.ticketcenter.user_factory.models.Distributor;
 import org.example.ticketcenter.user_factory.models.Organiser;
 
 import java.io.IOException;
@@ -35,7 +37,18 @@ public class AddEventController {
     private TableColumn<SeatsData, Integer> col_quantity;
     @FXML
     private TableColumn<SeatsData, BigDecimal> col_price;
+    @FXML
+    private TableView<Distributor> distributor_view;
+    @FXML
+    private TableColumn<Distributor, String> col_dis_name;
+    @FXML
+    private TableColumn<Distributor, BigDecimal> col_dis_fee;
+    @FXML
+    private TableColumn<Distributor, BigDecimal> col_dis_rating;
+    @FXML
+    private TableColumn<Distributor, CheckBox> col_dis_add;
     private ObservableList<String> seatType = FXCollections.observableArrayList();
+    private ObservableList<Distributor> distributors = FXCollections.observableArrayList();
     private SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
     private ChangeSceneCommand change=new ChangeSceneCommand(sceneAction);
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
@@ -55,7 +68,8 @@ public class AddEventController {
 
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException, IOException {
-        organiser= (Organiser) UserFactory.getInstance().getUser();
+        UserFactory userFactory=UserFactory.getInstance();
+        organiser= (Organiser) userFactory.getUser();
         connection=DBConnection.getInstance();
         connection.connect();
         String findTypes="CALL FIND_SEAT_TYPE(?)";
@@ -69,6 +83,22 @@ public class AddEventController {
             seatType.add(resultSet.getString("Seat_Type_Name"));
         }
 
+        type=connection.getConnection().prepareCall("CALL FIND_ALL_DISTRIBUTORS(?)");
+
+        type.registerOutParameter(1, OracleTypes.CURSOR);
+        type.execute();
+
+        resultSet= (ResultSet) type.getObject(1);
+
+        while (resultSet.next()){
+            distributors.add(new Distributor(resultSet.getInt("Distributor_ID"),
+                    resultSet.getString("Distributor_Name"),
+                    resultSet.getString("Distributor_User"),
+                    resultSet.getString("Distributor_Pass"),
+                    resultSet.getBigDecimal("Distributor_Fee"),
+                    resultSet.getBigDecimal("Rating")));
+        }
+
         connection.closeConnection();
         seat_view.setEditable(true);
         col_type.setCellValueFactory(new PropertyValueFactory<SeatsData, String>("type"));
@@ -78,6 +108,13 @@ public class AddEventController {
         col_type.setCellFactory(ComboBoxTableCell.forTableColumn(seatType));
         col_quantity.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         col_price.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
+
+        col_dis_name.setCellValueFactory(new PropertyValueFactory<Distributor, String>("name"));
+        col_dis_fee.setCellValueFactory(new PropertyValueFactory<Distributor, BigDecimal>("fee"));
+        col_dis_rating.setCellValueFactory(new PropertyValueFactory<Distributor, BigDecimal>("rating"));
+        col_dis_add.setCellValueFactory(new PropertyValueFactory<Distributor, CheckBox>("add"));
+
+        distributor_view.setItems(distributors);
     }
     @FXML
     protected void onCancelClick(ActionEvent event) throws IOException {
@@ -150,11 +187,20 @@ public class AddEventController {
 
     @FXML
     private void onAddClick() throws SQLException, ClassNotFoundException {
+        List<Distributor> addedDistr=new ArrayList<>();
+
+        for(Distributor distr: distributor_view.getItems()){
+            if(distr.getAdd().isSelected()){
+                addedDistr.add(distr);
+            }
+        }
+
         if(!name_field.getText().isEmpty() && !limit_field.getText().isEmpty() && !city_field.getText().isEmpty()
-        && !address_field.getText().isEmpty() && !type_field.getText().isEmpty() && !seat_view.getItems().isEmpty()){
+        && !address_field.getText().isEmpty() && !type_field.getText().isEmpty() && !seat_view.getItems().isEmpty()
+        && !addedDistr.isEmpty()){
             if(limit_field.getText().matches("[0-9]*")){
                 connection.connect();
-                int cityID = 0, typeID = 0, eventID = 0, seatID = 0;
+                int cityID = 0, typeID = 0, eventID = 0, seatID = 0, esID = 0;
                 CallableStatement ins=connection.getConnection().prepareCall("CALL CITY_INS(?)");
                 CallableStatement check=connection.getConnection().prepareCall("CALL CHECK_CITY(?, ?)");
                 check.setString(1, city_field.getText());
@@ -200,7 +246,7 @@ public class AddEventController {
                     ins.setDate(3, null);
                 }
                 else {
-                    ins.setDate(3, Date.valueOf(date_field.getValue()));
+                    ins.setDate(3, Date.valueOf(date_field.getEditor().getText()));
                 }
                 ins.setString(4, address_field.getText());
                 ins.setInt(5, cityID);
@@ -211,7 +257,7 @@ public class AddEventController {
 
                 eventID=ins.getInt(8);
 
-                ins=connection.getConnection().prepareCall("CALL ES_INS(?, ?, ?, ?)");
+                ins=connection.getConnection().prepareCall("CALL ES_INS(?, ?, ?, ?, ?)");
                 ins.setInt(1, eventID);
 
                 for(SeatsData seatsData : seat_view.getItems()){
@@ -229,7 +275,22 @@ public class AddEventController {
                     ins.setInt(2, seatID);
                     ins.setInt(3, seatsData.getQuantity());
                     ins.setBigDecimal(4, seatsData.getPrice());
+                    ins.registerOutParameter(5, Types.INTEGER);
                     ins.execute();
+
+                    esID=ins.getInt(5);
+
+                    CallableStatement edIns=connection.getConnection().prepareCall("CALL ED_INS(?, ?)");
+                    edIns.setInt(1, esID);
+
+                    for(Distributor dist: addedDistr){
+                        edIns.setInt(2, dist.getID());
+                        edIns.execute();
+                    }
+                }
+
+                for(Distributor distr: distributor_view.getItems()){
+                    distr.getAdd().setSelected(false);
                 }
 
                 name_field.clear();
