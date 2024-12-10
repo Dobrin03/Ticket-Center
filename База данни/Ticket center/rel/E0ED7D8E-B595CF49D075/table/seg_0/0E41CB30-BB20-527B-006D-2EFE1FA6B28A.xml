@@ -67,19 +67,6 @@
 <ownDataTypeParameters>,6,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Raiting" id="51F3E591-8DE9-5BF6-2BD9-05DF4FD61AE7">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-14 10:29:53 UTC</createdTime>
-<ownerDesignName>Ticket center</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>2</dataTypePrecision>
-<dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,2,2</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="A621854C-7172-9E7D-249C-F5757AAEF148" name="Distributor_PK">

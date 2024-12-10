@@ -46,9 +46,6 @@ public class EditUserController {
     private TableColumn<User, BigDecimal> col_fee;
 
     @FXML
-    private TableColumn<User, BigDecimal> col_rating;
-
-    @FXML
     private TableColumn<User, String> col_email;
 
     @FXML
@@ -75,7 +72,6 @@ public class EditUserController {
         col_user.setVisible(false);
         col_pass.setVisible(false);
         col_fee.setVisible(false);
-        col_rating.setVisible(false);
         col_email.setVisible(false);
         col_number.setVisible(false);
         col_address.setVisible(false);
@@ -86,7 +82,6 @@ public class EditUserController {
         col_user.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
         col_pass.setCellValueFactory(new PropertyValueFactory<User, String>("password"));
         col_fee.setCellValueFactory(new PropertyValueFactory<User, BigDecimal>("fee"));
-        col_rating.setCellValueFactory(new PropertyValueFactory<User, BigDecimal>("rating"));
         col_email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
         col_address.setCellValueFactory(new PropertyValueFactory<User, String>("address"));
         col_number.setCellValueFactory(new PropertyValueFactory<User, String>("number"));
@@ -96,7 +91,6 @@ public class EditUserController {
         col_user.setCellFactory(TextFieldTableCell.forTableColumn());
         col_pass.setCellFactory(TextFieldTableCell.forTableColumn());
         col_fee.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
-        col_rating.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
         col_email.setCellFactory(TextFieldTableCell.forTableColumn());
         col_address.setCellFactory(TextFieldTableCell.forTableColumn());
         col_number.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -110,7 +104,6 @@ public class EditUserController {
         col_user.setVisible(true);
         col_pass.setVisible(true);
         col_fee.setVisible(false);
-        col_rating.setVisible(false);
         col_email.setVisible(false);
         col_number.setVisible(false);
         col_address.setVisible(false);
@@ -130,14 +123,13 @@ public class EditUserController {
         col_user.setVisible(true);
         col_pass.setVisible(true);
         col_fee.setVisible(true);
-        col_rating.setVisible(true);
         col_email.setVisible(false);
         col_number.setVisible(false);
         col_address.setVisible(false);
         col_city.setVisible(false);
 
         query="CALL FIND_ALL_DISTRIBUTORS(?)";
-        update="CALL DISTRIBUTOR_UPD(?, ?, ?, ?, ?, ?)";
+        update="CALL DISTRIBUTOR_UPD(?, ?, ?, ?, ?)";
         delete="CALL DISTRIBUTOR_DEL(?)";
 
         loadTable(query);
@@ -151,7 +143,6 @@ public class EditUserController {
         col_pass.setVisible(true);
         col_email.setVisible(true);
         col_fee.setVisible(false);
-        col_rating.setVisible(false);
         col_number.setVisible(true);
         col_address.setVisible(true);
         col_city.setVisible(true);
@@ -236,17 +227,6 @@ public class EditUserController {
                         alert.showAndWait();
                     }
                     break;
-                case "Rating":
-                    if(event.getNewValue().toString().matches("[0-9.]*")) {
-                        distributor.setRating((BigDecimal) event.getNewValue());
-                    }
-                    else{
-                    alert.setTitle("Rating Error");
-                    alert.setContentText("Please insert a number");
-                    alert.setHeaderText("Rating Error");
-                    alert.showAndWait();
-                    }
-                    break;
             }
 
             statement.setString(1, distributor.getName());
@@ -254,7 +234,6 @@ public class EditUserController {
             statement.setString(3, distributor.getUsername());
             statement.setString(4, distributor.getPassword());
             statement.setBigDecimal(5, distributor.getFee());
-            statement.setBigDecimal(6, distributor.getRating());
         } else if(update.contains("CLIENT")){
             Client client= (Client) event.getRowValue();
             int cityIndex = 0;

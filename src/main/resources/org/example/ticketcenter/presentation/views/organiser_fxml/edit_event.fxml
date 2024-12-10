@@ -77,7 +77,6 @@
          <columns>
             <TableColumn fx:id="col_dis_name" onEditCommit="#updateCell" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="col_dis_fee" onEditCommit="#updateCell" prefWidth="75.0" text="Fee" />
-            <TableColumn fx:id="col_dis_rating" onEditCommit="#updateCell" prefWidth="75.0" text="Rating" />
             <TableColumn fx:id="col_dis_add" onEditCommit="#updateCell" prefWidth="75.0" text="Add Distributor" />
          </columns>
          <columnResizePolicy>

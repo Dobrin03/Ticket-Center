@@ -44,8 +44,6 @@ public class AddEventController {
     @FXML
     private TableColumn<Distributor, BigDecimal> col_dis_fee;
     @FXML
-    private TableColumn<Distributor, BigDecimal> col_dis_rating;
-    @FXML
     private TableColumn<Distributor, CheckBox> col_dis_add;
     private ObservableList<String> seatType = FXCollections.observableArrayList();
     private ObservableList<Distributor> distributors = FXCollections.observableArrayList();
@@ -95,8 +93,7 @@ public class AddEventController {
                     resultSet.getString("Distributor_Name"),
                     resultSet.getString("Distributor_User"),
                     resultSet.getString("Distributor_Pass"),
-                    resultSet.getBigDecimal("Distributor_Fee"),
-                    resultSet.getBigDecimal("Rating")));
+                    resultSet.getBigDecimal("Distributor_Fee")));
         }
 
         connection.closeConnection();
@@ -111,7 +108,6 @@ public class AddEventController {
 
         col_dis_name.setCellValueFactory(new PropertyValueFactory<Distributor, String>("name"));
         col_dis_fee.setCellValueFactory(new PropertyValueFactory<Distributor, BigDecimal>("fee"));
-        col_dis_rating.setCellValueFactory(new PropertyValueFactory<Distributor, BigDecimal>("rating"));
         col_dis_add.setCellValueFactory(new PropertyValueFactory<Distributor, CheckBox>("add"));
 
         distributor_view.setItems(distributors);

@@ -1,8 +1,8 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B8021210-42DA-0290-FDEF-1B4E32131BB0" name="Distributor">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="53D22575-B57C-5169-675B-B20D3023BAC3" name="Distributor Rating">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>0E41CB30-BB20-527B-006D-2EFE1FA6B28A</generatorID>
+<createdTime>2024-12-10 16:41:21 UTC</createdTime>
+<generatorID>2A54752C-F461-D2CA-B449-007F057C25DD</generatorID>
 <ownerDesignName>Ticket center</ownerDesignName>
 <engineerTo>
 <item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
@@ -16,10 +16,10 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="Distributor ID" id="107DAEA8-BDBF-55B0-7EE0-6152E9425D1B">
+<Attribute name="Rating ID" id="2D91F6D7-BB6D-5A10-E050-FBB69C6F15C6">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>45BB6980-21AB-FD84-7D25-5A7E5B670895</generatorID>
+<createdTime>2024-12-10 16:41:21 UTC</createdTime>
+<generatorID>5B47400E-B67C-607E-4FBC-27F24A30C194</generatorID>
 <ownerDesignName>Ticket center</ownerDesignName>
 <engineerTo>
 <item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
@@ -29,55 +29,10 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Distributor Name" id="7759793A-6A1D-0FDB-C7F0-178803F56C85">
+<Attribute name="Rating" id="933CA196-A2F0-5723-0856-8815D3ED8D94">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>88795DCA-7B49-47A9-3EE4-F15D09A7B469</generatorID>
-<ownerDesignName>Ticket center</ownerDesignName>
-<engineerTo>
-<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>50</dataTypeSize>
-<ownDataTypeParameters>50,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="Distributor User" id="A9A49C07-1927-4216-CB60-C538B24CC4D7">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>7F707E20-0EFE-4D22-9864-8365E2F90B82</generatorID>
-<ownerDesignName>Ticket center</ownerDesignName>
-<engineerTo>
-<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>30</dataTypeSize>
-<ownDataTypeParameters>30,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="DIstributor Pass" id="C3F0B835-E308-582D-B72A-B3E3889C4B39">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>AD248748-B1EC-375E-CE62-E44530045309</generatorID>
-<ownerDesignName>Ticket center</ownerDesignName>
-<engineerTo>
-<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>20</dataTypeSize>
-<ownDataTypeParameters>20,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="Distributor Fee" id="4F2AB927-D2D9-FEFB-6456-443CAC181582">
-<createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>99D23B7A-599F-4CB1-1BE5-1B1E49C3209B</generatorID>
+<createdTime>2024-12-10 16:41:21 UTC</createdTime>
+<generatorID>FDE503C7-1B20-9CE1-010F-C5C682AD7266</generatorID>
 <ownerDesignName>Ticket center</ownerDesignName>
 <engineerTo>
 <item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
@@ -86,23 +41,66 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
+<dataTypePrecision>3</dataTypePrecision>
 <dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<ownDataTypeParameters>,3,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Review" id="E8819F8E-8F01-7BA3-D9F4-76912AA0A48C">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:41:21 UTC</createdTime>
+<generatorID>3AA310FB-7382-F8EC-3745-911E64047233</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Organiser Organiser ID" id="1B1D6567-49DD-714C-E156-BFA23CA1D8B7">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:41:21 UTC</createdTime>
+<generatorID>32D5032B-0859-0FA3-0F6D-F2B65C77CDEC</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<referedAttribute>6310501C-6CC1-6162-C63A-09C629AE5DEC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Distributor Distributor ID" id="367A8E86-5E92-1160-DA0C-BF17C25102E7">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:41:21 UTC</createdTime>
+<generatorID>3D3EF995-5859-C739-E7B0-1B3F1965C597</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<referedAttribute>107DAEA8-BDBF-55B0-7EE0-6152E9425D1B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="38A98E6F-68FF-D34B-0FBE-8D15C2721BC7" name="Distributor PK">
+<identifier id="C5C6EC25-E060-918E-80B8-27857E18CE47" name="Distributor Rating PK">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>A621854C-7172-9E7D-249C-F5757AAEF148</generatorID>
+<createdTime>2024-12-10 16:41:21 UTC</createdTime>
+<generatorID>195C0496-BAF1-3671-890A-18B7DDE8195E</generatorID>
 <ownerDesignName>Ticket center</ownerDesignName>
 <engineerTo>
 <item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>107DAEA8-BDBF-55B0-7EE0-6152E9425D1B</attributeRef>
+<attributeRef>2D91F6D7-BB6D-5A10-E050-FBB69C6F15C6</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

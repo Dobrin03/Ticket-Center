@@ -42,13 +42,13 @@ public class OrganiserWelcomeController {
         changeScene.execute("/log_in.fxml", event);
         closeScene.execute("", event);
     }
-
-    @FXML
-    private void onRequestDistributorClick(ActionEvent event) throws IOException {
-        changeScene.execute("/organiser_fxml/request_distributors.fxml", event);
-    }
     @FXML
     private void onEditEventClick(ActionEvent event) throws IOException {
         changeScene.execute("/organiser_fxml/edit_event.fxml", event);
+    }
+
+    @FXML
+    private void onRateDistributorClick(ActionEvent event) throws IOException {
+        changeScene.execute("/organiser_fxml/rateDistributor.fxml", event);
     }
 }

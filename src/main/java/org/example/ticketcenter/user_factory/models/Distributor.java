@@ -42,13 +42,12 @@ public class Distributor extends User {
         this.add = add;
     }
 
-    public Distributor(int ID, String name, String username, String password, BigDecimal fee, BigDecimal rating) {
+    public Distributor(int ID, String name, String username, String password, BigDecimal fee) {
         this.ID = ID;
         this.name = name;
         this.username = username;
         this.password = password;
         this.fee = fee;
-        this.rating = rating;
         this.add=new CheckBox();
     }
 

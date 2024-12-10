@@ -1,0 +1,108 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2A54752C-F461-D2CA-B449-007F057C25DD" name="Distributor_Rating">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:39:20 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<ordsAlias>table_14</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Rating_ID" id="5B47400E-B67C-607E-4FBC-27F24A30C194">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:40:48 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Rating" id="FDE503C7-1B20-9CE1-010F-C5C682AD7266">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:40:48 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,3,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Review" id="3AA310FB-7382-F8EC-3745-911E64047233">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:40:48 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Organiser_Organiser_ID" id="E7BDE527-525A-AA56-1672-260375EFF9D3">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:41:03 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D465E43B-6325-4AD2-FD75-14C70DFCCDC8" referredColumn="6BAD7F55-4DF4-75E2-1C13-8C52DD901BFC"/>
+</associations>
+</Column>
+<Column name="Distributor_Distributor_ID" id="BBE8E26C-948C-887E-6707-F89B18E375A9">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:41:07 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="308148C4-26C6-A0E8-9DBB-CE584621067D" referredColumn="45BB6980-21AB-FD84-7D25-5A7E5B670895"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="195C0496-BAF1-3671-890A-18B7DDE8195E" name="Distributor_Rating_PK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:40:48 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5B47400E-B67C-607E-4FBC-27F24A30C194"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="225370EA-8027-A838-0FA4-36531D6C50C0" name="Distributor_Rating_Organiser_FK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:41:03 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E7BDE527-525A-AA56-1672-260375EFF9D3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5BDF3D8F-437E-A085-57E7-641B60EF49DD" name="Distributor_Rating_Distributor_FK">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-10 16:41:07 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BBE8E26C-948C-887E-6707-F89B18E375A9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

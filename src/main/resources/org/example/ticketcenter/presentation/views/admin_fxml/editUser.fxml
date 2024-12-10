@@ -14,7 +14,6 @@
             <TableColumn fx:id="col_user" onEditCommit="#updateCell" prefWidth="71.20001220703125" text="Username" />
             <TableColumn fx:id="col_pass" onEditCommit="#updateCell" prefWidth="66.39996337890625" text="Password" />
             <TableColumn fx:id="col_fee" onEditCommit="#updateCell" prefWidth="41.60003662109375" text="Fee" />
-            <TableColumn fx:id="col_rating" onEditCommit="#updateCell" prefWidth="72.79998779296875" text="Rating" />
             <TableColumn fx:id="col_email" onEditCommit="#updateCell" prefWidth="62.4000244140625" text="Email" />
             <TableColumn fx:id="col_number" onEditCommit="#updateCell" prefWidth="75.0" text="Number" />
             <TableColumn fx:id="col_city" onEditCommit="#updateCell" prefWidth="44.799957275390625" text="City" />

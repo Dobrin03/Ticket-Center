@@ -106,8 +106,7 @@ Distributor_ID INTEGER NOT NULL,
 Distributor_Name VARCHAR(50),
 Distributor_User VARCHAR(30),
 Distributor_Pass VARCHAR(20),
-Distributor_Fee NUMBER(5,2),
-Rating NUMBER(2,2));
+Distributor_Fee NUMBER(5,2));
 ALTER TABLE Distributor_Data ADD CONSTRAINT PK_Distributor PRIMARY KEY(Distributor_ID);
 
 CREATE SEQUENCE Distributor_SEQ START WITH 400 NOCACHE ORDER;
@@ -274,6 +273,36 @@ BEGIN
     VALUES(v_client_id, v_event_distributor_id);
 END;
 
+CREATE TABLE Distributor_Rating(
+Rating_ID INTEGER NOT NULL,
+Rating_Value NUMBER(3,2),
+Organiser_ID INTEGER,
+Distributor_ID INTEGER,
+Review NVARCHAR2(1000));
+ALTER TABLE Distributor_Rating ADD CONSTRAINT PK_Rating PRIMARY KEY(Rating_ID);
+ALTER TABLE Distributor_Rating ADD CONSTRAINT FK_Rater FOREIGN KEY(Organiser_ID) REFERENCES Organiser_Data(Organiser_ID);
+ALTER TABLE Distributor_Rating ADD CONSTRAINT FK_Rated FOREIGN KEY(Distributor_ID) REFERENCES Distributor_Data(Distributor_ID);
+
+CREATE SEQUENCE Rating_SEQ START WITH 1000 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER Rating_ID_AUTO
+BEFORE INSERT ON Distributor_Rating
+FOR EACH ROW
+WHEN (NEW.Rating_ID IS NULL)
+BEGIN
+    :NEW.Rating_ID:=Rating_SEQ.NEXTVAL;
+END;
+
+CREATE OR REPLACE PROCEDURE Rating_Ins
+(v_rating Distributor_Rating.Rating_Value%type,
+v_organiser Distributor_Rating.Organiser_ID%type,
+v_distributor Distributor_Rating.Distributor_ID%type,
+v_review Distributor_Rating.Review%type) AS
+BEGIN
+    INSERT INTO Distributor_Rating(rating_value, organiser_id, distributor_id, review)
+    VALUES(v_rating, v_organiser, v_distributor, v_review);
+END;
+
 CREATE OR REPLACE PROCEDURE ORGANISER_UPD
 (v_name ORGANISER_DATA.organiser_name%type,
 v_id ORGANISER_DATA.organiser_id%type,
@@ -297,11 +326,10 @@ CREATE OR REPLACE PROCEDURE DISTRIBUTOR_UPD
 v_id DISTRIBUTOR_DATA.distributor_id%type,
 v_user DISTRIBUTOR_DATA.distributor_user%type,
 v_pass DISTRIBUTOR_DATA.distributor_pass%type,
-v_fee DISTRIBUTOR_DATA.distributor_fee%type,
-v_rating DISTRIBUTOR_DATA.rating%type) AS
+v_fee DISTRIBUTOR_DATA.distributor_fee%type) AS
 BEGIN
     UPDATE DISTRIBUTOR_DATA
-    SET DISTRIBUTOR_NAME=v_name, DISTRIBUTOR_USER=v_user,  DISTRIBUTOR_PASS=v_pass, DISTRIBUTOR_FEE=v_fee,  RATING=v_rating 
+    SET DISTRIBUTOR_NAME=v_name, DISTRIBUTOR_USER=v_user,  DISTRIBUTOR_PASS=v_pass, DISTRIBUTOR_FEE=v_fee
     WHERE DISTRIBUTOR_ID=v_id;
 END;
 
@@ -387,12 +415,26 @@ BEGIN
     SELECT * FROM ORGANISER_DATA;
 END;
 
-CREATE OR REPLACE PROCEDURE FIND_ALL_DISTRIBUTORS
+create or replace PROCEDURE FIND_ALL_DISTRIBUTORS
 (cur OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cur FOR
-    SELECT * FROM DISTRIBUTOR_DATA;
+    SELECT * FROM Distributor_Data;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_UNRATED_DISTRIBUTORS
+(v_organiser Distributor_Rating.Organiser_ID%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT *
+    FROM Distributor_Data
+    WHERE Distributor_ID NOT IN(
+    SELECT Distributor_ID
+    FROM Distributor_Rating
+    WHERE Organiser_ID=v_organiser);
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_ALL_CLIENTS
