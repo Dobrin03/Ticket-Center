@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="749.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.AddEventController">
+<AnchorPane prefHeight="749.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.AddEventController">
    <children>
       <Label alignment="CENTER" layoutX="149.0" layoutY="59.0" prefHeight="35.0" prefWidth="301.0" text="Insert Data For Event">
          <font>

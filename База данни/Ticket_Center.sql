@@ -619,3 +619,53 @@ BEGIN
     JOIN Event_Seats es ON es.event_seats_id=evd.event_seats_id
     WHERE es.Event_ID=v_event AND es.Seat_Type_ID=v_seat AND evd.Distributor_ID=v_distributor);
 END;
+
+CREATE OR REPLACE PROCEDURE FIND_REQUESTS
+(v_distributor Event_Distributor.Distributor_ID%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT E.event_id,O.organiser_id FROM Event_Distributor ed
+    JOIN Event_Seats es ON es.event_seats_id=ed.event_seats_id
+    JOIN Event E ON E.Event_ID=es.event_id
+    JOIN Organiser_data O ON O.Organiser_ID=E.Organiser_ID
+    WHERE ed.distributor_id=v_distributor AND ed.is_distributing IS NULL
+    GROUP BY E.event_id,O.organiser_id;
+END;
+
+CREATE OR REPLACE PROCEDURE ANSWER_REQUEST
+(v_answer INTEGER,
+v_distributor Event_Distributor.Distributor_ID%type)
+AS 
+BEGIN
+    UPDATE Event_Distributor 
+    SET Is_Distributing=v_answer
+    WHERE Distributor_ID=v_distributor;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_ORGANISER_BY_ID
+(v_id organiser_data.organiser_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR 
+    SELECT *
+    FROM Organiser_Data
+    WHERE Organiser_ID=v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_EVENT_BY_ID
+(v_id event.event_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR 
+SELECT E.Event_Id,E.Event_Name,E.Ticket_Limit_Per_Person,E.Event_Date,E.Event_Address,C.City_Name,T.Event_Type_Name,S.Event_Status_Name 
+    FROM Event E
+    JOIN City C ON C.City_Id=E.City_Id
+    JOIN Event_Type T ON T.Event_Type_Id=E.Event_Type_Id
+    JOIN Event_Status S ON S.Event_Status_Id=E.Event_Status_Id
+    WHERE Event_ID=v_id;
+END;
+

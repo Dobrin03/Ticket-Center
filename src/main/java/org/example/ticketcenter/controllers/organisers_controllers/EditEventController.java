@@ -25,6 +25,7 @@ import org.example.ticketcenter.user_factory.models.Organiser;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -327,7 +328,7 @@ public class EditEventController {
                     ins.setDate(4, null);
                 }
                 else {
-                    ins.setDate(4, Date.valueOf(date_field.getEditor().getText()));
+                    ins.setDate(3, Date.valueOf(date_field.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
                 }
                 ins.setString(5, address_field.getText());
                 ins.setInt(6, cityID);

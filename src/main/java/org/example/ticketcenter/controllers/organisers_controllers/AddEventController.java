@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class AddEventController {
@@ -242,7 +243,7 @@ public class AddEventController {
                     ins.setDate(3, null);
                 }
                 else {
-                    ins.setDate(3, Date.valueOf(date_field.getEditor().getText()));
+                    ins.setDate(3, Date.valueOf(date_field.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
                 }
                 ins.setString(4, address_field.getText());
                 ins.setInt(5, cityID);
