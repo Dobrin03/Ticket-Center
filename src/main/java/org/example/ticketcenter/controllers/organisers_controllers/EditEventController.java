@@ -12,7 +12,7 @@ import javafx.util.converter.BigDecimalStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import oracle.jdbc.OracleTypes;
 import org.example.ticketcenter.database.DBConnection;
-import org.example.ticketcenter.event_data.Event;
+import org.example.ticketcenter.event_data.EventData;
 import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
 import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
 import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
@@ -55,7 +55,7 @@ public class EditEventController {
     private SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
     private ChangeSceneCommand change=new ChangeSceneCommand(sceneAction);
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
-    private ObservableList<Event> events = FXCollections.observableArrayList();
+    private ObservableList<EventData> eventData = FXCollections.observableArrayList();
     private Invoker changeScene=new Invoker(change);
     private Invoker closeScene=new Invoker(close);
     private Organiser organiser;
@@ -77,7 +77,7 @@ public class EditEventController {
 
     @FXML
     private Button add_seat_btn, update_btn, delete_seat_btn;
-    private Event updateEvent;
+    private EventData updateEventData;
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException, IOException {
         organiser= (Organiser) UserFactory.getInstance().getUser();
@@ -145,7 +145,7 @@ public class EditEventController {
         type.execute();
         resultSet= (ResultSet) type.getObject(2);
         while (resultSet.next()){
-            events.add(new Event(resultSet.getInt("Event_Id"),
+            eventData.add(new EventData(resultSet.getInt("Event_Id"),
                     resultSet.getString("Event_Name"),
                     resultSet.getInt("Ticket_Limit_Per_Person"),
                     resultSet.getDate("Event_Date"),
@@ -154,7 +154,7 @@ public class EditEventController {
                     resultSet.getString("Event_Type_Name"),
                     resultSet.getString("Event_Status_Name")));
         }
-        for (Event event:events) {
+        for (EventData event : eventData) {
             event_cb.getItems().add(event.getName());
         }
         type=connection.getConnection().prepareCall("call find_STATUS(?)");
@@ -219,8 +219,8 @@ public class EditEventController {
         connection.connect();
         CallableStatement stmt=connection.getConnection().prepareCall("CALL ES_DEL(?, ?)");
         CallableStatement edStmt=connection.getConnection().prepareCall("CALL ED_DEL(?, ?, ?)");
-        stmt.setInt(1, updateEvent.getId());
-        edStmt.setInt(1, updateEvent.getId());
+        stmt.setInt(1, updateEventData.getId());
+        edStmt.setInt(1, updateEventData.getId());
         TableView.TableViewSelectionModel<SeatsData> selected=seat_view.getSelectionModel();
 
         if(!selected.isEmpty()){
@@ -321,7 +321,7 @@ public class EditEventController {
                 }
 
                 ins=connection.getConnection().prepareCall("CALL EVENT_UPD(?, ?, ?, ?, ?, ?, ?, ?)");
-                ins.setInt(1, updateEvent.getId());
+                ins.setInt(1, updateEventData.getId());
                 ins.setString(2, name_field.getText());
                 ins.setInt(3, Integer.parseInt(limit_field.getText()));
                 if(date_field.getEditor().getText().isEmpty()) {
@@ -339,8 +339,8 @@ public class EditEventController {
 
 
                 ins=connection.getConnection().prepareCall("CALL ES_DEL(?, ?)");
-                ins.setInt(1, updateEvent.getId());
-                edIns.setInt(1, updateEvent.getId());
+                ins.setInt(1, updateEventData.getId());
+                edIns.setInt(1, updateEventData.getId());
 
                 for(SeatsData seatsData : seatTypeData){
                     check=connection.getConnection().prepareCall("CALL CHECK_STYPE(?, ?)");
@@ -365,7 +365,7 @@ public class EditEventController {
                 }
 
                 ins=connection.getConnection().prepareCall("CALL ES_INS(?, ?, ?, ?, ?)");
-                ins.setInt(1, updateEvent.getId());
+                ins.setInt(1, updateEventData.getId());
 
                 for(SeatsData seatsData : seat_view.getItems()){
                     check=connection.getConnection().prepareCall("CALL CHECK_STYPE(?, ?)");
@@ -422,7 +422,7 @@ public class EditEventController {
                 seat_view.setDisable(true);
                 distributor_view.setDisable(true);
 
-                event_cb.getItems().remove(updateEvent);
+                event_cb.getItems().remove(updateEventData);
 
                 lbl_error.setText("Event updated successfully");
 
@@ -456,27 +456,27 @@ public class EditEventController {
 
         int index=event_cb.getSelectionModel().getSelectedIndex();
 
-        for(Event event:events){
-            if(index==events.indexOf(event)){
-                updateEvent=event;
+        for(EventData eventData : this.eventData){
+            if(index== this.eventData.indexOf(eventData)){
+                updateEventData = eventData;
             }
         }
 
-        name_field.setText(updateEvent.getName());
-        address_field.setText(updateEvent.getAddress());
-        city_field.setText(updateEvent.getCity());
-        limit_field.setText(String.valueOf(updateEvent.getLimit()));
-        type_field.setText(updateEvent.getType());
-        status_cb.getSelectionModel().select(updateEvent.getStatus());
-        if(updateEvent.getDate()==null) {
+        name_field.setText(updateEventData.getName());
+        address_field.setText(updateEventData.getAddress());
+        city_field.setText(updateEventData.getCity());
+        limit_field.setText(String.valueOf(updateEventData.getLimit()));
+        type_field.setText(updateEventData.getType());
+        status_cb.getSelectionModel().select(updateEventData.getStatus());
+        if(updateEventData.getDate()==null) {
             date_field.getEditor().setText("");
         }else{
-            date_field.getEditor().setText(String.valueOf(updateEvent.getDate()));
+            date_field.getEditor().setText(String.valueOf(updateEventData.getDate()));
         }
 
         connection.connect();
         CallableStatement stmt=connection.getConnection().prepareCall("CALL FIND_EVENT_SEATS(?, ?)");
-        stmt.setInt(1, updateEvent.getId());
+        stmt.setInt(1, updateEventData.getId());
         stmt.registerOutParameter(2, OracleTypes.CURSOR);
         stmt.execute();
 

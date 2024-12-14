@@ -1,41 +1,46 @@
-package org.example.ticketcenter.event_distributor_data;
+package org.example.ticketcenter.event_organiser_data;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
-import org.example.ticketcenter.event_data.Event;
-import org.example.ticketcenter.user_factory.models.Distributor;
+import org.example.ticketcenter.event_data.EventData;
 import org.example.ticketcenter.user_factory.models.Organiser;
 
-public class EventDistributorData {
-
-    private Event event;
-
+public class EventOrganiserData {
+    private EventData eventData;
     private Organiser organiser;
-
     private Button accept, decline;
     private HBox pane;
     private String organiserName;
-
     private String eventName;
+    private static EventOrganiserData instance;
 
-    public EventDistributorData(Event event, Organiser organiser) {
-        this.event = event;
+    public static EventOrganiserData getInstance(){
+        if(instance==null){
+            instance=new EventOrganiserData();
+        }
+        return instance;
+    }
+    private EventOrganiserData(){
+
+    }
+
+    public EventOrganiserData(EventData eventData, Organiser organiser) {
+        this.eventData = eventData;
         this.organiser = organiser;
         this.organiserName = organiser.getName();
-        this.eventName = event.getName();
+        this.eventName = eventData.getName();
         this.accept = new Button("Accept");
         this.decline = new Button("Decline");
         this.pane = new HBox(accept,decline);
 
     }
 
-    public Event getEvent() {
-        return event;
+    public EventData getEvent() {
+        return eventData;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEvent(EventData eventData) {
+        this.eventData = eventData;
     }
 
     public Organiser getOrganiser() {

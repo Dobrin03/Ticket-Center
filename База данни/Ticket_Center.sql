@@ -250,7 +250,8 @@ END;
 CREATE TABLE Ticket(
 Ticket_ID INTEGER NOT NULL,
 Client_ID INTEGER,
-Event_Distributor_ID INTEGER);
+Event_Distributor_ID INTEGER,
+Number_od_Tickets INTEGER);
 ALTER TABLE Ticket ADD CONSTRAINT PK_Ticket PRIMARY KEY(Ticket_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Client FOREIGN KEY(Client_ID) REFERENCES Client_Data(Client_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Event_Distributor FOREIGN KEY(Event_Distributor_ID) REFERENCES Event_Distributor(Event_Distributor_ID);
@@ -267,10 +268,11 @@ END;
 
 CREATE OR REPLACE PROCEDURE Ticket_Ins
 (v_client_id Ticket.client_id%type,
-v_event_distributor_id Ticket.event_distributor_id%type) AS
+v_event_distributor_id Ticket.event_distributor_id%type,
+v_number Ticket.number_of_tickets%type) AS
 BEGIN
-    INSERT INTO Ticket(client_id, event_distributor_id)
-    VALUES(v_client_id, v_event_distributor_id);
+    INSERT INTO Ticket(client_id, event_distributor_id, number_of_tickets)
+    VALUES(v_client_id, v_event_distributor_id, v_number);
 END;
 
 CREATE TABLE Distributor_Rating(
@@ -639,9 +641,14 @@ CREATE OR REPLACE PROCEDURE ANSWER_REQUEST
 v_distributor Event_Distributor.Distributor_ID%type)
 AS 
 BEGIN
-    UPDATE Event_Distributor 
+    UPDATE Event_Distributor d
     SET Is_Distributing=v_answer
-    WHERE Distributor_ID=v_distributor;
+    WHERE Distributor_ID=v_distributor AND EXISTS(
+    SELECT e.Event_ID
+    FROM Event_Distributor ed
+    JOIN Event_seats es ON es.event_seats_id=ed.event_seats_id
+    JOIN Event e ON e.event_id=es.event_id
+    WHERE e.Event_ID=v_event);
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_ORGANISER_BY_ID
@@ -656,12 +663,12 @@ BEGIN
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_EVENT_BY_ID
-(v_id event.event_id%type,
+(v_id eventData.event_id%type,
 cur OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cur FOR 
-SELECT E.Event_Id,E.Event_Name,E.Ticket_Limit_Per_Person,E.Event_Date,E.Event_Address,C.City_Name,T.Event_Type_Name,S.Event_Status_Name 
+    SELECT E.Event_Id,E.Event_Name,E.Ticket_Limit_Per_Person,E.Event_Date,E.Event_Address,C.City_Name,T.Event_Type_Name,S.Event_Status_Name 
     FROM Event E
     JOIN City C ON C.City_Id=E.City_Id
     JOIN Event_Type T ON T.Event_Type_Id=E.Event_Type_Id
@@ -669,3 +676,24 @@ SELECT E.Event_Id,E.Event_Name,E.Ticket_Limit_Per_Person,E.Event_Date,E.Event_Ad
     WHERE Event_ID=v_id;
 END;
 
+CREATE OR REPLACE PROCEDURE CHECK_RATING
+(v_distributor Distributor_Rating.distributor_id%type,
+v_rating OUT NUMBER)
+AS
+BEGIN
+    SELECT AVG(rating_value) INTO v_rating
+    FROM Distributor_Rating
+    WHERE Distributor_ID=v_distributor;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_ALL_EVENTS
+(cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT E.Event_Id,E.Event_Name,E.Ticket_Limit_Per_Person,E.Event_Date,E.Event_Address,C.City_Name,T.Event_Type_Name,S.Event_Status_Name 
+    FROM Event E
+    JOIN City C ON C.City_Id=E.City_Id
+    JOIN Event_Type T ON T.Event_Type_Id=E.Event_Type_Id
+    JOIN Event_Status S ON S.Event_Status_Id=E.Event_Status_Id;
+END;

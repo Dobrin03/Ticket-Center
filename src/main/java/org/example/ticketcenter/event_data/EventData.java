@@ -2,13 +2,12 @@ package org.example.ticketcenter.event_data;
 
 import java.sql.Date;
 
-public class Event {
+public class EventData {
     private int id;
     private String name;
     private int limit;
     private Date date;
     private String address;
-
     private String city;
     private String type;
     private String status;
@@ -21,7 +20,7 @@ public class Event {
         return status;
     }
 
-    public Event(int id, String name, int limit, Date date, String address, String city, String type, String status) {
+    public EventData(int id, String name, int limit, Date date, String address, String city, String type, String status) {
         this.id = id;
         this.name = name;
         this.limit = limit;

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.distributors_controllers.CheckRequestsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.distributors_controllers.CheckRequestsController">
    <children>
-      <TableView fx:id="ed_view" layoutX="101.0" layoutY="64.0" prefHeight="243.0" prefWidth="411.0">
+      <TableView fx:id="ed_view" layoutX="22.0" layoutY="89.0" prefHeight="243.0" prefWidth="556.0">
         <columns>
           <TableColumn fx:id="col_organiser" prefWidth="75.0" text="Organiser Name" />
           <TableColumn fx:id="col_event" prefWidth="75.0" text="Event" />
@@ -18,10 +19,15 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="521.0" layoutY="349.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="70.0" text="Cancel">
+      <Button layoutX="521.0" layoutY="349.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="43.0" prefWidth="70.0" text="Cancel">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Label layoutX="149.0" layoutY="28.0" text="Pending Requests">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.distributors_controllers.DistributorWelcomeController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.distributors_controllers.DistributorWelcomeController">
    <children>
       <Label fx:id="lbl_welcome" alignment="CENTER" layoutX="144.0" layoutY="41.0" prefHeight="54.0" prefWidth="312.0" text="Welcome">
          <font>
@@ -20,6 +20,11 @@
       <Button layoutX="483.0" layoutY="332.0" mnemonicParsing="false" onAction="#onLogOutClick" prefHeight="42.0" prefWidth="84.0" text="Log Out">
          <font>
             <Font size="14.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="207.0" mnemonicParsing="false" onAction="#onCheckRatingClick" prefHeight="54.0" prefWidth="154.0" text="Check Rating">
+         <font>
+            <Font size="18.0" />
          </font>
       </Button>
    </children>
