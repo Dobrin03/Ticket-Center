@@ -1,8 +1,8 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Event_Seats_Event_FK" directorySegmentName="seg_0" id="AFA6FA8E-3411-9A27-43C5-63478ED60DA0">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Event_Distributor_Event_FK" directorySegmentName="seg_0" id="26AA47A8-C89B-E6B1-6F3B-AC2D77E788E9">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:27:24 UTC</createdTime>
-<generatorID>2DB8C46D-ED98-BD89-C188-6468CACBA144</generatorID>
+<createdTime>2024-12-15 16:07:39 UTC</createdTime>
+<generatorID>6AB7D19F-5822-3C40-9E2A-DD50955A1478</generatorID>
 <ownerDesignName>Ticket center</ownerDesignName>
 <engineerTo>
 <item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
@@ -14,7 +14,7 @@
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>4BEE3934-4490-BAB4-F148-2BCBF6579D93</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
-<targetEntity>BC2168E0-D1FC-D30F-0AB7-0B27B1A14451</targetEntity>
+<targetEntity>1FD10C1F-3B27-91C9-D4F0-83A47A98967B</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
 </Relation>

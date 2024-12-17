@@ -27,5 +27,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="277.0" mnemonicParsing="false" onAction="#onBoughtTicketsClick" prefHeight="54.0" prefWidth="154.0" text="Bought Tickets">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

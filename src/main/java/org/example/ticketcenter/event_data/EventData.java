@@ -1,6 +1,7 @@
 package org.example.ticketcenter.event_data;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class EventData {
     private int id;

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import oracle.jdbc.OracleType;
+import oracle.jdbc.OracleTypes;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
 import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
@@ -12,6 +13,7 @@ import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
 import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.models.Distributor;
+import org.example.ticketcenter.user_factory.models.LoggedDistributor;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -27,16 +29,17 @@ public class DistributorWelcomeController {
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
     private Invoker changeScene=new Invoker(change);
     private Invoker closeScene=new Invoker(close);
-    private Distributor distributor;
+    private LoggedDistributor distributor;
 
     @FXML
     private Label lbl_welcome;
 
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
-        distributor= (Distributor) UserFactory.getInstance().getUser();
+        distributor= LoggedDistributor.getInstance();
+        distributor.setDistributor((Distributor) UserFactory.getInstance().getUser());
         StringBuilder builder=new StringBuilder();
-        builder.append(lbl_welcome.getText()).append(" ").append(distributor.getName()).append("!");
+        builder.append(lbl_welcome.getText()).append(" ").append(distributor.getDistributor().getName()).append("!");
         lbl_welcome.setText(builder.toString());
     }
 
@@ -58,7 +61,7 @@ public class DistributorWelcomeController {
         DBConnection connection=DBConnection.getInstance();
         connection.connect();
         CallableStatement stmt=connection.getConnection().prepareCall("CALL CHECK_RATING(?, ?)");
-        stmt.setInt(1, distributor.getID());
+        stmt.setInt(1, distributor.getDistributor().getID());
         stmt.registerOutParameter(2, Types.NUMERIC);
         stmt.execute();
 
@@ -70,6 +73,33 @@ public class DistributorWelcomeController {
         else{
             alert.setContentText("You haven't been rated yet");
         }
+        alert.showAndWait();
+        connection.closeConnection();
+    }
+
+    @FXML
+    protected void onBoughtTicketsClick() throws SQLException, ClassNotFoundException {
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bought Tickets");
+        alert.setHeaderText("Bought tickets distributed by you:");
+
+        DBConnection connection=DBConnection.getInstance();
+        connection.connect();
+        CallableStatement stmt=connection.getConnection().prepareCall("CALL SOLD_TICKETS_DISTR(?, ?)");
+        stmt.setInt(1, distributor.getDistributor().getID());
+        stmt.registerOutParameter(2, OracleTypes.CURSOR);
+        stmt.execute();
+
+        ResultSet resultSet= (ResultSet) stmt.getObject(2);
+
+        if(!resultSet.isBeforeFirst()){
+            alert.setContentText("No purchases yet");
+        }
+
+        while (resultSet.next()){
+            alert.setContentText(alert.getContentText()+"\n"+resultSet.getString("Event_Name")+" - "+resultSet.getString("tickets"));
+        }
+
         alert.showAndWait();
         connection.closeConnection();
     }

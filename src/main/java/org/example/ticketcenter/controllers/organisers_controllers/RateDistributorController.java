@@ -14,6 +14,7 @@ import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.interfaces.User;
 import org.example.ticketcenter.user_factory.models.Distributor;
+import org.example.ticketcenter.user_factory.models.LoggedOrganiser;
 import org.example.ticketcenter.user_factory.models.Organiser;
 
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class RateDistributorController {
     private Label lbl_error;
 
     private ObservableList<Distributor> distributors= FXCollections.observableArrayList();
-    private Organiser organiser;
+    private LoggedOrganiser organiser;
     private SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
     private Invoker closeScene=new Invoker(close);
@@ -43,11 +44,11 @@ public class RateDistributorController {
 
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
-        organiser= (Organiser) UserFactory.getInstance().getUser();
+        organiser= LoggedOrganiser.getInstance();
         connection=DBConnection.getInstance();
         connection.connect();
         CallableStatement stmt=connection.getConnection().prepareCall("CALL FIND_UNRATED_DISTRIBUTORS(?, ?)");
-        stmt.setInt(1, organiser.getID());
+        stmt.setInt(1, organiser.getOrganiser().getID());
         stmt.registerOutParameter(2, OracleTypes.CURSOR);
         stmt.execute();
 
@@ -97,7 +98,7 @@ public class RateDistributorController {
                 radio_5.setSelected(false);
             }
 
-            stmt.setInt(2, organiser.getID());
+            stmt.setInt(2, organiser.getOrganiser().getID());
             stmt.setInt(3, distributor_view.getSelectionModel().getSelectedItem().getID());
             stmt.setString(4, review_area.getText());
 

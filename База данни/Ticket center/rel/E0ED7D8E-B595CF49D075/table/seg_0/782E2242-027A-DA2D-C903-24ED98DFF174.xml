@@ -32,9 +32,9 @@
 <colAssociation fkAssociation="3C3970C7-82CB-9210-8957-3230EB8F3A3A" referredColumn="0BE12F51-6B95-FAB0-06C5-A2606B3A7D20"/>
 </associations>
 </Column>
-<Column name="Event_Distributor_Event_Distributor_ID" id="A2A6AB62-5F90-3CAE-6CB3-94AF18F14DF9">
+<Column name="Event_Seats_Event_Seat_ID" id="E781FDCF-5FBD-D836-C687-C5BD08603075">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:25:45 UTC</createdTime>
+<createdTime>2024-12-15 16:07:17 UTC</createdTime>
 <ownerDesignName>Ticket center</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -43,8 +43,19 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="9545526D-4057-3D6C-7573-CCF9D72ED7F2" referredColumn="EE5050D3-C4B5-981F-6F10-3DB5AE1E2B62"/>
+<colAssociation fkAssociation="00C058EA-E5C3-C5B4-2F9D-B717D48BE48D" referredColumn="0A9FACC6-A5FF-4F2F-099C-B4025AD5EEB8"/>
 </associations>
+</Column>
+<Column name="Number_of_Tickets" id="0C35763C-5552-3DCA-ABB7-608221FFEE52">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-15 16:08:59 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -69,14 +80,14 @@
 <colUsage columnID="52BE38A3-5AA8-C3D1-95FB-C1AC915B503B"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="78182AEF-E6A0-1348-EA2C-A406F00546EC" name="Ticket_Event_Distributor_FK">
+<ind_PK_UK id="9A7A1AE1-ED55-E6C1-F1EE-00DDB2B3466C" name="Ticket_Event_Seats_FK">
 <createdBy>dobri</createdBy>
-<createdTime>2024-10-15 17:25:45 UTC</createdTime>
+<createdTime>2024-12-15 16:07:17 UTC</createdTime>
 <ownerDesignName>Ticket center</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="A2A6AB62-5F90-3CAE-6CB3-94AF18F14DF9"/>
+<colUsage columnID="E781FDCF-5FBD-D836-C687-C5BD08603075"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

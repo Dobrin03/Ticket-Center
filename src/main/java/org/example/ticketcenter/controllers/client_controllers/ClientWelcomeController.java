@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import oracle.jdbc.OracleTypes;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.event_data.EventData;
+import org.example.ticketcenter.event_data.ReservedEvent;
 import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
 import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
 import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
@@ -20,6 +21,7 @@ import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.models.Admin;
 import org.example.ticketcenter.user_factory.models.Client;
+import org.example.ticketcenter.user_factory.models.LoggedClient;
 
 import java.io.IOException;
 import java.sql.CallableStatement;
@@ -33,7 +35,7 @@ public class ClientWelcomeController {
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
     private Invoker changeScene=new Invoker(change);
     private Invoker closeScene=new Invoker(close);
-    private Client client;
+    private LoggedClient client;
     @FXML
     private Label lbl_welcome;
     @FXML
@@ -52,9 +54,10 @@ public class ClientWelcomeController {
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
         DBConnection connection=DBConnection.getInstance();
-        client= (Client) UserFactory.getInstance().getUser();
+        client= LoggedClient.getInstance();
+        client.setClient((Client) UserFactory.getInstance().getUser());
         StringBuilder builder=new StringBuilder();
-        builder.append(lbl_welcome.getText()).append(" ").append(client.getName()).append("!");
+        builder.append(lbl_welcome.getText()).append(" ").append(client.getClient().getName()).append("!");
         lbl_welcome.setText(builder.toString());
 
         col_name.setCellValueFactory(new PropertyValueFactory<EventData, String>("name"));
@@ -93,12 +96,13 @@ public class ClientWelcomeController {
 
     @FXML
     protected void onBuyTicketsClick(ActionEvent event) throws IOException {
+        ReservedEvent reservedEvent=ReservedEvent.getInstance();
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Selection error");
         alert.setContentText("Please select an event to buy tickets form!");
         if(!event_view.getSelectionModel().isEmpty()) {
-            event_view.getSelectionModel().getSelectedItem();
+            reservedEvent.setEventData(event_view.getSelectionModel().getSelectedItem());
             changeScene.execute("/client_fxml/buyTickets.fxml", event);
         }
         else{

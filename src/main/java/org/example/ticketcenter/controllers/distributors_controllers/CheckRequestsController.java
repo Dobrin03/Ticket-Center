@@ -18,6 +18,7 @@ import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
 import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.models.Distributor;
+import org.example.ticketcenter.user_factory.models.LoggedDistributor;
 import org.example.ticketcenter.user_factory.models.Organiser;
 
 import java.io.IOException;
@@ -36,12 +37,12 @@ public class CheckRequestsController {
     private TableColumn<EventOrganiserData, HBox> col_accept;
     private ObservableList<EventOrganiserData> data = FXCollections.observableArrayList();
     private DBConnection connection;
-    private Distributor distributor;
+    private LoggedDistributor distributor;
 
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
         UserFactory userFactory=UserFactory.getInstance();
-        distributor= (Distributor) userFactory.getUser();
+        distributor=LoggedDistributor.getInstance();
 
         connection=DBConnection.getInstance();
         connection.connect();
@@ -50,7 +51,7 @@ public class CheckRequestsController {
         CallableStatement organiserstmt=connection.getConnection().prepareCall("call find_organiser_by_id(?,?)");
         EventData eventData = null;
         Organiser organiser = null;
-        stmt.setInt(1,distributor.getID());
+        stmt.setInt(1,distributor.getDistributor().getID());
         stmt.registerOutParameter(2, OracleTypes.CURSOR);
         stmt.execute();
         ResultSet eventResult,organiserResult;
@@ -119,8 +120,8 @@ public class CheckRequestsController {
         connection.connect();
         CallableStatement stmt=connection.getConnection().prepareCall("CALL ANSWER_REQUEST(?, ?, ?)");
         stmt.setInt(1, value);
-        stmt.setInt(2, id);
-        stmt.setInt(3, distributor.getID());
+        stmt.setInt(2,  distributor.getDistributor().getID());
+        stmt.setInt(3, id);
         stmt.execute();
     }
 

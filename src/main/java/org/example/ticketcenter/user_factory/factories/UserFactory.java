@@ -3,6 +3,7 @@ package org.example.ticketcenter.user_factory.factories;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.user_factory.interfaces.User;
 import org.example.ticketcenter.user_factory.interfaces.UserAbstractFactory;
+import org.example.ticketcenter.user_factory.models.Admin;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;

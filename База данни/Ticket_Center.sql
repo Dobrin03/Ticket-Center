@@ -101,6 +101,24 @@ BEGIN
     VALUES(v_organiser_name, v_organiser_user, v_organiser_pass);
 END;
 
+CREATE OR REPLACE PROCEDURE ORGANISER_UPD
+(v_name ORGANISER_DATA.organiser_name%type,
+v_id ORGANISER_DATA.organiser_id%type,
+v_user ORGANISER_DATA.organiser_user%type,
+v_pass ORGANISER_DATA.organiser_pass%type) AS
+BEGIN
+    UPDATE ORGANISER_DATA
+    SET ORGANISER_NAME=v_name, ORGANISER_USER=v_user,  ORGANISER_PASS=v_pass 
+    WHERE ORGANISER_ID=v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE ORGANISER_DEL
+(v_id ORGANISER_DATA.organiser_id%type) AS
+BEGIN
+    DELETE FROM ORGANISER_DATA
+    WHERE ORGANISER_ID=v_id;
+END;
+
 CREATE TABLE Distributor_Data(
 Distributor_ID INTEGER NOT NULL,
 Distributor_Name VARCHAR(50),
@@ -128,6 +146,26 @@ BEGIN
     INSERT INTO Distributor_Data(distributor_name, distributor_user, distributor_pass, distributor_fee)
     VALUES(v_distributor_name, v_distributor_user, v_distributor_pass, v_distributor_fee);
 END;
+
+CREATE OR REPLACE PROCEDURE DISTRIBUTOR_UPD
+(v_name DISTRIBUTOR_DATA.distributor_name%type,
+v_id DISTRIBUTOR_DATA.distributor_id%type,
+v_user DISTRIBUTOR_DATA.distributor_user%type,
+v_pass DISTRIBUTOR_DATA.distributor_pass%type,
+v_fee DISTRIBUTOR_DATA.distributor_fee%type) AS
+BEGIN
+    UPDATE DISTRIBUTOR_DATA
+    SET DISTRIBUTOR_NAME=v_name, DISTRIBUTOR_USER=v_user,  DISTRIBUTOR_PASS=v_pass, DISTRIBUTOR_FEE=v_fee
+    WHERE DISTRIBUTOR_ID=v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE DISTRIBUTOR_DEL
+(v_id DISTRIBUTOR_DATA.distributor_id%type) AS
+BEGIN
+    DELETE FROM DISTRIBUTOR_DATA
+    WHERE DISTRIBUTOR_ID=v_id;
+END;
+
 
 CREATE TABLE Client_Data(
 Client_ID INTEGER NOT NULL,
@@ -164,6 +202,28 @@ BEGIN
     VALUES(v_client_name, v_client_user, v_client_pass, v_client_email, v_client_address, v_client_number, v_city_id);
 END;
 
+CREATE OR REPLACE PROCEDURE CLIENT_UPD
+(v_name CLIENT_DATA.client_name%type,
+v_id CLIENT_DATA.client_id%type,
+v_user CLIENT_DATA.client_user%type,
+v_pass CLIENT_DATA.client_pass%type,
+v_email CLIENT_DATA.client_email%type,
+v_address CLIENT_DATA.client_address%type,
+v_number CLIENT_DATA.client_number%type,
+v_city_id CLIENT_DATA.city_id%type) AS
+BEGIN
+    UPDATE CLIENT_DATA
+    SET CLIENT_NAME=v_name, CLIENT_USER=v_user,  CLIENT_PASS=v_pass, CLIENT_EMAIL=v_email,  CLIENT_ADDRESS=v_address, CLIENT_NUMBER=v_number, CITY_ID=v_city_id 
+    WHERE CLIENT_ID=v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE CLIENT_DEL
+(v_id CLIENT_DATA.client_id%type) AS
+BEGIN
+    DELETE FROM CLIENT_DATA
+    WHERE CLIENT_ID=v_id;
+END;
+
 CREATE TABLE Event(
 Event_ID INTEGER NOT NULL,
 Event_Name VARCHAR(50),
@@ -190,14 +250,44 @@ BEGIN
     :NEW.Event_ID:=Event_SEQ.NEXTVAL;
 END;
 
+CREATE OR REPLACE PROCEDURE EVENT_INS
+(v_name Event.event_name%type,
+v_limit Event.ticket_limit_per_person%type, 
+v_date Event.event_date%type, 
+v_address Event.event_address%type, 
+v_city Event.city_id%type, 
+v_type Event.event_type_id%type, 
+v_organiser Event.organiser_id%type,
+v_id OUT Event.event_id%type) AS
+BEGIN
+    INSERT INTO Event(event_name, ticket_limit_per_person, event_date, event_address, city_id, event_type_id, organiser_id)
+    VALUES(v_name, v_limit, v_date, v_address, v_city, v_type, v_organiser)
+    RETURNING event_id INTO v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE EVENT_UPD
+(v_id Event.event_id%type,
+v_name Event.event_name%type,
+v_limit Event.ticket_limit_per_person%type, 
+v_date Event.event_date%type, 
+v_address Event.event_address%type, 
+v_city Event.city_id%type, 
+v_type Event.event_type_id%type, 
+v_status Event.event_status_id%type) AS
+BEGIN
+    UPDATE Event
+    SET Event_name = v_name, Ticket_limit_per_person = v_limit, Event_date = v_date, Event_address = v_address, City_id = v_city, Event_type_id = v_type, Event_status_id = v_status
+    WHERE Event_id = v_id;
+END;
+
 CREATE TABLE Event_Distributor(
 Event_Distributor_ID INTEGER NOT NULL,
-Event_Seats_ID INTEGER,
 Distributor_ID INTEGER,
+Event_ID INTEGER,
 Is_Distributing NUMBER(1, 0));
 ALTER TABLE Event_Distributor ADD CONSTRAINT PK_Event_Distributor PRIMARY KEY(Event_Distributor_ID);
-ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Seats FOREIGN KEY(Event_Seats_ID) REFERENCES Event_Seats(Event_Seats_ID);
 ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Distributor FOREIGN KEY(Distributor_ID) REFERENCES Distributor_Data(Distributor_ID);
+ALTER TABLE Event_Distributor ADD CONSTRAINT FK_Event FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID);
 
 CREATE SEQUENCE ED_SEQ START WITH 700 NOCACHE ORDER;
 
@@ -210,22 +300,34 @@ BEGIN
 END;
 
 CREATE OR REPLACE PROCEDURE ED_Ins
-(v_event_seats_id Event_Distributor.event_seats_id%type,
-v_distributor_id Event_Distributor.distributor_id%type) AS
+(v_event_id Event_Distributor.event_id%type,
+v_distributor_id Event_Distributor.distributor_id%type,
+v_id OUT Event_Distributor.event_distributor_id%type) AS
 BEGIN
-    INSERT INTO Event_Distributor(event_seats_id, distributor_id)
-    VALUES(v_event_seats_id, v_distributor_id);
+    INSERT INTO Event_Distributor(event_id, distributor_id)
+    VALUES(v_event_id, v_distributor_id)
+    RETURNING Event_Distributor_ID INTO v_id;
+END;
+
+CREATE OR REPLACE PROCEDURE ED_DEL
+(v_event Event_Distributor.Event_ID%type,
+v_distributor Event_Distributor.Distributor_ID%type)
+AS
+BEGIN
+    DELETE FROM Event_Distributor
+    WHERE Event_ID=v_event AND Distributor_ID=v_distributor;
 END;
 
 CREATE TABLE Event_Seats(
 Event_Seats_ID INTEGER NOT NULL,
-Event_ID INTEGER,
 Seat_Type_ID INTEGER, 
 Seat_Quantity INTEGER,
-Seat_Price NUMBER(5,2));
+Seat_Price NUMBER(5,2),
+Event_Distributor_ID INTEGER);
 ALTER TABLE Event_Seats ADD CONSTRAINT PK_Event_Seats PRIMARY KEY(Event_Seats_ID);
 ALTER TABLE Event_Seats ADD CONSTRAINT FK_Event_Seats_Event FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID);
 ALTER TABLE Event_Seats ADD CONSTRAINT FK_Seat_Type FOREIGN KEY(Seat_Type_ID) REFERENCES Seat_Type(Seat_Type_ID);
+ALTER TABLE Event_Seats ADD CONSTRAINT FK_Event_Distributor FOREIGN KEY(Event_Distributor_ID) REFERENCES Event_Distributor(Event_Distributor_ID);
 
 CREATE SEQUENCE ES_SEQ START WITH 800 NOCACHE ORDER;
 
@@ -238,23 +340,37 @@ BEGIN
 END;
 
 CREATE OR REPLACE PROCEDURE ES_Ins
-(v_event_id Event_Seats.event_id%type,
-v_seat_type_id Event_Seats.seat_type_id%type,
+(v_seat_type_id Event_Seats.seat_type_id%type,
 v_seat_quantity Event_Seats.seat_quantity%type,
-v_seat_price Event_Seats.seat_price%type) AS
+v_seat_price Event_Seats.seat_price%type,
+v_ed Event_Seats.event_distributor_id%type) AS
 BEGIN
-    INSERT INTO Event_Seats(event_id, seat_type_id, seat_quantity, seat_price)
-    VALUES(v_event_id, v_seat_type_id, v_seat_quantity, v_seat_price);
+    INSERT INTO Event_Seats(seat_type_id, seat_quantity, seat_price, event_distributor_id)
+    VALUES(v_seat_type_id, v_seat_quantity, v_seat_price, v_ed);
 END;
+
+CREATE OR REPLACE PROCEDURE ES_DEL
+(v_event Event_Distributor.event_id%type,
+v_seat Event_Seats.Seat_type_Id%type)
+AS
+BEGIN
+    DELETE FROM Event_Seats
+    WHERE Event_Seats_ID IN(
+    SELECT es.Event_Seats_ID
+    FROM Event_Seats es
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    WHERE ed.Event_ID=v_event AND es.Seat_Type_ID=v_seat);
+END;
+
 
 CREATE TABLE Ticket(
 Ticket_ID INTEGER NOT NULL,
 Client_ID INTEGER,
-Event_Distributor_ID INTEGER,
+Event_Seats_ID INTEGER,
 Number_od_Tickets INTEGER);
 ALTER TABLE Ticket ADD CONSTRAINT PK_Ticket PRIMARY KEY(Ticket_ID);
 ALTER TABLE Ticket ADD CONSTRAINT FK_Client FOREIGN KEY(Client_ID) REFERENCES Client_Data(Client_ID);
-ALTER TABLE Ticket ADD CONSTRAINT FK_Event_Distributor FOREIGN KEY(Event_Distributor_ID) REFERENCES Event_Distributor(Event_Distributor_ID);
+ALTER TABLE Ticket ADD CONSTRAINT FK_Event_Seats FOREIGN KEY(Event_Seats_ID) REFERENCES Event_Seats(Event_Seats_ID);
 
 CREATE SEQUENCE Ticket_SEQ START WITH 900 NOCACHE ORDER;
 
@@ -268,11 +384,11 @@ END;
 
 CREATE OR REPLACE PROCEDURE Ticket_Ins
 (v_client_id Ticket.client_id%type,
-v_event_distributor_id Ticket.event_distributor_id%type,
+v_event_seats_id Ticket.event_seats_id%type,
 v_number Ticket.number_of_tickets%type) AS
 BEGIN
-    INSERT INTO Ticket(client_id, event_distributor_id, number_of_tickets)
-    VALUES(v_client_id, v_event_distributor_id, v_number);
+    INSERT INTO Ticket(client_id, event_seats_id, number_of_tickets)
+    VALUES(v_client_id, v_event_seats_id, v_number);
 END;
 
 CREATE TABLE Distributor_Rating(
@@ -303,65 +419,6 @@ v_review Distributor_Rating.Review%type) AS
 BEGIN
     INSERT INTO Distributor_Rating(rating_value, organiser_id, distributor_id, review)
     VALUES(v_rating, v_organiser, v_distributor, v_review);
-END;
-
-CREATE OR REPLACE PROCEDURE ORGANISER_UPD
-(v_name ORGANISER_DATA.organiser_name%type,
-v_id ORGANISER_DATA.organiser_id%type,
-v_user ORGANISER_DATA.organiser_user%type,
-v_pass ORGANISER_DATA.organiser_pass%type) AS
-BEGIN
-    UPDATE ORGANISER_DATA
-    SET ORGANISER_NAME=v_name, ORGANISER_USER=v_user,  ORGANISER_PASS=v_pass 
-    WHERE ORGANISER_ID=v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE ORGANISER_DEL
-(v_id ORGANISER_DATA.organiser_id%type) AS
-BEGIN
-    DELETE FROM ORGANISER_DATA
-    WHERE ORGANISER_ID=v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE DISTRIBUTOR_UPD
-(v_name DISTRIBUTOR_DATA.distributor_name%type,
-v_id DISTRIBUTOR_DATA.distributor_id%type,
-v_user DISTRIBUTOR_DATA.distributor_user%type,
-v_pass DISTRIBUTOR_DATA.distributor_pass%type,
-v_fee DISTRIBUTOR_DATA.distributor_fee%type) AS
-BEGIN
-    UPDATE DISTRIBUTOR_DATA
-    SET DISTRIBUTOR_NAME=v_name, DISTRIBUTOR_USER=v_user,  DISTRIBUTOR_PASS=v_pass, DISTRIBUTOR_FEE=v_fee
-    WHERE DISTRIBUTOR_ID=v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE DISTRIBUTOR_DEL
-(v_id DISTRIBUTOR_DATA.distributor_id%type) AS
-BEGIN
-    DELETE FROM DISTRIBUTOR_DATA
-    WHERE DISTRIBUTOR_ID=v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE CLIENT_UPD
-(v_name CLIENT_DATA.client_name%type,
-v_id CLIENT_DATA.client_id%type,
-v_user CLIENT_DATA.client_user%type,
-v_pass CLIENT_DATA.client_pass%type,
-v_email CLIENT_DATA.client_email%type,
-v_address CLIENT_DATA.client_address%type,
-v_number CLIENT_DATA.client_number%type,
-v_city_id CLIENT_DATA.city_id%type) AS
-BEGIN
-    UPDATE CLIENT_DATA
-    SET CLIENT_NAME=v_name, CLIENT_USER=v_user,  CLIENT_PASS=v_pass, CLIENT_EMAIL=v_email,  CLIENT_ADDRESS=v_address, CLIENT_NUMBER=v_number, CITY_ID=v_city_id 
-    WHERE CLIENT_ID=v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE CLIENT_DEL
-(v_id CLIENT_DATA.client_id%type) AS
-BEGIN
-    DELETE FROM CLIENT_DATA
-    WHERE CLIENT_ID=v_id;
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_ADMIN
@@ -457,63 +514,6 @@ BEGIN
     SELECT City_ID FROM City WHERE City_Name = v_name;
 END;
 
-CREATE OR REPLACE PROCEDURE ET_INS
-(v_name Event_Type.event_type_name%type) AS
-BEGIN
-    INSERT INTO Event_Type(event_type_name)
-    VALUES(v_name);
-END;
-
-CREATE OR REPLACE PROCEDURE EVENT_INS
-(v_name Event.event_name%type,
-v_limit Event.ticket_limit_per_person%type, 
-v_date Event.event_date%type, 
-v_address Event.event_address%type, 
-v_city Event.city_id%type, 
-v_type Event.event_type_id%type, 
-v_organiser Event.organiser_id%type,
-v_id OUT Event.event_id%type) AS
-BEGIN
-    INSERT INTO Event(event_name, ticket_limit_per_person, event_date, event_address, city_id, event_type_id, organiser_id)
-    VALUES(v_name, v_limit, v_date, v_address, v_city, v_type, v_organiser)
-    RETURNING event_id INTO v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE EVENT_UPD
-(v_id Event.event_id%type,
-v_name Event.event_name%type,
-v_limit Event.ticket_limit_per_person%type, 
-v_date Event.event_date%type, 
-v_address Event.event_address%type, 
-v_city Event.city_id%type, 
-v_type Event.event_type_id%type, 
-v_status Event.event_status_id%type) AS
-BEGIN
-    UPDATE Event
-    SET Event_name = v_name, Ticket_limit_per_person = v_limit, Event_date = v_date, Event_address = v_address, City_id = v_city, Event_type_id = v_type, Event_status_id = v_status
-    WHERE Event_id = v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE ES_INS
-(v_event Event_Seats.event_id%type,
-v_seat Event_Seats.seat_type_id%type,
-v_quantity Event_Seats.seat_quantity%type,
-v_price Event_Seats.seat_price%type,
-v_id OUT Event_Seats.event_seats_id%type)AS
-BEGIN
-    INSERT INTO Event_Seats(event_id, seat_type_id, seat_quantity, seat_price)
-    VALUES(v_event, v_seat, v_quantity, v_price)
-    RETURNING event_seats_id INTO v_id;
-END;
-
-CREATE OR REPLACE PROCEDURE ED_INS
-(v_seats Event_Distributor.event_seats_id%type,
-v_distributor Event_Distributor.distributor_id%type)AS
-BEGIN
-    INSERT INTO Event_Distributor(event_seats_id, distributor_id)
-    VALUES(v_seats, v_distributor);
-END;
-
 CREATE OR REPLACE PROCEDURE FIND_SEAT_TYPE
 (cur OUT SYS_REFCURSOR)
 AS
@@ -570,25 +570,19 @@ BEGIN
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_EVENT_SEATS
-(v_event Event_Seats.event_id%type,
+(v_event Event_Distributor.event_id%type,
 cur OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cur FOR
-    SELECT S.SEAT_TYPE_ID,S.SEAT_TYPE_NAME,E.SEAT_QUANTITY,E.SEAT_PRICE 
-    FROM Event_Seats E 
-    JOIN Seat_Type S on S.SEAT_TYPE_ID = E.SEAT_TYPE_ID
-    WHERE Event_Id=v_event;
+    SELECT s.SEAT_TYPE_ID,s.SEAT_TYPE_NAME,es.SEAT_QUANTITY,es.SEAT_PRICE 
+    FROM Event_Seats es 
+    JOIN Seat_Type s on s.SEAT_TYPE_ID = es.SEAT_TYPE_ID
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    WHERE ed.Event_Id=v_event
+    GROUP BY s.SEAT_TYPE_ID, s.SEAT_TYPE_NAME,es.SEAT_QUANTITY,es.SEAT_PRICE ;
 END;
 
-CREATE OR REPLACE PROCEDURE ES_DEL
-(v_event Event_Seats.event_id%type,
-v_seat Event_Seats.Seat_type_Id%type)
-AS
-BEGIN
-    DELETE FROM Event_Seats
-    WHERE Event_Id=v_event AND Seat_Type_ID=v_seat;
-END;
 
 CREATE OR REPLACE PROCEDURE FIND_STATUS
 (cur OUT SYS_REFCURSOR)
@@ -608,47 +602,29 @@ BEGIN
     WHERE event_status_name=v_name;
 END;
 
-CREATE OR REPLACE PROCEDURE ED_DEL
-(v_event Event_Seats.Event_ID%type,
-v_seat Event_Seats.Seat_Type_ID%type,
-v_distributor Event_Distributor.Distributor_ID%type)
-AS
-BEGIN
-    DELETE FROM Event_Distributor
-    WHERE Event_Distributor_ID IN(
-    SELECT Event_Distributor_ID 
-    FROM Event_Distributor evd
-    JOIN Event_Seats es ON es.event_seats_id=evd.event_seats_id
-    WHERE es.Event_ID=v_event AND es.Seat_Type_ID=v_seat AND evd.Distributor_ID=v_distributor);
-END;
-
 CREATE OR REPLACE PROCEDURE FIND_REQUESTS
 (v_distributor Event_Distributor.Distributor_ID%type,
 cur OUT SYS_REFCURSOR)
 AS
 BEGIN
     OPEN cur FOR
-    SELECT E.event_id,O.organiser_id FROM Event_Distributor ed
-    JOIN Event_Seats es ON es.event_seats_id=ed.event_seats_id
-    JOIN Event E ON E.Event_ID=es.event_id
-    JOIN Organiser_data O ON O.Organiser_ID=E.Organiser_ID
+    SELECT e.event_id,o.organiser_id 
+    FROM Event_Distributor ed
+    JOIN Event e ON e.Event_ID=ed.event_id
+    JOIN Organiser_data o ON o.Organiser_ID=e.Organiser_ID
     WHERE ed.distributor_id=v_distributor AND ed.is_distributing IS NULL
-    GROUP BY E.event_id,O.organiser_id;
+    GROUP BY e.event_id, o.organiser_id;
 END;
 
 CREATE OR REPLACE PROCEDURE ANSWER_REQUEST
 (v_answer INTEGER,
-v_distributor Event_Distributor.Distributor_ID%type)
+v_distributor Event_Distributor.Distributor_ID%type,
+v_event Event_Distributor.Event_ID%type)
 AS 
 BEGIN
     UPDATE Event_Distributor d
     SET Is_Distributing=v_answer
-    WHERE Distributor_ID=v_distributor AND EXISTS(
-    SELECT e.Event_ID
-    FROM Event_Distributor ed
-    JOIN Event_seats es ON es.event_seats_id=ed.event_seats_id
-    JOIN Event e ON e.event_id=es.event_id
-    WHERE e.Event_ID=v_event);
+    WHERE Distributor_ID=v_distributor AND Event_ID=v_event;
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_ORGANISER_BY_ID
@@ -696,4 +672,146 @@ BEGIN
     JOIN City C ON C.City_Id=E.City_Id
     JOIN Event_Type T ON T.Event_Type_Id=E.Event_Type_Id
     JOIN Event_Status S ON S.Event_Status_Id=E.Event_Status_Id;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_ORGANISER_BY_EVENT
+(v_event Event.event_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT o.Organiser_ID, o.Organiser_Name, o.Organiser_User, o.Organiser_Pass
+    FROM Event e
+    JOIN Organiser_Data o ON o.organiser_id=e.organiser_id
+    WHERE e.Event_ID=v_event;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_DISTRIBUTING_BY_EVENT
+(v_event Event_Distributor.event_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT d.Distributor_ID, d.Distributor_Name, d.Distributor_User, d.Distributor_Pass, d.Distributor_Pass, d.Distributor_Fee
+    FROM Event_Distributor ed
+    JOIN Distributor_Data d ON d.distributor_id=ed.distributor_id
+    WHERE ed.Event_ID=v_event AND ed.Is_Distributing=1;
+END;
+
+CREATE OR REPLACE TRIGGER CHECK_LIMIT
+BEFORE INSERT ON Ticket
+FOR EACH ROW
+DECLARE ticket_limit INTEGER; bought INTEGER;
+BEGIN
+    IF(:NEW.Number_of_Tickets>0)
+    THEN
+        SELECT e.Ticket_Limit_Per_Person INTO ticket_limit
+        FROM Event_Seats es
+        JOIN Event_Distributor ed ON es.event_distributor_id=ed.event_distributor_id
+        JOIN Event e ON e.event_id=ed.event_id
+        WHERE es.Event_Seats_ID=:New.Event_Seats_ID;
+        
+        IF(:NEW.Number_of_Tickets>ticket_limit)
+        THEN
+            raise_application_error(-20103, 'Ticket Limit exceeded!');
+        END IF;
+        
+        SELECT SUM(t.Number_of_Tickets) INTO bought
+        FROM Ticket t
+        JOIN Event_Seats es ON es.event_seats_id=t.event_seats_id
+        JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id 
+        WHERE Client_ID=:New.Client_ID AND ed.Event_ID IN (
+        SELECT ed.Event_ID
+        FROM Event_Seats es
+        JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+        WHERE es.Event_Seats_ID=:New.Event_Seats_ID);
+        
+        IF(bought+:NEW.Number_of_Tickets>ticket_limit)
+        THEN
+            raise_application_error(-20103, 'User has exceeded the required limit for this event!');
+        END IF;
+    ELSE
+        raise_application_error(-20104, 'The number of bought tickets can not be negative');
+    END IF;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_EVENT_SEATS_ID
+(v_event Event_Distributor.event_id%type,
+v_distributor Event_Distributor.distributor_id%type,
+v_seat Event_Seats.seat_type_id%type,
+v_id OUT Event_Seats.event_seats_id%type)
+AS
+BEGIN
+    SELECT es.Event_Seats_ID INTO v_id
+    FROM Event_Seats es
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    WHERE ed.Event_ID=v_event AND es.Seat_Type_ID=v_seat AND Distributor_ID=v_distributor;
+END;
+
+CREATE OR REPLACE TRIGGER AVAILABLE_QUANTITY_UPD
+AFTER INSERT ON Ticket
+FOR EACH ROW
+DECLARE bought INTEGER; avialable INTEGER;
+BEGIN
+    bought:=:NEW.Number_of_Tickets;
+    
+    SELECT Seat_Quantity INTO avialable
+    FROM Event_Seats
+    WHERE Event_Seats_ID=:NEW.Event_Seats_ID;
+    
+    IF(bought<avialable)
+    THEN
+        UPDATE Event_Seats
+        SET Seat_Quantity=avialable-bought
+        WHERE Event_Seats_ID=:NEW.Event_Seats_ID;
+    ELSIF(bought=avialable)
+    THEN
+        UPDATE Event_Seats
+        SET Seat_Quantity=0
+        WHERE Event_Seats_ID=:OLD.Event_Seats_ID;
+    ELSE
+        raise_application_error(-20103, 'No avialable amount for this seat!');
+    END IF;
+END;
+
+CREATE OR REPLACE PROCEDURE FIND_DISTRIBUTORS_BY_EVENT
+(v_event Event_Distributor.event_id%type,
+cur OUT SYS_REFCURSOR)AS
+BEGIN
+    OPEN cur FOR
+    SELECT Distributor_ID
+    FROM Event_Distributor
+    WHERE Event_ID=v_event;
+END;
+
+CREATE OR REPLACE PROCEDURE SOLD_TICKETS_DISTR
+(v_distributor Event_Distributor.distributor_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT e.Event_Name, SUM(t.Number_of_Tickets) AS tickets
+    FROM Ticket t
+    JOIN Event_Seats es ON es.event_seats_id=t.event_seats_id
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    JOIN Event e ON e.event_id=ed.event_id
+    WHERE ed.Distributor_ID=v_distributor
+    GROUP BY e.Event_Name;
+END;
+
+CREATE OR REPLACE PROCEDURE NO_BOUGHT_TICKETS_ORG
+(v_organiser Event.organiser_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT Event_Name
+    FROM Event
+    WHERE Organiser_ID=v_organiser AND Event_Status_ID!=11 AND Event_Date <= SYSDATE + 7 AND EVENT_ID NOT IN(
+    SELECT e.EVENT_ID 
+    FROM Ticket t
+    JOIN Event_Seats es ON es.event_seats_id=t.event_seats_id
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    JOIN Event e ON e.event_id=ed.event_id
+    WHERE e.Organiser_ID=v_organiser);
 END;

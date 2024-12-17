@@ -43,20 +43,6 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Event Seats Event Seat ID" id="40DDCDDB-C649-4C1B-4F94-4AD06F455FAC">
-<createdBy>dobri</createdBy>
-<createdTime>2024-11-16 13:02:21 UTC</createdTime>
-<generatorID>4BEB2DCB-E402-0192-479A-15C28720EF60</generatorID>
-<ownerDesignName>Ticket center</ownerDesignName>
-<engineerTo>
-<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
-</engineerTo>
-<referedAttribute>933C7039-8DB7-2196-E039-CCC2362AC5B0</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="Is Distributing" id="09237F5E-299D-3732-17A9-0E058AA98A66">
 <createdBy>dobri</createdBy>
 <createdTime>2024-12-09 13:44:46 UTC</createdTime>
@@ -71,6 +57,20 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>1</dataTypePrecision>
 <ownDataTypeParameters>,1,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Event Event ID" id="C64825A4-1234-27A9-94A1-F9197159B238">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-15 16:07:39 UTC</createdTime>
+<generatorID>26AA47A8-C89B-E6B1-6F3B-AC2D77E788E9</generatorID>
+<ownerDesignName>Ticket center</ownerDesignName>
+<engineerTo>
+<item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
+</engineerTo>
+<referedAttribute>C14B911F-FE2B-EF27-B38F-ECD692A86C46</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">

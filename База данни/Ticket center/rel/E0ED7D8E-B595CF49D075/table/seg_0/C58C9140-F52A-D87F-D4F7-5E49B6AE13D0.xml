@@ -32,20 +32,6 @@
 <colAssociation fkAssociation="679AD760-5F39-ADAF-0136-330DE4CDA9AE" referredColumn="45BB6980-21AB-FD84-7D25-5A7E5B670895"/>
 </associations>
 </Column>
-<Column name="Event_Seats_Event_Seat_ID" id="12D4C984-5019-6F7E-DF06-2F6F0F69EAA6">
-<createdBy>dobri</createdBy>
-<createdTime>2024-11-16 13:01:18 UTC</createdTime>
-<ownerDesignName>Ticket center</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="85608D2D-E640-4606-1E18-B3F691CDD11A" referredColumn="0A9FACC6-A5FF-4F2F-099C-B4025AD5EEB8"/>
-</associations>
-</Column>
 <Column name="Is_Distributing" id="8E5E270F-C075-6C4C-8B30-0EC0873023DA">
 <createdBy>dobri</createdBy>
 <createdTime>2024-12-09 13:35:27 UTC</createdTime>
@@ -57,6 +43,20 @@
 <dataTypePrecision>1</dataTypePrecision>
 <ownDataTypeParameters>,1,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Event_Event_ID" id="BBF9F661-75B7-C8D5-2B4A-F1BFDC2D71EC">
+<createdBy>dobri</createdBy>
+<createdTime>2024-12-15 16:07:00 UTC</createdTime>
+<ownerDesignName>Ticket center</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6AB7D19F-5822-3C40-9E2A-DD50955A1478" referredColumn="5EFC5725-CDF2-BBDB-2B7F-678ABADA032D"/>
+</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -81,14 +81,14 @@
 <colUsage columnID="14AC5108-DD38-14ED-668E-31645B7BD729"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="6661AC40-2D24-D806-6F33-FE2F6EDFE8A7" name="Event_Distributor_Event_Seats_FK">
+<ind_PK_UK id="E1A12232-F437-7C28-D6C2-A53B91FE689E" name="Event_Distributor_Event_FK">
 <createdBy>dobri</createdBy>
-<createdTime>2024-11-16 13:01:18 UTC</createdTime>
+<createdTime>2024-12-15 16:07:00 UTC</createdTime>
 <ownerDesignName>Ticket center</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="12D4C984-5019-6F7E-DF06-2F6F0F69EAA6"/>
+<colUsage columnID="BBF9F661-75B7-C8D5-2B4A-F1BFDC2D71EC"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

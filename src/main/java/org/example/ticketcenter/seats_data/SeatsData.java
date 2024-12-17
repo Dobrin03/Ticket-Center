@@ -7,6 +7,15 @@ public class SeatsData {
     private String type;
     private int quantity;
     private BigDecimal price;
+    private int boughtSeats;
+
+    public int getBoughtSeats() {
+        return boughtSeats;
+    }
+
+    public void setBoughtSeats(int boughtSeats) {
+        this.boughtSeats = boughtSeats;
+    }
 
     public int getID() {
         return ID;

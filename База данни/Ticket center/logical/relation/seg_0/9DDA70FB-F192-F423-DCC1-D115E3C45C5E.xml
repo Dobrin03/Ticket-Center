@@ -1,20 +1,20 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Event_Distributor_Event_Seats_FK" directorySegmentName="seg_0" id="4BEB2DCB-E402-0192-479A-15C28720EF60">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Event_Seats_Event_Distributor_FK" directorySegmentName="seg_0" id="9DDA70FB-F192-F423-DCC1-D115E3C45C5E">
 <createdBy>dobri</createdBy>
-<createdTime>2024-11-16 13:02:21 UTC</createdTime>
-<generatorID>85608D2D-E640-4606-1E18-B3F691CDD11A</generatorID>
+<createdTime>2024-12-15 16:07:39 UTC</createdTime>
+<generatorID>D93BBBFD-7C89-9ACA-D251-8FFFB568B339</generatorID>
 <ownerDesignName>Ticket center</ownerDesignName>
 <engineerTo>
 <item key="E0ED7D8E-1637-D1D2-5DA7-B595CF49D075" value="true"/>
 </engineerTo>
-<sourcePk>2EE6EE04-307C-5231-15CB-9530E49DA15C</sourcePk>
+<sourcePk>61D1212E-7870-C1C4-62A1-B1D744D2D2D9</sourcePk>
 <identifying>false</identifying>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
-<sourceEntity>BC2168E0-D1FC-D30F-0AB7-0B27B1A14451</sourceEntity>
+<sourceEntity>1FD10C1F-3B27-91C9-D4F0-83A47A98967B</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
-<targetEntity>1FD10C1F-3B27-91C9-D4F0-83A47A98967B</targetEntity>
+<targetEntity>BC2168E0-D1FC-D30F-0AB7-0B27B1A14451</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
 </Relation>

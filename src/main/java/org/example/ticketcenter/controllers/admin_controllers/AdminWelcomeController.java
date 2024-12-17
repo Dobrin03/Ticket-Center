@@ -9,6 +9,7 @@ import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.models.Admin;
+import org.example.ticketcenter.user_factory.models.LoggedAdmin;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,16 +20,17 @@ public class AdminWelcomeController {
     private CloseSceneCommand close=new CloseSceneCommand(sceneAction);
     private Invoker changeScene=new Invoker(change);
     private Invoker closeScene=new Invoker(close);
-    private Admin admin;
+    private LoggedAdmin admin;
 
     @FXML
     private Label lbl_welcome;
 
     @FXML
     public void initialize() throws SQLException, ClassNotFoundException {
-        admin= (Admin) UserFactory.getInstance().getUser();
+        admin=LoggedAdmin.getInstance();
+        admin.setAdmin((Admin) UserFactory.getInstance().getUser());
         StringBuilder builder=new StringBuilder();
-        builder.append(lbl_welcome.getText()).append(" ").append(admin.getName()).append("!");
+        builder.append(lbl_welcome.getText()).append(" ").append(admin.getAdmin().getName()).append("!");
         lbl_welcome.setText(builder.toString());
     }
     @FXML
