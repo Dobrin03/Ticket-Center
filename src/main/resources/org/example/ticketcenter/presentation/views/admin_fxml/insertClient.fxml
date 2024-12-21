@@ -17,7 +17,7 @@
       <Label layoutX="46.0" layoutY="80.0" text="Name" />
       <Button layoutX="356.0" layoutY="378.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="38.0" prefWidth="59.0" text="Cancel" />
       <Button layoutX="279.0" layoutY="378.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="38.0" prefWidth="59.0" text="Add" />
-      <Label alignment="CENTER" layoutX="104.0" layoutY="22.0" prefHeight="38.0" prefWidth="224.0" text="Add User Orgamiser" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="104.0" layoutY="22.0" prefHeight="38.0" prefWidth="224.0" text="Add User Client" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>

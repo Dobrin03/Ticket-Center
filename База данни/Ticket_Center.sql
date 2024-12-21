@@ -38,6 +38,7 @@ ALTER TABLE Event_Status ADD CONSTRAINT PK_Event_Status PRIMARY KEY(Event_Status
 INSERT INTO Event_Status VALUES(10, 'Ongoing');
 INSERT INTO Event_Status VALUES(11, 'Cancelled');
 INSERT INTO Event_Status VALUES(12, 'To be determined');
+INSERT INTO Event_Status VALUES(13, 'Over');
 
 
 CREATE TABLE City(
@@ -541,7 +542,12 @@ BEGIN
         THEN
             :NEW.Event_Status_ID:=12;
         ELSE
-            :NEW.Event_Status_ID:=10;
+            IF(:NEW.Event_Date <= SYSDATE)
+            THEN
+                :NEW.Event_Status_ID:=13;
+            ELSE
+                :NEW.Event_Status_ID:=10;
+            END IF;
         END IF;
     END IF;
 END;
@@ -671,7 +677,8 @@ BEGIN
     FROM Event E
     JOIN City C ON C.City_Id=E.City_Id
     JOIN Event_Type T ON T.Event_Type_Id=E.Event_Type_Id
-    JOIN Event_Status S ON S.Event_Status_Id=E.Event_Status_Id;
+    JOIN Event_Status S ON S.Event_Status_Id=E.Event_Status_Id
+    WHERE E.Event_Status_ID!=13;
 END;
 
 CREATE OR REPLACE PROCEDURE FIND_ORGANISER_BY_EVENT
@@ -799,6 +806,21 @@ BEGIN
     GROUP BY e.Event_Name;
 END;
 
+CREATE OR REPLACE PROCEDURE SOLD_TICKETS_ORG
+(v_organiser Event.organiser_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT e.Event_Name, SUM(t.Number_of_Tickets) AS tickets
+    FROM Ticket t
+    JOIN Event_Seats es ON es.event_seats_id=t.event_seats_id
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    JOIN Event e ON e.event_id=ed.event_id
+    WHERE e.Organiser_ID=v_organiser
+    GROUP BY e.Event_Name;
+END;
+
 CREATE OR REPLACE PROCEDURE NO_BOUGHT_TICKETS_ORG
 (v_organiser Event.organiser_id%type,
 cur OUT SYS_REFCURSOR)
@@ -807,11 +829,29 @@ BEGIN
     OPEN cur FOR
     SELECT Event_Name
     FROM Event
-    WHERE Organiser_ID=v_organiser AND Event_Status_ID!=11 AND Event_Date <= SYSDATE + 7 AND EVENT_ID NOT IN(
+    WHERE Organiser_ID=v_organiser AND (Event_Status_ID!=11 OR Event_Status_ID!=13) AND Event_Date <= SYSDATE + 7 AND EVENT_ID NOT IN(
     SELECT e.EVENT_ID 
     FROM Ticket t
     JOIN Event_Seats es ON es.event_seats_id=t.event_seats_id
     JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
     JOIN Event e ON e.event_id=ed.event_id
     WHERE e.Organiser_ID=v_organiser);
+END;
+
+CREATE OR REPLACE PROCEDURE NO_BOUGHT_TICKETS_DISTR
+(v_distributor Event_Distributor.distributor_id%type,
+cur OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cur FOR
+    SELECT e.Event_Name
+    FROM Event_Seats es
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    JOIN Event e ON e.event_id=ed.event_id
+    WHERE ed.Distributor_ID=v_distributor AND (e.Event_Status_ID!=11 OR e.Event_Status_ID!=13) AND e.Event_Date <= SYSDATE + 7 AND e.EVENT_ID NOT IN(
+    SELECT ed.EVENT_ID 
+    FROM Ticket t
+    JOIN Event_Seats es ON es.event_seats_id=t.event_seats_id
+    JOIN Event_Distributor ed ON ed.event_distributor_id=es.event_distributor_id
+    WHERE ed.Distributor_ID=v_distributor);
 END;

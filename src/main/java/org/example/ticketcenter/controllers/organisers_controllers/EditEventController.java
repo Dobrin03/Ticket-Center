@@ -375,6 +375,8 @@ public class EditEventController {
                 eventData.clear();
                 event_cb.getItems().clear();
 
+
+                connection.connect();
                 check=connection.getConnection().prepareCall("call find_events(?,?)");
                 check.setInt(1,organiser.getOrganiser().getID());
                 check.registerOutParameter(2,OracleTypes.CURSOR);
@@ -492,7 +494,7 @@ public class EditEventController {
 
         seat_view.setItems(seatTypeData);
 
-        stmt=connection.getConnection().prepareCall("CALL FIND_DISTRIBUTING_BY_EVENT(?, ?)");
+        stmt=connection.getConnection().prepareCall("CALL FIND_DISTRIBUTORS_BY_EVENT(?, ?)");
         stmt.setInt(1, updateEventData.getId());
         stmt.registerOutParameter(2, OracleTypes.CURSOR);
         stmt.execute();

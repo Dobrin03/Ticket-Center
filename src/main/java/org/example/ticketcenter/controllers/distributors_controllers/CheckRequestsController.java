@@ -126,7 +126,7 @@ public class CheckRequestsController {
     }
 
     @FXML
-    protected void onCancelClick(ActionEvent event) throws IOException {
+    private void onCancelClick(ActionEvent event) throws IOException {
         SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
         CloseSceneCommand close=new CloseSceneCommand(sceneAction);
         Invoker closeScene=new Invoker(close);

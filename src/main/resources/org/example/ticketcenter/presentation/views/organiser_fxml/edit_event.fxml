@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="757.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ticketcenter.controllers.organisers_controllers.EditEventController">
    <children>
-      <Label alignment="CENTER" layoutX="149.0" layoutY="14.0" prefHeight="35.0" prefWidth="301.0" text="Insert Data For Event">
+      <Label alignment="CENTER" layoutX="149.0" layoutY="14.0" prefHeight="35.0" prefWidth="301.0" text="Choose an Event to Edit">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

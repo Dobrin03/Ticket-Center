@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -14,6 +15,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.BigDecimalStringConverter;
 import oracle.jdbc.OracleTypes;
 import org.example.ticketcenter.database.DBConnection;
+import org.example.ticketcenter.scene_actions.actions.SceneActionsImplication;
+import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
+import org.example.ticketcenter.scene_actions.invoker.Invoker;
 import org.example.ticketcenter.user_factory.factories.UserFactory;
 import org.example.ticketcenter.user_factory.interfaces.User;
 import org.example.ticketcenter.user_factory.models.Admin;
@@ -21,6 +25,7 @@ import org.example.ticketcenter.user_factory.models.Client;
 import org.example.ticketcenter.user_factory.models.Distributor;
 import org.example.ticketcenter.user_factory.models.Organiser;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Arrays;
@@ -98,7 +103,15 @@ public class EditUserController {
     }
 
     @FXML
-    public void onOrganiserDataClick() throws SQLException, ClassNotFoundException {
+    private void onCancelClick(ActionEvent event) throws IOException {
+        SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
+        CloseSceneCommand close=new CloseSceneCommand(sceneAction);
+        Invoker closeScene=new Invoker(close);
+        closeScene.execute("", event);
+    }
+
+    @FXML
+    private void onOrganiserDataClick() throws SQLException, ClassNotFoundException {
         col_id.setVisible(true);
         col_name.setVisible(true);
         col_user.setVisible(true);
@@ -117,7 +130,7 @@ public class EditUserController {
     }
 
     @FXML
-    public void onDistributorDataClick() throws SQLException, ClassNotFoundException {
+    private void onDistributorDataClick() throws SQLException, ClassNotFoundException {
         col_id.setVisible(true);
         col_name.setVisible(true);
         col_user.setVisible(true);
@@ -136,7 +149,7 @@ public class EditUserController {
     }
 
     @FXML
-    public void onClientDataClick() throws SQLException, ClassNotFoundException {
+    private void onClientDataClick() throws SQLException, ClassNotFoundException {
         col_id.setVisible(true);
         col_name.setVisible(true);
         col_user.setVisible(true);

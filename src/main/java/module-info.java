@@ -5,6 +5,7 @@ module org.example.ticketcenter {
     requires com.dlsc.formsfx;
     requires java.sql;
     requires com.oracle.database.jdbc;
+    requires log4j;
 
     exports org.example.ticketcenter.controllers;
     opens org.example.ticketcenter.controllers to javafx.fxml;

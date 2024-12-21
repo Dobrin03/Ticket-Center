@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import oracle.jdbc.OracleTypes;
+import org.example.ticketcenter.common.Constants;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
 import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
@@ -28,7 +29,7 @@ public class LogInController {
     private PasswordField pass_field;
 
     @FXML
-    protected void onLogInButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+    private void onLogInButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
         SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
         ChangeSceneCommand change=new ChangeSceneCommand(sceneAction);
         CloseSceneCommand close=new CloseSceneCommand(sceneAction);
@@ -48,22 +49,22 @@ public class LogInController {
                 query="CALL FIND_ADMIN(?, ?, ?)";
                 user_column="admin_user";
                 pass_column="admin_pass";
-                fxml="/admin_fxml/adminWelcome.fxml";
+                fxml= Constants.VIEW.ADMIN_WELCOME;
             } else if (radio_org.isSelected()) {
                 query="CALL FIND_ORGANISER(?, ?, ?)";
                 user_column="organiser_user";
                 pass_column="organiser_pass";
-                fxml="/organiser_fxml/organiserWelcome.fxml";
+                fxml=Constants.VIEW.ORGANISER_WELCOME;
             } else if (radio_distr.isSelected()) {
                 query="CALL FIND_DISTRIBUTOR(?, ?, ?)";
                 user_column="distributor_user";
                 pass_column="distributor_pass";
-                fxml="/distributor_fxml/distributorWelcome.fxml";
+                fxml=Constants.VIEW.DISTRIBUTOR_WELCOME;
             } else if (radio_cl.isSelected()) {
                 query="CALL FIND_CLIENT(?, ?, ?)";
                 user_column="client_user";
                 pass_column="client_pass";
-                fxml="/client_fxml/clientWelcome.fxml";
+                fxml=Constants.VIEW.CLIENT_WELCOME;
             } else {
                 lbl_error.setText("Please check the type of user to log in");
             }

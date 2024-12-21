@@ -3,6 +3,7 @@ package org.example.ticketcenter.controllers.admin_controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import org.example.ticketcenter.common.Constants;
 import org.example.ticketcenter.scene_actions.commands.ChangeSceneCommand;
 import org.example.ticketcenter.scene_actions.commands.CloseSceneCommand;
 import org.example.ticketcenter.scene_actions.invoker.Invoker;
@@ -34,27 +35,27 @@ public class AdminWelcomeController {
         lbl_welcome.setText(builder.toString());
     }
     @FXML
-    protected void onAddOrganiserClick(ActionEvent event) throws IOException {
-        changeScene.execute("/admin_fxml/insertOrganiser.fxml", event);
+    private void onAddOrganiserClick(ActionEvent event) throws IOException {
+        changeScene.execute(Constants.VIEW.INSERT_ORGANISER, event);
     }
 
     @FXML
-    protected void onAddDistributorClick(ActionEvent event) throws IOException {
-        changeScene.execute("/admin_fxml/insertDistributor.fxml", event);
+    private void onAddDistributorClick(ActionEvent event) throws IOException {
+        changeScene.execute(Constants.VIEW.INSERT_DISTRIBUTOR, event);
     }
 
     @FXML
-    protected void onAddClientClick(ActionEvent event) throws IOException {
-        changeScene.execute("/admin_fxml/insertClient.fxml", event);
+    private void onAddClientClick(ActionEvent event) throws IOException {
+        changeScene.execute(Constants.VIEW.INSERT_CLIENT, event);
     }
 
     @FXML
-    protected void onEditUsersClick(ActionEvent event) throws IOException {
-        changeScene.execute("/admin_fxml/editUser.fxml", event);
+    private void onEditUsersClick(ActionEvent event) throws IOException {
+        changeScene.execute(Constants.VIEW.EDIT_USER, event);
     }
     @FXML
-    protected void onLogOutClick(ActionEvent event) throws IOException {
-        changeScene.execute("/log_in.fxml", event);
+    private void onLogOutClick(ActionEvent event) throws IOException {
+        changeScene.execute(Constants.VIEW.LOG_IN, event);
         closeScene.execute("", event);
     }
 }

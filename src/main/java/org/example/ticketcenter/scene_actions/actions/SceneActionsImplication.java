@@ -6,12 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
+import org.example.ticketcenter.common.Constants;
 import org.example.ticketcenter.scene_actions.interfaces.SceneActions;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class SceneActionsImplication implements SceneActions {
+    private static Logger logger=Logger.getLogger(SceneActionsImplication.class);
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -26,15 +29,16 @@ public class SceneActionsImplication implements SceneActions {
     }
     @Override
     public void changeScene(String fxml, ActionEvent event) throws IOException {
-        String url = "/org/example/ticketcenter/presentation/views";
-        StringBuilder builder= new StringBuilder();
-        url=builder.append(url).append(fxml).toString();
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(url)));
-        stage = new Stage();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+        if(fxml!=null) {
+            root = FXMLLoader.load(getClass().getResource(fxml));
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }else{
+            logger.error("Couldn't open fxml file");
+        }
     }
 
     @Override

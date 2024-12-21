@@ -141,7 +141,7 @@ public class BuyTicketsController {
     }
 
     @FXML
-    protected void onCancelClick(ActionEvent event) throws IOException {
+    private void onCancelClick(ActionEvent event) throws IOException {
         SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
         CloseSceneCommand close=new CloseSceneCommand(sceneAction);
         Invoker closeScene=new Invoker(close);
@@ -155,7 +155,7 @@ public class BuyTicketsController {
     }
 
     @FXML
-    protected void onBuyClick() throws SQLException, ClassNotFoundException{
+    private void onBuyClick() throws SQLException, ClassNotFoundException{
         int reservedSeats=0;
         for(SeatsData s:seat_view.getItems()){
             reservedSeats+=s.getBoughtSeats();

@@ -48,7 +48,7 @@ public class Distributor extends User {
         this.username = username;
         this.password = password;
         this.fee = fee;
-        this.add=new CheckBox();
+        add=new CheckBox();
     }
 
     @Override

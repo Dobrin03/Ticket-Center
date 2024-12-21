@@ -26,7 +26,7 @@
       <Button layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#onOrganiserDataClick" text="Organiser Data" />
       <Button layoutX="123.0" layoutY="27.0" mnemonicParsing="false" onAction="#onDistributorDataClick" text="Distributor Data" />
       <Button layoutX="237.0" layoutY="27.0" mnemonicParsing="false" onAction="#onClientDataClick" text="Client Data" />
-      <Button layoutX="518.0" layoutY="27.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="518.0" layoutY="27.0" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />
       <Button layoutX="458.0" layoutY="27.0" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
    </children>
 </AnchorPane>

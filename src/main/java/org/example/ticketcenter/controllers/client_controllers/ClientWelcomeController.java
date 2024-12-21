@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import oracle.jdbc.OracleTypes;
+import org.example.ticketcenter.common.Constants;
 import org.example.ticketcenter.database.DBConnection;
 import org.example.ticketcenter.event_data.EventData;
 import org.example.ticketcenter.event_data.ReservedEvent;
@@ -89,13 +90,13 @@ public class ClientWelcomeController {
     }
 
     @FXML
-    protected void onLogOutClick(ActionEvent event) throws IOException {
-        changeScene.execute("/log_in.fxml", event);
+    private void onLogOutClick(ActionEvent event) throws IOException {
+        changeScene.execute(Constants.VIEW.LOG_IN, event);
         closeScene.execute("", event);
     }
 
     @FXML
-    protected void onBuyTicketsClick(ActionEvent event) throws IOException {
+    private void onBuyTicketsClick(ActionEvent event) throws IOException {
         ReservedEvent reservedEvent=ReservedEvent.getInstance();
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -103,7 +104,7 @@ public class ClientWelcomeController {
         alert.setContentText("Please select an event to buy tickets form!");
         if(!event_view.getSelectionModel().isEmpty()) {
             reservedEvent.setEventData(event_view.getSelectionModel().getSelectedItem());
-            changeScene.execute("/client_fxml/buyTickets.fxml", event);
+            changeScene.execute(Constants.VIEW.BUY_TICKETS, event);
         }
         else{
             alert.showAndWait();

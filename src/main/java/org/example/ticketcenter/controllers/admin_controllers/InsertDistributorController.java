@@ -24,7 +24,7 @@ public class InsertDistributorController {
     private Label lbl_error;
 
     @FXML
-    protected void onCancelClick(ActionEvent event) throws IOException {
+    private void onCancelClick(ActionEvent event) throws IOException {
         SceneActionsImplication sceneAction=SceneActionsImplication.getInstance();
         CloseSceneCommand close=new CloseSceneCommand(sceneAction);
         Invoker closeScene=new Invoker(close);
@@ -32,7 +32,7 @@ public class InsertDistributorController {
     }
 
     @FXML
-    protected void onAddClick(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    private void onAddClick(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         DBConnection database=DBConnection.getInstance();
         database.connect();
         PreparedStatement preparedStatement=database.getConnection().
