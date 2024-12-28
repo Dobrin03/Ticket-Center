@@ -7,8 +7,10 @@ import org.example.ticketcenter.user_factory.models.Admin;
 import org.example.ticketcenter.user_factory.models.Client;
 import org.example.ticketcenter.user_factory.models.Distributor;
 import org.example.ticketcenter.user_factory.models.Organiser;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -29,7 +31,7 @@ class UserFactoryTest {
     }
 
     @Test
-    void testNoResultSet() throws SQLException, ClassNotFoundException {
+    void testNoResultSet() {
         userFactory.setResult(null);
         assertThrows(NullPointerException.class, () -> {
             userFactory.getUser();
@@ -108,6 +110,66 @@ class UserFactoryTest {
         while (result.next()){
             userFactory.setResult(result);
             assertInstanceOf(Client.class, userFactory.getUser());
+        }
+
+        connection.closeConnection();
+    }
+
+    @Test
+    void testReturnAdminWithCorrectID() throws SQLException, ClassNotFoundException {
+        connection.connect();
+        stmt=connection.getConnection().prepareCall("CALL FIND_ADMIN(?, ?, ?)");
+        stmt.setString(1, "project_admin");
+        stmt.setString(2, "admin123");
+        stmt.registerOutParameter(3, OracleTypes.CURSOR);
+        stmt.execute();
+
+        result= (ResultSet) stmt.getObject(3);
+
+        while (result.next()){
+            userFactory.setResult(result);
+            assertInstanceOf(Admin.class, userFactory.getUser());
+            assertEquals(1, userFactory.getUser().getID());
+        }
+
+        connection.closeConnection();
+    }
+
+    @Test
+    void testReturnOrganiserWithCorrectID() throws SQLException, ClassNotFoundException {
+        connection.connect();
+        stmt=connection.getConnection().prepareCall("CALL FIND_ORGANISER(?, ?, ?)");
+        stmt.setString(1, "john_lenon");
+        stmt.setString(2, "Johnathan123");
+        stmt.registerOutParameter(3, OracleTypes.CURSOR);
+        stmt.execute();
+
+        result= (ResultSet) stmt.getObject(3);
+
+        while (result.next()){
+            userFactory.setResult(result);
+            assertInstanceOf(Organiser.class, userFactory.getUser());
+            assertEquals(301, userFactory.getUser().getID());
+        }
+
+        connection.closeConnection();
+    }
+
+    @Test
+    void testReturnClientWithCorrectID() throws SQLException, ClassNotFoundException {
+        connection.connect();
+        stmt=connection.getConnection().prepareCall("CALL FIND_CLIENT(?, ?, ?)");
+        stmt.setString(1, "vankata");
+        stmt.setString(2, "Vankata23");
+        stmt.registerOutParameter(3, OracleTypes.CURSOR);
+        stmt.execute();
+
+        result= (ResultSet) stmt.getObject(3);
+
+        while (result.next()){
+            userFactory.setResult(result);
+            assertInstanceOf(Client.class, userFactory.getUser());
+            assertEquals(403, userFactory.getUser().getID());
         }
 
         connection.closeConnection();

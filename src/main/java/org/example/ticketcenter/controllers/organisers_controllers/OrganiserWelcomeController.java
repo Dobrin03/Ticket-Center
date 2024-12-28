@@ -85,6 +85,8 @@ public class OrganiserWelcomeController {
     @FXML
     private void onBoughtTicketsClick() throws SQLException {
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bought tickets");
+        alert.setHeaderText("Bought tickets from events organised by you:");
         connection.connect();
         CallableStatement stmt=connection.getConnection().prepareCall("CALL SOLD_TICKETS_ORG(?, ?)");
         stmt.setInt(1, organiser.getOrganiser().getID());
